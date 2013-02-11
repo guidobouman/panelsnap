@@ -6,7 +6,7 @@ if ( typeof Object.create !== 'function' )
     function F() {}
     F.prototype = obj;
     return new F();
-  }
+  };
 }
 
 (function($, window, document, undefined)
@@ -15,6 +15,7 @@ if ( typeof Object.create !== 'function' )
 
   var pluginObject = {
     isMouseDown: false,
+    isSnapping: false,
     scrollOffset: 0,
 
     init: function(options, container)
@@ -116,26 +117,30 @@ if ( typeof Object.create !== 'function' )
         return false;
       }
 
+      if(self.isSnapping)
+      {
+        return false;
+      }
+
       var interval = self.$container.height();
       var offset = self.$container.scrollTop();
       var scrollDifference = offset - self.scrollOffset;
 
-      console.log(scrollDifference);
-
+      var child_number;
       if(scrollDifference < -self.options.directionThreshold && scrollDifference > -interval)
       {
-        var child_no = Math.floor(offset / interval);
+        child_number = Math.floor(offset / interval);
       }
       else if(scrollDifference > self.options.directionThreshold && scrollDifference < interval)
       {
-        var child_no = Math.ceil(offset / interval);
+        child_number = Math.ceil(offset / interval);
       }
       else
       {
-        var child_no = Math.round(offset / interval);
+        child_number = Math.round(offset / interval);
       }
 
-      var target_class = $(self.options.panelSelector, self.$container)[child_no].className;
+      var target_class = $(self.options.panelSelector, self.$container)[child_number].className;
       var $target = $(self.options.panelSelector + '.' + target_class, self.$container);
 
       self.snapToPanel($target);
@@ -159,17 +164,22 @@ if ( typeof Object.create !== 'function' )
     {
       var self = this;
 
+      self.isSnapping = true;
+
       var scrollTop = $target.offset().top;
 
       self.$container.animate(
       {
         scrollTop: scrollTop
-      }, self.options.slideSpeed);
+      }, self.options.slideSpeed, function()
+      {
+        self.isSnapping = false;
+      });
 
       if(self.options.$menu !== false)
       {
         $('a.active', self.options.$menu).removeClass('active');
-        var $activeItem = $('a[data-panel=' + $target.attr('class') + ']', self.options.$menu)
+        var $activeItem = $('a[data-panel=' + $target.attr('class') + ']', self.options.$menu);
         $activeItem.addClass('active');
       }
 
