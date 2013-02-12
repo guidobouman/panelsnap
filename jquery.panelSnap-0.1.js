@@ -170,11 +170,11 @@ if ( typeof Object.create !== 'function' )
 
       self.isSnapping = true;
 
-      var scrollTop = $target.offset().top;
+      var scrollTarget = $target.offset().top;
 
       self.$container.animate(
       {
-        scrollTop: scrollTop
+        scrollTop: scrollTarget
       }, self.options.slideSpeed, function()
       {
         self.isSnapping = false;
