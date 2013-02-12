@@ -22,9 +22,11 @@ if ( typeof Object.create !== 'function' )
     {
       var self = this;
 
+      self.$window = $(window);
+      self.$document = $(document);
+
       self.container = container;
       self.$container = $(container);
-      self.$document = $(document);
 
       self.options = $.extend(true, {}, $.fn.panelSnap.options, options);
 
@@ -57,7 +59,7 @@ if ( typeof Object.create !== 'function' )
       {
         self.mouseUp();
       }, self));
-      self.$document.on('resize' + self.options.nameSpace, $.proxy(function()
+      self.$window.on('resize' + self.options.nameSpace, $.proxy(function()
       {
         self.processScroll();
       }, self));
@@ -77,6 +79,7 @@ if ( typeof Object.create !== 'function' )
 
       // Gotta love namespaced events!
       self.$document.off(self.options.nameSpace);
+      self.$window.off(self.options.nameSpace);
 
       if(self.options.$menu !== false)
       {
