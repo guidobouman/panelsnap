@@ -39,38 +39,27 @@ if ( typeof Object.create !== 'function' )
     {
       var self = this;
 
-      self.$document.on('scrollstop' + self.options.nameSpace, $.proxy(function(e)
-      {
-        return self.processScroll(e);
-      }, self));
-      self.$document.on('scrollstart' + self.options.nameSpace, $.proxy(function(e)
-      {
-        return self.initScroll(e);
-      }, self));
-      self.$document.on('mousewheel' + self.options.nameSpace, $.proxy(function(e)
-      {
-        return self.holdScroll(e);
-      }, self));
-      self.$document.on('mousedown' + self.options.nameSpace, $.proxy(function(e)
-      {
-        return self.mouseDown(e);
-      }, self));
-      self.$document.on('mouseup' + self.options.nameSpace, $.proxy(function(e)
-      {
-        return self.mouseUp(e);
-      }, self));
-      self.$window.on('resize' + self.options.nameSpace, $.proxy(function(e)
-      {
-        return self.processScroll(e);
-      }, self));
+      self.bindProxied(self.$document, 'scrollstop', self.processScroll);
+      self.bindProxied(self.$document, 'scrollstart', self.initScroll);
+      self.bindProxied(self.$document, 'mousewheel', self.holdScroll);
+      self.bindProxied(self.$document, 'mousedown', self.mouseDown);
+      self.bindProxied(self.$document, 'mouseup', self.mouseUp);
+      self.bindProxied(self.$window, 'resize', self.processScroll);
 
       if(self.options.$menu !== false)
       {
-        $('a', self.options.$menu).on('click' + self.options.nameSpace, $.proxy(function(e)
-        {
-          return self.captureMenuClick(e);
-        }, self));
+        self.bindProxied($('a', self.options.$menu), 'click', self.captureMenuClick);
       }
+    },
+
+    bindProxied: function($element, event, method)
+    {
+      var self = this;
+
+      $element.on(event + self.options.nameSpace, $.proxy(function(e)
+      {
+        return method.call(self, e);
+      }, self));
     },
 
     destroy: function()
