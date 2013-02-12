@@ -39,36 +39,36 @@ if ( typeof Object.create !== 'function' )
     {
       var self = this;
 
-      self.$document.on('scrollstop' + self.options.nameSpace, $.proxy(function()
+      self.$document.on('scrollstop' + self.options.nameSpace, $.proxy(function(e)
       {
-        self.processScroll();
+        return self.processScroll(e);
       }, self));
-      self.$document.on('scrollstart' + self.options.nameSpace, $.proxy(function()
+      self.$document.on('scrollstart' + self.options.nameSpace, $.proxy(function(e)
       {
-        self.initScroll();
+        return self.initScroll(e);
       }, self));
-      self.$document.on('mousewheel' + self.options.nameSpace, $.proxy(function()
+      self.$document.on('mousewheel' + self.options.nameSpace, $.proxy(function(e)
       {
-        self.holdScroll();
+        return self.holdScroll(e);
       }, self));
-      self.$document.on('mousedown' + self.options.nameSpace, $.proxy(function()
+      self.$document.on('mousedown' + self.options.nameSpace, $.proxy(function(e)
       {
-        self.mouseDown();
+        return self.mouseDown(e);
       }, self));
-      self.$document.on('mouseup' + self.options.nameSpace, $.proxy(function()
+      self.$document.on('mouseup' + self.options.nameSpace, $.proxy(function(e)
       {
-        self.mouseUp();
+        return self.mouseUp(e);
       }, self));
-      self.$window.on('resize' + self.options.nameSpace, $.proxy(function()
+      self.$window.on('resize' + self.options.nameSpace, $.proxy(function(e)
       {
-        self.processScroll();
+        return self.processScroll(e);
       }, self));
 
       if(self.options.$menu !== false)
       {
-        $(a, self.options.$menu).on('click' + self.options.nameSpace, $.proxy(function()
+        $('a', self.options.$menu).on('click' + self.options.nameSpace, $.proxy(function(e)
         {
-          self.captureMenuClick();
+          return self.captureMenuClick(e);
         }, self));
       }
     },
@@ -83,7 +83,7 @@ if ( typeof Object.create !== 'function' )
 
       if(self.options.$menu !== false)
       {
-        $(a, self.options.$menu).off(self.options.nameSpace);
+        $('a', self.options.$menu).off(self.options.nameSpace);
       }
     },
 
@@ -91,8 +91,11 @@ if ( typeof Object.create !== 'function' )
     {
       var self = this;
 
-      var $target = $(panelSelector + '.' + $(self).data('panel'), self.settings.$container);
-      snapToPanel($target);
+      var $target = $(self.options.panelSelector + '.' + $(e.currentTarget).data('panel'), self.$container);
+
+      self.snapToPanel($target);
+
+      return false;
     },
 
     holdScroll: function(e)
