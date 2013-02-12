@@ -76,7 +76,7 @@ if ( typeof Object.create !== 'function' )
       var self = this;
 
       // Gotta love namespaced events!
-      self.options.$document.off(self.options.nameSpace);
+      self.$document.off(self.options.nameSpace);
 
       if(self.options.$menu !== false)
       {
