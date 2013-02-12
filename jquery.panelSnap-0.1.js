@@ -100,6 +100,7 @@ if ( typeof Object.create !== 'function' )
       var self = this;
 
       self.$container.stop(true);
+      self.isSnapping = false;
     },
 
     initScroll: function(e)
