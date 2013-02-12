@@ -107,7 +107,8 @@ if ( typeof Object.create !== 'function' )
     {
       var self = this;
 
-      self.scrollOffset = self.$container.scrollTop();
+      // Deprecated, moved storage of scrollOffset to callback of panelSnap
+      // self.scrollOffset = self.$container.scrollTop();
     },
 
     processScroll: function(e)
@@ -177,6 +178,7 @@ if ( typeof Object.create !== 'function' )
         scrollTop: scrollTarget
       }, self.options.slideSpeed, function()
       {
+        self.scrollOffset = scrollTarget;
         self.isSnapping = false;
       });
 
