@@ -180,6 +180,9 @@ if ( typeof Object.create !== 'function' )
       {
         self.scrollOffset = scrollTarget;
         self.isSnapping = false;
+
+        // Call callback
+        self.options.onSlideFinish.call(self);
       });
 
       if(self.options.$menu !== false)
@@ -188,8 +191,6 @@ if ( typeof Object.create !== 'function' )
         var $activeItem = $('a[data-panel=' + $target.attr('class') + ']', self.options.$menu);
         $activeItem.addClass('active');
       }
-
-      self.options.onSlideFinish.call(self);
     }
   };
 
