@@ -246,11 +246,16 @@ if ( typeof Object.create !== 'function' )
 
           pluginInstance = $.data(this, name, Object.create(pluginObject).init(options, this));
         }
+        else
+        {
+          $.error('Plugin is already initialized for this object.');
+          return;
+        }
       }
       else if(!pluginInstance)
       {
-        $.error('Plugin was not initialized for self object');
-        return true;
+        $.error('Plugin is not initialized for this object yet.');
+        return;
       }
       else if(pluginInstance[options])
       {
@@ -261,7 +266,7 @@ if ( typeof Object.create !== 'function' )
       else
       {
         $.error('Method ' +  options + ' does not exist on jQuery.panelSnap.');
-        return true;
+        return;
       }
     });
   };
