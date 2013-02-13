@@ -247,7 +247,7 @@ if ( typeof Object.create !== 'function' )
         $.error('Plugin was not initialized for self object');
         return true;
       }
-      else if(typeof options === 'string' && methods[options])
+      else if(pluginInstance[options])
       {
         method = options;
         options = Array.prototype.slice.call(arguments, 1);
