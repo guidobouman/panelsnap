@@ -44,6 +44,7 @@ if ( typeof Object.create !== 'function' )
 (function($, window, document, undefined)
 {
   var pluginName = 'panelSnap';
+  var storageName = 'plugin_' + pluginName;
 
   var pluginObject = {
     isMouseDown: false,
@@ -106,6 +107,8 @@ if ( typeof Object.create !== 'function' )
       {
         $('a', self.options.$menu).off(self.options.nameSpace);
       }
+
+      self.$container.removeData(storageName);
     },
 
     captureMenuClick: function(e)
@@ -233,8 +236,7 @@ if ( typeof Object.create !== 'function' )
   {
     return this.each(function()
     {
-      var name = 'plugin_' + pluginName;
-      var pluginInstance = $.data(self, name);
+      var pluginInstance = $.data(this, storageName);
       if(typeof options === 'object' || options === 'init' || ! options)
       {
         if(!pluginInstance)
@@ -244,7 +246,7 @@ if ( typeof Object.create !== 'function' )
             options = Array.prototype.slice.call(arguments, 1);
           }
 
-          pluginInstance = $.data(this, name, Object.create(pluginObject).init(options, this));
+          pluginInstance = $.data(this, storageName, Object.create(pluginObject).init(options, this));
         }
         else
         {
