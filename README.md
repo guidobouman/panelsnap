@@ -2,4 +2,5 @@
 
 A jQuery plugin that provides snapping functionality to a set of panels within your interface.
 
-A lot of improvements can still be made, but the beginning is here.
+# Demo
+A working development version of the code can be seen at [http://dev.guido.vc/]
