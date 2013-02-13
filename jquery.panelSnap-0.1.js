@@ -154,6 +154,11 @@ if ( typeof Object.create !== 'function' )
       var offset = self.$container.scrollTop();
       var scrollDifference = offset - self.scrollOffset;
 
+      if(scrollDifference == 0)
+      {
+        return false;
+      }
+
       var child_number;
       if(scrollDifference < -self.options.directionThreshold && scrollDifference > -interval)
       {
