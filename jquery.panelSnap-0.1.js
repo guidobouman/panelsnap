@@ -156,7 +156,7 @@ if ( typeof Object.create !== 'function' )
       var maxOffset = self.$container[0].scrollHeight - interval;
 
       if(
-        scrollDifference == 0 ||
+        scrollDifference === 0 ||
         offset < 0 ||
         offset > maxOffset
       )
