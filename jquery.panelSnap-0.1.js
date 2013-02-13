@@ -141,7 +141,6 @@ if ( typeof Object.create !== 'function' )
 
       if(self.isMouseDown)
       {
-        console.log(self.isMouseDown);
         self.$container.one('mouseup', self.processScroll);
         return false;
       }
