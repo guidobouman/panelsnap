@@ -1,72 +1,50 @@
-(function(){
+/*!
+ * jQuery Mobile Scrollstart & Scrollstop events.
+ * Gotta love them!
+ */
 
-  var special = jQuery.event.special,
-    uid1 = 'D' + (+new Date()),
-    uid2 = 'D' + (+new Date() + 1);
+(function($)
+{
+  // also handles scrollstop
+  $.event.special.scrollstart = {
 
-  special.scrollstart = {
-    setup: function() {
+    enabled: true,
 
-      var timer,
-        handler =  function(evt) {
+    setup: function()
+    {
+      var thisObject = this,
+          $this = $(thisObject),
+          scrolling,
+          timer;
 
-          var _self = this,
-            _args = arguments;
+      function trigger(event, scrolling)
+      {
+        event.type = scrolling ? "scrollstart" : "scrollstop";
+        $this.trigger(event);
+      }
 
-          if (timer) {
-            clearTimeout(timer);
-          } else {
-            evt.type = 'scrollstart';
-            jQuery.event.handle.apply(_self, _args);
-          }
+      $this.on("touchmove scroll", function(event)
+      {
+        if(!$.event.special.scrollstart.enabled)
+        {
+          return;
+        }
 
-          timer = setTimeout( function(){
-            timer = null;
-          }, special.scrollstop.latency);
+        if(!scrolling)
+        {
+          trigger(event, true);
+        }
 
-        };
-
-      jQuery(this).bind('scroll', handler).data(uid1, handler);
-
-    },
-    teardown: function(){
-      jQuery(this).unbind( 'scroll', jQuery(this).data(uid1) );
+        clearTimeout(timer);
+        timer = setTimeout(function()
+        {
+          trigger(event, false);
+        }, 50);
+      });
     }
   };
 
-  special.scrollstop = {
-    latency: 300,
-    setup: function() {
-
-      var timer,
-        handler = function(evt) {
-
-          var _self = this,
-            _args = arguments;
-
-          if (timer) {
-            clearTimeout(timer);
-          }
-
-          timer = setTimeout( function(){
-
-            timer = null;
-            evt.type = 'scrollstop';
-            jQuery.event.handle.apply(_self, _args);
-
-          }, special.scrollstop.latency);
-
-        };
-
-      jQuery(this).bind('scroll', handler).data(uid2, handler);
-
-    },
-    teardown: function() {
-      jQuery(this).unbind( 'scroll', jQuery(this).data(uid2) );
-    }
-  };
-
-})();
+})(jQuery);
 
 /*! Copyright (c) 2011 Brandon Aaron (http://brandonaaron.net)
  * Licensed under the MIT License (LICENSE.txt).
