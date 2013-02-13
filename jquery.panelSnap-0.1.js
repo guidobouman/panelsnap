@@ -142,12 +142,12 @@ if ( typeof Object.create !== 'function' )
       if(self.isMouseDown)
       {
         self.$container.one('mouseup', self.processScroll);
-        return false;
+        return;
       }
 
       if(self.isSnapping)
       {
-        return false;
+        return;
       }
 
       var interval = self.$container.height();
@@ -156,7 +156,7 @@ if ( typeof Object.create !== 'function' )
 
       if(scrollDifference == 0)
       {
-        return false;
+        return;
       }
 
       var child_number;
