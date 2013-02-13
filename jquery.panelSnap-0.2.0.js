@@ -239,6 +239,11 @@ if ( typeof Object.create !== 'function' )
       {
         if(!pluginInstance)
         {
+          if(options === 'init')
+          {
+            options = Array.prototype.slice.call(arguments, 1);
+          }
+
           pluginInstance = $.data(this, name, Object.create(pluginObject).init(options, this));
         }
       }
