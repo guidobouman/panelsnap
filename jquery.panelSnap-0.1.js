@@ -153,8 +153,13 @@ if ( typeof Object.create !== 'function' )
       var interval = self.$container.height();
       var offset = self.$container.scrollTop();
       var scrollDifference = offset - self.scrollOffset;
+      var maxOffset = self.$container[0].scrollHeight - interval;
 
-      if(scrollDifference == 0)
+      if(
+        scrollDifference == 0 ||
+        offset < 0 ||
+        offset > maxOffset
+      )
       {
         return;
       }
