@@ -199,6 +199,8 @@ if ( typeof Object.create !== 'function' )
 
       self.isSnapping = true;
 
+      self.options.onSnapStart.call(self, $target);
+
       var scrollTarget = $target.offset().top;
 
       self.$container.animate(
@@ -210,7 +212,7 @@ if ( typeof Object.create !== 'function' )
         self.isSnapping = false;
 
         // Call callback
-        self.options.onSlideFinish.call(self);
+        self.options.onSnapFinish.call(self, $target);
       });
 
       if(self.options.$menu !== false)
@@ -258,8 +260,8 @@ if ( typeof Object.create !== 'function' )
     $menu: false,
     panelSelector: 'section',
     nameSpace: '.panelSnap',
-    onSlideStart: function(){},
-    onSlideFinish: function(){},
+    onSnapStart: function(){},
+    onSnapFinish: function(){},
     directionThreshold: 50,
     slideSpeed: 200
   };
