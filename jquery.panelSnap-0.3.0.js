@@ -89,7 +89,7 @@ if ( typeof Object.create !== 'function' )
     {
       var self = this;
 
-      $element.on(event + self.options.nameSpace, $.proxy(function(e)
+      $element.on(event + self.options.namespace, $.proxy(function(e)
       {
         return method.call(self, e);
       }, self));
@@ -100,12 +100,12 @@ if ( typeof Object.create !== 'function' )
       var self = this;
 
       // Gotta love namespaced events!
-      self.$document.off(self.options.nameSpace);
-      self.$window.off(self.options.nameSpace);
+      self.$document.off(self.options.namespace);
+      self.$window.off(self.options.namespace);
 
       if(self.options.$menu !== false)
       {
-        $('a', self.options.$menu).off(self.options.nameSpace);
+        $('a', self.options.$menu).off(self.options.namespace);
       }
 
       self.$container.removeData(storageName);
@@ -276,7 +276,7 @@ if ( typeof Object.create !== 'function' )
   $.fn.panelSnap.options = {
     $menu: false,
     panelSelector: 'section',
-    nameSpace: '.panelSnap',
+    namespace: '.panelSnap',
     onSnapStart: function(){},
     onSnapFinish: function(){},
     directionThreshold: 50,
