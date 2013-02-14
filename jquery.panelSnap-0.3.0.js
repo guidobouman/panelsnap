@@ -61,7 +61,7 @@ if ( typeof Object.create !== 'function' )
       self.container = container;
       self.$container = $(container);
 
-      self.options = $.extend(true, {}, $.fn.panelSnap.options, options);
+      self.options = $.extend(true, {}, $.fn[pluginName].options, options);
 
       self.bind();
 
@@ -267,13 +267,13 @@ if ( typeof Object.create !== 'function' )
       }
       else
       {
-        $.error('Method ' +  options + ' does not exist on jQuery.panelSnap.');
+        $.error('Method ' +  options + ' does not exist on jQuery.' + pluginName + '.');
         return;
       }
     });
   };
 
-  $.fn.panelSnap.options = {
+  $.fn[pluginName].options = {
     $menu: false,
     panelSelector: 'section',
     namespace: '.panelSnap',
