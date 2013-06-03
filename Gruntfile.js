@@ -2,25 +2,19 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    lint: {
-      //all: ['grunt.js', 'lib/**/*.js', 'test/**/*.js']
-      all: ['*.js']
-    },
     jshint: {
+      files: ['*.js'],
       options: {
         browser: true
       }
     }
   });
-
-  // Load tasks from "grunt-sample" grunt plugin installed via Npm.
-  // grunt.loadNpmTasks('grunt-sample');
-
-  // Default task.
-  // grunt.registerTask('default', 'lint sample');
+  
+  // Load JSHint
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Only linting for now.
-  grunt.registerTask('default', 'lint');
+  grunt.registerTask('default', 'jshint');
 
   // Travis CI task.
   grunt.registerTask('ci', 'default');
