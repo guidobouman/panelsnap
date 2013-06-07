@@ -11,7 +11,7 @@ if ( typeof Object.create !== 'function' )
 
 /*!
  * jQuery panelSnap
- * Version 0.3.0
+ * Version 0.3.1
  *
  * Requires:
  * - jQuery 1.7.1 or higher (Works with the API changes from 1.9.1 too)
@@ -61,7 +61,7 @@ if ( typeof Object.create !== 'function' )
       self.container = container;
       self.$container = $(container);
 
-      self.options = $.extend(true, {}, $.fn[pluginName].options, options);
+      self.options = $.extend(true, {}, $.fn.panelSnap.options, options);
 
       self.bind();
 
@@ -72,11 +72,23 @@ if ( typeof Object.create !== 'function' )
     {
       var self = this;
 
-      self.bindProxied(self.$document, 'scrollstop', self.processScroll);
-      self.bindProxied(self.$document, 'scrollstart', self.initScroll);
-      self.bindProxied(self.$document, 'mousewheel', self.holdScroll);
-      self.bindProxied(self.$document, 'mousedown', self.mouseDown);
-      self.bindProxied(self.$document, 'mouseup', self.mouseUp);
+      if(self.$container.is('body'))
+      {
+        self.bindProxied(self.$document, 'scrollstop', self.processScroll);
+        self.bindProxied(self.$document, 'scrollstart', self.initScroll);
+        self.bindProxied(self.$document, 'mousewheel', self.holdScroll);
+        self.bindProxied(self.$document, 'mousedown', self.mouseDown);
+        self.bindProxied(self.$document, 'mouseup', self.mouseUp);
+      }
+      else
+      {
+        self.bindProxied(self.$container, 'scrollstop', self.processScroll);
+        self.bindProxied(self.$container, 'scrollstart', self.initScroll);
+        self.bindProxied(self.$container, 'mousewheel', self.holdScroll);
+        self.bindProxied(self.$container, 'mousedown', self.mouseDown);
+        self.bindProxied(self.$container, 'mouseup', self.mouseUp);
+      }
+
       self.bindProxied(self.$window, 'resize', self.processScroll);
 
       if(self.options.$menu !== false)
@@ -100,7 +112,15 @@ if ( typeof Object.create !== 'function' )
       var self = this;
 
       // Gotta love namespaced events!
-      self.$document.off(self.options.namespace);
+      if(self.$container.is('body'))
+      {
+        self.$document.off(self.options.namespace);
+      }
+      else
+      {
+        self.$container.off(self.options.namespace);
+      }
+
       self.$window.off(self.options.namespace);
 
       if(self.options.$menu !== false)
@@ -209,7 +229,15 @@ if ( typeof Object.create !== 'function' )
 
       self.options.onSnapStart.call(self, $target);
 
-      var scrollTarget = $target.offset().top;
+      var scrollTarget = 0;
+      if(self.$container.is('body'))
+      {
+        scrollTarget = $target.offset().top;
+      }
+      else
+      {
+        scrollTarget = self.$container.scrollTop() + $target.position().top;
+      }
 
       self.$container.animate(
       {
@@ -267,13 +295,13 @@ if ( typeof Object.create !== 'function' )
       }
       else
       {
-        $.error('Method ' +  options + ' does not exist on jQuery.' + pluginName + '.');
+        $.error('Method ' +  options + ' does not exist on jQuery.panelSnap.');
         return;
       }
     });
   };
 
-  $.fn[pluginName].options = {
+  $.fn.panelSnap.options = {
     $menu: false,
     panelSelector: 'section',
     namespace: '.panelSnap',
