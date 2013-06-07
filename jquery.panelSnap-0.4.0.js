@@ -11,7 +11,7 @@ if ( typeof Object.create !== 'function' )
 
 /*!
  * jQuery panelSnap
- * Version 0.3.2
+ * Version 0.4.0
  *
  * Requires:
  * - jQuery 1.7.1 or higher (Works with the API changes from 1.9.1 too)
@@ -60,7 +60,7 @@ if ( typeof Object.create !== 'function' )
 
       self.container = container;
       self.$container = $(container);
-      
+
       self.$eventContainer = self.$container;
       if(self.$container.is('body'))
       {
@@ -77,7 +77,7 @@ if ( typeof Object.create !== 'function' )
     bind: function()
     {
       var self = this;
-      
+
       self.bindProxied(self.$eventContainer, 'scrollstop', self.processScroll);
       self.bindProxied(self.$eventContainer, 'scrollstart', self.initScroll);
       self.bindProxied(self.$eventContainer, 'mousewheel', self.holdScroll);
@@ -189,8 +189,9 @@ if ( typeof Object.create !== 'function' )
         child_number = Math.round(offset / interval);
       }
 
-      var target_class = $(self.options.panelSelector, self.$container)[child_number].className;
-      var $target = $(self.options.panelSelector + '.' + target_class, self.$container);
+      child_number += 1;
+
+      var $target = $(self.options.panelSelector + ':nth-of-type(' + child_number + ')', self.$container);
 
       self.snapToPanel($target);
     },
@@ -242,7 +243,7 @@ if ( typeof Object.create !== 'function' )
       if(self.options.$menu !== false)
       {
         $('a.active', self.options.$menu).removeClass('active');
-        var $activeItem = $('a[data-panel=' + $target.attr('class') + ']', self.options.$menu);
+        var $activeItem = $('a[data-panel=' + $target.data('panel') + ']', self.options.$menu);
         $activeItem.addClass('active');
       }
     }
