@@ -11,7 +11,7 @@ if ( typeof Object.create !== 'function' )
 
 /*!
  * jQuery panelSnap
- * Version 0.3.1
+ * Version 0.3.2
  *
  * Requires:
  * - jQuery 1.7.1 or higher (Works with the API changes from 1.9.1 too)
@@ -60,6 +60,12 @@ if ( typeof Object.create !== 'function' )
 
       self.container = container;
       self.$container = $(container);
+      
+      self.$eventContainer = self.$container;
+      if(self.$container.is('body'))
+      {
+        self.$eventContainer = self.$document;
+      }
 
       self.options = $.extend(true, {}, $.fn.panelSnap.options, options);
 
@@ -71,23 +77,12 @@ if ( typeof Object.create !== 'function' )
     bind: function()
     {
       var self = this;
-
-      if(self.$container.is('body'))
-      {
-        self.bindProxied(self.$document, 'scrollstop', self.processScroll);
-        self.bindProxied(self.$document, 'scrollstart', self.initScroll);
-        self.bindProxied(self.$document, 'mousewheel', self.holdScroll);
-        self.bindProxied(self.$document, 'mousedown', self.mouseDown);
-        self.bindProxied(self.$document, 'mouseup', self.mouseUp);
-      }
-      else
-      {
-        self.bindProxied(self.$container, 'scrollstop', self.processScroll);
-        self.bindProxied(self.$container, 'scrollstart', self.initScroll);
-        self.bindProxied(self.$container, 'mousewheel', self.holdScroll);
-        self.bindProxied(self.$container, 'mousedown', self.mouseDown);
-        self.bindProxied(self.$container, 'mouseup', self.mouseUp);
-      }
+      
+      self.bindProxied(self.$eventContainer, 'scrollstop', self.processScroll);
+      self.bindProxied(self.$eventContainer, 'scrollstart', self.initScroll);
+      self.bindProxied(self.$eventContainer, 'mousewheel', self.holdScroll);
+      self.bindProxied(self.$eventContainer, 'mousedown', self.mouseDown);
+      self.bindProxied(self.$eventContainer, 'mouseup', self.mouseUp);
 
       self.bindProxied(self.$window, 'resize', self.processScroll);
 
@@ -112,14 +107,7 @@ if ( typeof Object.create !== 'function' )
       var self = this;
 
       // Gotta love namespaced events!
-      if(self.$container.is('body'))
-      {
-        self.$document.off(self.options.namespace);
-      }
-      else
-      {
-        self.$container.off(self.options.namespace);
-      }
+      self.$eventContainer.off(self.options.namespace);
 
       self.$window.off(self.options.namespace);
 
