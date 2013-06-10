@@ -88,15 +88,17 @@ if ( typeof Object.create !== 'function' )
 
       if(self.options.$menu !== false)
       {
-        self.bindProxied($(self.options.menuSelector, self.options.$menu), 'click', self.captureMenuClick);
+        self.bindProxied($(self.options.$menu), 'click', self.captureMenuClick, self.options.menuSelector);
       }
     },
 
-    bindProxied: function($element, event, method)
+    bindProxied: function($element, event, method, selector)
     {
       var self = this;
+      
+      selector = typeof selector === 'string' ? selector : null;
 
-      $element.on(event + self.options.namespace, $.proxy(function(e)
+      $element.on(event + self.options.namespace, selector, $.proxy(function(e)
       {
         return method.call(self, e);
       }, self));
