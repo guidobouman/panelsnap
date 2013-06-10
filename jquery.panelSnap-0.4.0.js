@@ -88,7 +88,7 @@ if ( typeof Object.create !== 'function' )
 
       if(self.options.$menu !== false)
       {
-        self.bindProxied($('a', self.options.$menu), 'click', self.captureMenuClick);
+        self.bindProxied($(self.options.menuSelector, self.options.$menu), 'click', self.captureMenuClick);
       }
     },
 
@@ -113,7 +113,7 @@ if ( typeof Object.create !== 'function' )
 
       if(self.options.$menu !== false)
       {
-        $('a', self.options.$menu).off(self.options.namespace);
+        $(self.options.menuSelector, self.options.$menu).off(self.options.namespace);
       }
 
       self.$container.removeData(storageName);
@@ -122,8 +122,8 @@ if ( typeof Object.create !== 'function' )
     captureMenuClick: function(e)
     {
       var self = this;
-
-      var $target = $(self.options.panelSelector + '.' + $(e.currentTarget).data('panel'), self.$container);
+      var itemSelector = self.options.panelSelector + '[data-panel=' + $(e.currentTarget).data('panel') + ']';
+      var $target = $(itemSelector, self.$container);
 
       self.snapToPanel($target);
 
@@ -242,8 +242,9 @@ if ( typeof Object.create !== 'function' )
 
       if(self.options.$menu !== false)
       {
-        $('a.active', self.options.$menu).removeClass('active');
-        var $activeItem = $('a[data-panel=' + $target.data('panel') + ']', self.options.$menu);
+        $(self.options.menuSelector + '.active', self.options.$menu).removeClass('active');
+        var itemSelector = self.options.menuSelector + '[data-panel=' + $target.data('panel') + ']';
+        var $activeItem = $(itemSelector, self.options.$menu);
         $activeItem.addClass('active');
       }
     }
@@ -292,6 +293,7 @@ if ( typeof Object.create !== 'function' )
 
   $.fn.panelSnap.options = {
     $menu: false,
+    menuSelector: 'a',
     panelSelector: 'section',
     namespace: '.panelSnap',
     onSnapStart: function(){},
