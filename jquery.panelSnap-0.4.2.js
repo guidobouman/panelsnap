@@ -78,9 +78,9 @@ if ( typeof Object.create !== 'function' )
     {
       var self = this;
 
-      self.bindProxied(self.$eventContainer, 'scrollstop', self.processScroll);
-      self.bindProxied(self.$eventContainer, 'scrollstart', self.initScroll);
-      self.bindProxied(self.$eventContainer, 'mousewheel', self.holdScroll);
+      self.bindProxied(self.$eventContainer, 'scrollstart', self.scrollStart);
+      self.bindProxied(self.$eventContainer, 'scrollstop', self.scrollStop);
+      self.bindProxied(self.$eventContainer, 'mousewheel', self.mouseWheel);
       self.bindProxied(self.$eventContainer, 'mousedown', self.mouseDown);
       self.bindProxied(self.$eventContainer, 'mouseup', self.mouseUp);
 
@@ -95,7 +95,7 @@ if ( typeof Object.create !== 'function' )
     bindProxied: function($element, event, method, selector)
     {
       var self = this;
-      
+
       selector = typeof selector === 'string' ? selector : null;
 
       $element.on(event + self.options.namespace, selector, $.proxy(function(e)
@@ -132,15 +132,7 @@ if ( typeof Object.create !== 'function' )
       return false;
     },
 
-    holdScroll: function(e)
-    {
-      var self = this;
-
-      self.$container.stop(true);
-      self.isSnapping = false;
-    },
-
-    initScroll: function(e)
+    scrollStart: function(e)
     {
       var self = this;
 
@@ -148,7 +140,7 @@ if ( typeof Object.create !== 'function' )
       // self.scrollOffset = self.$container.scrollTop();
     },
 
-    processScroll: function(e)
+    scrollStop: function(e)
     {
       var self = this;
 
@@ -196,6 +188,17 @@ if ( typeof Object.create !== 'function' )
       var $target = $(self.options.panelSelector + ':nth-of-type(' + child_number + ')', self.$container);
 
       self.snapToPanel($target);
+    },
+
+    mouseWheel: function(e)
+    {
+      var self = this;
+
+      // This event only fires when the user actually scrolls with their input device.
+      // Be it a trackpad, legacy mouse or anything else.
+
+      self.$container.stop(true);
+      self.isSnapping = false;
     },
 
     mouseDown: function(e)
