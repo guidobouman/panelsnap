@@ -95,13 +95,13 @@ The ammount of miliseconds in which the plugin snaps to the desired panel
       </div>
     </header>
     <div class="panel_container">
-      <section>
+      <section data-panel="first">
         ...
       </section>
-      <section>
+      <section data-panel="second">
         ...
       </section>
-      <section>
+      <section data-panel="third">
         ...
       </section>
     </div>
