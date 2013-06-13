@@ -124,8 +124,9 @@ if ( typeof Object.create !== 'function' )
     captureMenuClick: function(e)
     {
       var self = this;
-      var itemSelector = self.options.panelSelector + '[data-panel=' + $(e.currentTarget).data('panel') + ']';
-      var $target = $(itemSelector, self.$container);
+      var panel = $(e.currentTarget).data('panel');
+      var selector = self.options.panelSelector + '[data-panel=' + panel + ']';
+      var $target = $(selector, self.$container);
 
       self.snapToPanel($target);
 
@@ -146,7 +147,7 @@ if ( typeof Object.create !== 'function' )
 
       if(self.isMouseDown)
       {
-        self.$container.one('mouseup', self.processScroll);
+        self.$eventContainer.one('mouseup', self.processScroll);
         return;
       }
 
@@ -185,7 +186,8 @@ if ( typeof Object.create !== 'function' )
 
       child_number += 1;
 
-      var $target = $(self.options.panelSelector + ':nth-of-type(' + child_number + ')', self.$container);
+      var selector = '> ' + self.options.panelSelector + ':nth-child(' + child_number + ')';
+      var $target = $(selector, self.$container);
 
       self.snapToPanel($target);
     },

@@ -1,0 +1,218 @@
+<html>
+  <head>
+    <title>jQuery-panelSnap Demos</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+      @import url(http://fonts.googleapis.com/css?family=Lato:100);
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+
+      body {
+        color: #ffffff;
+        font-family: 'Lato';
+        font-weight: 100;
+        font-size: 32px;
+      }
+
+      h1 {
+        font-weight: inherit;
+        text-transform: uppercase;
+        font-size: 250%;
+        margin: 0;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      img {
+        max-width: 100%;
+      }
+
+      p {
+        max-width: 800px;
+      }
+
+      p.large {
+        font-size: 180%;
+      }
+
+      section {
+        position: relative;
+        overflow: hidden;
+        padding: 50px;
+        width: 100%;
+        height: 100%;
+        background: #1abc9c;
+      }
+
+      section:nth-child(2n) {
+        background: #16a085;
+      }
+
+      section section {
+        background: #f1c40f;
+      }
+
+      section section:nth-child(2n) {
+        background: #f39c12;
+      }
+
+      .panels, .log, .menu {
+        position: absolute;
+        top: 200px;
+        bottom: 50px;
+        right: 50px;
+        left: 53%;
+        overflow: scroll;
+      }
+
+      .log, .menu {
+        right: 53%;
+        left: 50px;
+      }
+
+      .menu a {
+        display: block;
+        width: 100%;
+        padding: 25px;
+        background: #f1c40f;
+        text-decoration: none;
+        margin: 0 0 25px 0;
+      }
+
+      .menu a.active,
+      .menu a:active,
+      .menu a:hover {
+        background: #f39c12;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="basic_demo">
+      <h1>
+        The basic setup.
+      </h1>
+      <p>
+        As you can see, the page snaps to blocks of content which I like to call panels. You can actually nest sets of panels as you will see throughout this demo page.
+      </p>
+      <p>
+        Each panel will explain a specific feature of the panelSnap plugin.
+      </p>
+      <p>
+        Scroll down to see more.
+      </p>
+    </section>
+
+    <section class="menu_demo">
+      <h1>
+        Connected menu
+      </h1>
+      <div class="menu">
+        <a href="" data-panel="first">
+          First panel
+        </a>
+        <a href="" data-panel="second">
+          Second panel
+        </a>
+        <a href="" data-panel="third">
+          Third panel
+        </a>
+      </div>
+      <div class="panels">
+        <section data-panel="first">
+          <h1>First</h1>
+        </section>
+        <section data-panel="second">
+          <h1>Second</h1>
+        </section>
+        <section data-panel="third">
+          <h1>Third</h1>
+        </section>
+      </div>
+    </section>
+
+    <section class="callback_demo">
+      <h1>
+        Callback functions
+      </h1>
+      <div class="panels">
+        <section>
+          <h1>First</h1>
+        </section>
+        <section>
+          <h1>Second</h1>
+        </section>
+        <section>
+          <h1>Third</h1>
+        </section>
+      </div>
+      <div class="log">
+        <h2>Log:</h2>
+      </div>
+    </section>
+
+    <section class="event_demo">
+      <h1>
+        Event capturing
+      </h1>
+      <div class="panels">
+        <section>
+          <h1>First</h1>
+        </section>
+        <section>
+          <h1>Second</h1>
+        </section>
+        <section>
+          <h1>Third</h1>
+        </section>
+      </div>
+      <div class="log">
+        <h2>Log:</h2>
+      </div>
+    </section>
+
+    <script src="//code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="../jquery.customEvents.js"></script>
+    <script src="../jquery.panelSnap-0.4.2.js"></script>
+    <script>
+      // Basic demo
+      $('body').panelSnap();
+
+      // Menu demo
+      $('.menu_demo .panels').panelSnap({
+        $menu: $('.menu_demo .menu')
+      });
+
+      // Callback demo
+      $('.callback_demo .panels').panelSnap({
+        onSnapStart: function(e, $target){
+          $('.callback_demo .log').append('<p>onSnapStart:<br>' + $target + '</p>');
+        },
+        onSnapFinish: function(e, $target){
+          $('.callback_demo .log').append('<p>onSnapFinish:<br>' + $target + '</p>');
+        }
+      });
+
+      // Event demo
+      $('.event_demo .panels').panelSnap();
+
+      $('.event_demo .panels').on('panelsnap:start', function(){
+        $('.event_demo .log').append('<p>panelsnap:start:<br>' + $target.find('h1').innerText() + '</p>');
+      });
+
+      $('.event_demo .panels').on('panelsnap:finish', function(){
+        $('.event_demo .log').append('<p>panelsnap:finish:<br>' + $target.find('h1').innerText() + '</p>');
+      });
+    </script>
+
+  </body>
+</html>
