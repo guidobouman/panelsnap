@@ -194,23 +194,27 @@
 
       // Callback demo
       $('.callback_demo .panels').panelSnap({
-        onSnapStart: function(e, $target){
-          $('.callback_demo .log').append('<p>onSnapStart:<br>' + $target + '</p>');
+        onSnapStart: function($target){
+        var text = '<p>onSnapStart:<br>' + $target.find('h1').text() + '</p>';
+        $('.callback_demo .log h2').after(text);
         },
-        onSnapFinish: function(e, $target){
-          $('.callback_demo .log').append('<p>onSnapFinish:<br>' + $target + '</p>');
+        onSnapFinish: function($target){
+        var text = '<p>onSnapFinish:<br>' + $target.find('h1').text() + '</p>';
+        $('.callback_demo .log h2').after(text);
         }
       });
 
       // Event demo
       $('.event_demo .panels').panelSnap();
 
-      $('.event_demo .panels').on('panelsnap:start', function(){
-        $('.event_demo .log').append('<p>panelsnap:start:<br>' + $target.find('h1').innerText() + '</p>');
+      $('.event_demo .panels').on('panelsnap:start', function(e, $target){
+        var text = '<p>panelsnap:start:<br>' + $target.find('h1').text() + '</p>';
+        $('.event_demo .log h2').after(text);
       });
 
-      $('.event_demo .panels').on('panelsnap:finish', function(){
-        $('.event_demo .log').append('<p>panelsnap:finish:<br>' + $target.find('h1').innerText() + '</p>');
+      $('.event_demo .panels').on('panelsnap:finish', function(e, $target){
+        var text = '<p>panelsnap:finish:<br>' + $target.find('h1').text() + '</p>';
+        $('.event_demo .log h2').after(text);
       });
     </script>
 

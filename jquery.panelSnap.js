@@ -233,6 +233,7 @@ if ( typeof Object.create !== 'function' )
       self.isSnapping = true;
 
       self.options.onSnapStart.call(self, $target);
+      self.$container.trigger('panelsnap:start', [$target]);
 
       var scrollTarget = 0;
       if(self.$container.is('body'))
@@ -254,6 +255,7 @@ if ( typeof Object.create !== 'function' )
 
         // Call callback
         self.options.onSnapFinish.call(self, $target);
+        self.$container.trigger('panelsnap:finish', [$target]);
       });
 
       self.activatePanel($target);
