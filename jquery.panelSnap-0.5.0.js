@@ -71,6 +71,15 @@ if ( typeof Object.create !== 'function' )
 
       self.bind();
 
+      if(self.options.$menu !== false && $('.active', self.options.$menu).length > 0)
+      {
+        $('.active', self.options.$menu).click();
+      }
+      else
+      {
+        self.activatePanel(self.$container.children(':first'));
+      }
+
       return self;
     },
 
@@ -246,6 +255,16 @@ if ( typeof Object.create !== 'function' )
         // Call callback
         self.options.onSnapFinish.call(self, $target);
       });
+
+      self.activatePanel($target);
+    },
+
+    activatePanel: function($target)
+    {
+      var self = this;
+
+      $('> ' + self.options.panelSelector + '.active', self.container).removeClass('active');
+      $target.addClass('active');
 
       if(self.options.$menu !== false)
       {
