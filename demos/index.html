@@ -1,12 +1,13 @@
 <html>
   <head>
-    <title>jQuery-panelSnap Demos</title>
+    <title>jQuery.panelSnap Plugin</title>
     <link rel="stylesheet" href="style.css">
     <style>
       @import url(http://fonts.googleapis.com/css?family=Lato:100);
 
       * {
         box-sizing: border-box;
+        -moz-box-sizing: border-box;
       }
 
       html, body {
@@ -41,8 +42,9 @@
         max-width: 800px;
       }
 
-      p.large {
-        font-size: 180%;
+      p.small,
+      pre {
+        font-size: 70%;
       }
 
       section {
@@ -66,7 +68,18 @@
         background: #f39c12;
       }
 
-      .panels, .log, .menu {
+      section pre {
+        background: #16a085;
+      }
+
+      section:nth-child(2n) pre {
+        background: #1abc9c;
+      }
+
+      .panels,
+      .log,
+      .menu,
+      pre {
         position: absolute;
         top: 200px;
         bottom: 50px;
@@ -75,9 +88,15 @@
         overflow: scroll;
       }
 
-      .log, .menu {
+      .log,
+      .menu {
         right: 53%;
         left: 50px;
+      }
+
+      pre {
+        left: 50px;
+        padding: 50px;
       }
 
       .menu a {
@@ -94,22 +113,75 @@
       .menu a:hover {
         background: #f39c12;
       }
+
+      @media screen and (max-width: 1000px) {
+        .panels,
+        .log,
+        .menu {
+          top: 300px;
+        }
+      }
     </style>
   </head>
   <body>
-    <section class="basic_demo">
+    <section class="introduction">
       <h1>
-        The basic setup.
+        jQuery.panelSnap
       </h1>
       <p>
-        As you can see, the page snaps to blocks of content which I like to call panels. You can actually nest sets of panels as you will see throughout this demo page.
+        A jQuery plugin that, after scrolling, snaps to blocks of content which I like to call panels. You can actually nest sets of panels as you will see throughout this demo page.
       </p>
       <p>
-        Each panel will explain a specific feature of the panelSnap plugin.
+        Each following panel will explain a specific feature of the panelSnap plugin.
       </p>
-      <p>
-        Scroll down to see more.
+      <p class="small">
+        (Scroll down to see more.)
       </p>
+    </section>
+
+    <section class="basic_setup">
+      <h1>
+        The basic setup
+      </h1>
+      <pre>&lt;html&gt;
+  &lt;head&gt;
+    &lt;script src="/path/to/jquery-panelSnap-0.4.2.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+      $('body').panelSnap();
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;section&gt;
+      ...
+    &lt;/section&gt;
+    &lt;section&gt;
+      ...
+    &lt;/section&gt;
+    &lt;section&gt;
+      ...
+    &lt;/section&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+    </section>
+
+    <section class="configuration">
+      <h1>
+        Configuration options
+      </h1>
+      <pre>&lt;script&gt;
+  var options = {
+    $menu: false,
+    menuSelector: 'a',
+    panelSelector: 'section',
+    namespace: '.panelSnap',
+    onSnapStart: function(){},
+    onSnapFinish: function(){},
+    directionThreshold: 50,
+    slideSpeed: 200
+  };
+
+  $('.panel_container').panelSnap(options);
+&lt;/script&gt;</pre>
     </section>
 
     <section class="menu_demo">
