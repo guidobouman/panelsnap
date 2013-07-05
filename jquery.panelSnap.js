@@ -49,6 +49,7 @@ if ( typeof Object.create !== 'function' )
   var pluginObject = {
     isMouseDown: false,
     isSnapping: false,
+    scrollInterval: 0,
     scrollOffset: 0,
 
     init: function(options, container)
@@ -93,7 +94,7 @@ if ( typeof Object.create !== 'function' )
       self.bindProxied(self.$eventContainer, 'mousedown', self.mouseDown);
       self.bindProxied(self.$eventContainer, 'mouseup', self.mouseUp);
 
-      self.bindProxied(self.$window, 'resize', self.processScroll);
+      self.bindProxied(self.$window, 'resize', self.scrollStop);
 
       if(self.options.$menu !== false)
       {
@@ -166,12 +167,15 @@ if ( typeof Object.create !== 'function' )
       }
 
       var interval = self.$container.height();
+      var intervalDifference = interval - self.scrollInterval;
       var offset = self.$container.scrollTop();
       var scrollDifference = offset - self.scrollOffset;
       var maxOffset = self.$container[0].scrollHeight - interval;
 
+      self.scrollInterval = interval;
+
       if(
-        scrollDifference === 0 ||
+        scrollDifference === 0  && intervalDifference === 0 ||
         offset < 0 ||
         offset > maxOffset
       )
