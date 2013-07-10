@@ -197,9 +197,7 @@ if ( typeof Object.create !== 'function' )
         child_number = Math.round(offset / interval);
       }
 
-      child_number += 1;
-
-      var selector = '> ' + self.options.panelSelector + ':nth-child(' + child_number + ')';
+      var selector = '> ' + self.options.panelSelector + ':eq(' + child_number + ')';
       var $target = $(selector, self.$container);
 
       self.snapToPanel($target);
