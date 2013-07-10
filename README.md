@@ -2,7 +2,7 @@
 A jQuery plugin that provides snapping functionality to a set of panels within your interface.
 
 # Demo
-Check out the demos folder for a working demo that explains most of the features present in the plugin.
+Check out the homepage at http://guidobouman.github.io/jquery-panelsnap or the demos folder for a working demo that explains most of the features present in the plugin.
 
 # Usage
 ## The Basics
