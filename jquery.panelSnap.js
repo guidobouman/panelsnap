@@ -70,6 +70,10 @@ if ( typeof Object.create !== 'function' )
 
       self.options = $.extend(true, {}, $.fn.panelSnap.options, options);
 
+      var selector = '> ' + self.options.panelSelector;
+      var $target = $(selector, self.$container);
+      self.panelCount = $target.length;
+
       self.bind();
 
       if(self.options.$menu !== false && $('.active', self.options.$menu).length > 0)
@@ -177,11 +181,8 @@ if ( typeof Object.create !== 'function' )
 
       self.scrollInterval = interval;
 
-      if(
-        scrollDifference === 0  && intervalDifference === 0 ||
-        offset < 0 ||
-        offset > maxOffset
-      )
+      if((scrollDifference === 0) ||
+        (scrollDifference < 100 && (offset < 0 || offset > maxOffset)))
       {
         return;
       }
@@ -199,6 +200,9 @@ if ( typeof Object.create !== 'function' )
       {
         child_number = Math.round(offset / interval);
       }
+
+      child_number = child_number < 0 ? 0 : child_number;
+      child_number = child_number > self.panelCount ? self.panelCount : child_number;
 
       var selector = '> ' + self.options.panelSelector + ':eq(' + child_number + ')';
       var $target = $(selector, self.$container);
