@@ -138,18 +138,6 @@ if ( typeof Object.create !== 'function' )
       self.$container.removeData(storageName);
     },
 
-    captureMenuClick: function(e)
-    {
-      var self = this;
-      var panel = $(e.currentTarget).data('panel');
-      var selector = '> ' + self.options.panelSelector + '[data-panel=' + panel + ']';
-      var $target = $(selector, self.$container);
-
-      self.snapToPanel($target);
-
-      return false;
-    },
-
     scrollStart: function(e)
     {
       var self = this;
@@ -244,6 +232,18 @@ if ( typeof Object.create !== 'function' )
 
       self.snapToPanel($target);
 
+    },
+
+    captureMenuClick: function(e)
+    {
+      var self = this;
+      var panel = $(e.currentTarget).data('panel');
+      var selector = '> ' + self.options.panelSelector + '[data-panel=' + panel + ']';
+      var $target = $(selector, self.$container);
+
+      self.snapToPanel($target);
+
+      return false;
     },
 
     snapToPanel: function($target)
