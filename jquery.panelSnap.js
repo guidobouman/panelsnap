@@ -97,7 +97,7 @@ if ( typeof Object.create !== 'function' )
       self.bindProxied(self.$eventContainer, 'mousedown', self.mouseDown);
       self.bindProxied(self.$eventContainer, 'mouseup', self.mouseUp);
 
-      self.bindProxied(self.$window, 'resize', self.scrollStop);
+      self.bindProxied(self.$window, 'resize', self.resize);
 
       if(self.options.$menu !== false)
       {
@@ -229,6 +229,17 @@ if ( typeof Object.create !== 'function' )
       var self = this;
 
       self.isMouseDown = false;
+    },
+
+    resize: function(e) {
+
+      var self = this;
+
+      var selector = '> ' + self.options.panelSelector + '.active';
+      var $target = $(selector, self.$container);
+
+      self.snapToPanel($target);
+
     },
 
     snapToPanel: function($target)
