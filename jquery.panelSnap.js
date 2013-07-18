@@ -147,6 +147,8 @@ if ( typeof Object.create !== 'function' )
     {
       var self = this;
 
+      e.stopPropagation();
+
       if(self.isMouseDown)
       {
         self.$eventContainer.one('mouseup' + self.options.namespace, self.processScroll);
