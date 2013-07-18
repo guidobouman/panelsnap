@@ -63,9 +63,14 @@ if ( typeof Object.create !== 'function' )
       self.$container = $(container);
 
       self.$eventContainer = self.$container;
+      self.$snapContainer = self.$container;
       if(self.$container.is('body'))
       {
         self.$eventContainer = self.$document;
+        var ua = navigator.userAgent;
+        if(!~ua.indexOf("WebKit")) {
+          self.$snapContainer = $('html');
+        }
       }
 
       self.options = $.extend(true, {}, $.fn.panelSnap.options, options);
@@ -162,7 +167,7 @@ if ( typeof Object.create !== 'function' )
 
       var interval = self.$container.height();
       var intervalDifference = interval - self.scrollInterval;
-      var offset = self.$container.scrollTop();
+      var offset = self.$eventContainer.scrollTop();
       var scrollDifference = offset - self.scrollOffset;
       var maxOffset = self.$container[0].scrollHeight - interval;
 
@@ -260,10 +265,10 @@ if ( typeof Object.create !== 'function' )
       }
       else
       {
-        scrollTarget = self.$container.scrollTop() + $target.position().top;
+        scrollTarget = self.$eventContainer.scrollTop() + $target.position().top;
       }
 
-      self.$container.stop(true).animate(
+      self.$snapContainer.stop(true).animate(
       {
         scrollTop: scrollTarget
       }, self.options.slideSpeed, function()
