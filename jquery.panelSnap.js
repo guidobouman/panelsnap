@@ -14,7 +14,7 @@ if ( typeof Object.create !== 'function' )
  * Version 0.7.3
  *
  * Requires:
- * - jQuery 1.7.1 or higher (Works with the API changes from 1.9.1 too)
+ * - jQuery 1.7.1 or higher (no jQuery.migrate needed)
  * - jQuery scrollEvents.js (included in the package)
  *
  * https://github.com/guidobouman/jquery-panelsnap
