@@ -78,7 +78,10 @@ if ( typeof Object.create !== 'function' )
       }
       else
       {
-        self.activatePanel(self.$container.children(':first'));
+        var selector = '> ' + self.options.panelSelector + ':first';
+        var $target = $(selector, self.$container);
+
+        self.activatePanel($target);
       }
 
       return self;
@@ -135,7 +138,7 @@ if ( typeof Object.create !== 'function' )
     {
       var self = this;
       var panel = $(e.currentTarget).data('panel');
-      var selector = self.options.panelSelector + '[data-panel=' + panel + ']';
+      var selector = '> ' + self.options.panelSelector + '[data-panel=' + panel + ']';
       var $target = $(selector, self.$container);
 
       self.snapToPanel($target);
