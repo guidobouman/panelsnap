@@ -70,9 +70,7 @@ if ( typeof Object.create !== 'function' )
 
       self.options = $.extend(true, {}, $.fn.panelSnap.options, options);
 
-      var selector = '> ' + self.options.panelSelector;
-      var $target = $(selector, self.$container);
-      self.panelCount = $target.length;
+      self.panelCount = self.getPanel().length;
 
       self.bind();
 
@@ -82,8 +80,7 @@ if ( typeof Object.create !== 'function' )
       }
       else
       {
-        var selector = '> ' + self.options.panelSelector + ':first';
-        var $target = $(selector, self.$container);
+        var $target = self.getPanel(':first');
 
         self.activatePanel($target);
       }
@@ -190,10 +187,10 @@ if ( typeof Object.create !== 'function' )
       }
 
       child_number = child_number < 0 ? 0 : child_number;
+
       child_number = child_number > self.panelCount ? self.panelCount : child_number;
 
-      var selector = '> ' + self.options.panelSelector + ':eq(' + child_number + ')';
-      var $target = $(selector, self.$container);
+      var $target = self.getPanel(':eq(' + child_number + ')');
 
       self.snapToPanel($target);
     },
@@ -227,8 +224,7 @@ if ( typeof Object.create !== 'function' )
 
       var self = this;
 
-      var selector = '> ' + self.options.panelSelector + '.active';
-      var $target = $(selector, self.$container);
+      var $target = self.getPanel('.active');
 
       self.snapToPanel($target);
 
@@ -237,9 +233,9 @@ if ( typeof Object.create !== 'function' )
     captureMenuClick: function(e)
     {
       var self = this;
+
       var panel = $(e.currentTarget).data('panel');
-      var selector = '> ' + self.options.panelSelector + '[data-panel=' + panel + ']';
-      var $target = $(selector, self.$container);
+      var $target = self.getPanel('[data-panel=' + panel + ']');
 
       self.snapToPanel($target);
 
@@ -295,6 +291,18 @@ if ( typeof Object.create !== 'function' )
         var $activeItem = $(itemSelector, self.options.$menu);
         $activeItem.addClass('active');
       }
+    },
+
+    getPanel: function(selector)
+    {
+      var self = this;
+
+      if(typeof selector === 'undefined') {
+        selector = '';
+      }
+
+      var panel_selector = '> ' + self.options.panelSelector + selector;
+      return $(panel_selector, self.$container);
     }
   };
 
