@@ -247,7 +247,7 @@ if ( typeof Object.create !== 'function' )
         scrollTarget = self.$container.scrollTop() + $target.position().top;
       }
 
-      self.$container.animate(
+      self.$container.stop(true).animate(
       {
         scrollTop: scrollTarget
       }, self.options.slideSpeed, function()
