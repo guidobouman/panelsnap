@@ -315,6 +315,8 @@ if ( typeof Object.create !== 'function' )
 
   $.fn[pluginName] = function(options)
   {
+    var args = Array.prototype.slice.call(arguments);
+
     return this.each(function()
     {
       var pluginInstance = $.data(this, storageName);
@@ -324,10 +326,11 @@ if ( typeof Object.create !== 'function' )
         {
           if(options === 'init')
           {
-            options = Array.prototype.slice.call(arguments, 1);
+            options = args[1] || {};
           }
 
-          pluginInstance = $.data(this, storageName, Object.create(pluginObject).init(options, this));
+          pluginInstance = Object.create(pluginObject).init(options, this);
+          $.data(this, storageName, pluginInstance);
         }
         else
         {
@@ -342,9 +345,9 @@ if ( typeof Object.create !== 'function' )
       }
       else if(pluginInstance[options])
       {
-        method = options;
-        options = Array.prototype.slice.call(arguments, 1);
-        pluginInstance[method](options);
+        var method = options;
+        options = args.slice(1);
+        pluginInstance[method].apply(pluginInstance, options);
       }
       else
       {
