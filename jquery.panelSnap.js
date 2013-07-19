@@ -310,6 +310,47 @@ if ( typeof Object.create !== 'function' )
 
       var panel_selector = '> ' + self.options.panelSelector + selector;
       return $(panel_selector, self.$container);
+    },
+
+    snapTo: function(target, wrap)
+    {
+      var self = this;
+
+      if(typeof wrap !== 'boolean')
+      {
+        wrap = true;
+      }
+
+      var $target;
+
+      switch(target) {
+        case 'prev':
+          $target = self.getPanel('.active').prev(self.options.panelSelector);
+          if($target.length < 1 && wrap)
+          {
+            $target = self.getPanel(':last');
+          }
+          break;
+        case 'next':
+          $target = self.getPanel('.active').next(self.options.panelSelector);
+          if($target.length < 1 && wrap)
+          {
+            $target = self.getPanel(':first');
+          }
+          break;
+        case 'first':
+          $target = self.getPanel(':first');
+          break;
+        case 'last':
+          $target = self.getPanel(':last');
+          break;
+      }
+
+      if($target.length > 0)
+      {
+        self.snapToPanel($target);
+      }
+
     }
   };
 
