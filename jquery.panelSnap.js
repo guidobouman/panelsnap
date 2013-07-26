@@ -73,9 +73,9 @@ if ( typeof Object.create !== 'function' )
         }
       }
 
-      self.options = $.extend(true, {}, $.fn.panelSnap.options, options);
+      self.scrollInterval = self.$container.height();
 
-      self.panelCount = self.getPanel().length;
+      self.options = $.extend(true, {}, $.fn.panelSnap.options, options);
 
       self.bind();
 
@@ -165,41 +165,40 @@ if ( typeof Object.create !== 'function' )
         return;
       }
 
-      var interval = self.$container.height();
-      var intervalDifference = interval - self.scrollInterval;
       var offset = self.$eventContainer.scrollTop();
       var scrollDifference = offset - self.scrollOffset;
-      var maxOffset = self.$container[0].scrollHeight - interval;
+      var maxOffset = self.$container[0].scrollHeight - self.scrollInterval;
+      var panelCount = self.getPanel().length;
 
-      self.scrollInterval = interval;
+      var child_number;
+      if(scrollDifference < -self.options.directionThreshold &&
+        scrollDifference > -self.scrollInterval)
+      {
+        child_number = Math.floor(offset / self.scrollInterval);
+      }
+      else if(scrollDifference > self.options.directionThreshold &&
+        scrollDifference < self.scrollInterval)
+      {
+        child_number = Math.ceil(offset / self.scrollInterval);
+      }
+      else
+      {
+        child_number = Math.round(offset / self.scrollInterval);
+      }
+
+      child_number = Math.max(0, Math.min(child_number, panelCount));
+
+      var $target = self.getPanel(':eq(' + child_number + ')');
 
       if((scrollDifference === 0) ||
         (scrollDifference < 100 && (offset < 0 || offset > maxOffset)))
       {
-        return;
-      }
-
-      var child_number;
-      if(scrollDifference < -self.options.directionThreshold && scrollDifference > -interval)
-      {
-        child_number = Math.floor(offset / interval);
-      }
-      else if(scrollDifference > self.options.directionThreshold && scrollDifference < interval)
-      {
-        child_number = Math.ceil(offset / interval);
+        self.activatePanel($target);
       }
       else
       {
-        child_number = Math.round(offset / interval);
+        self.snapToPanel($target);
       }
-
-      child_number = child_number < 0 ? 0 : child_number;
-
-      child_number = child_number > self.panelCount ? self.panelCount : child_number;
-
-      var $target = self.getPanel(':eq(' + child_number + ')');
-
-      self.snapToPanel($target);
     },
 
     mouseWheel: function(e)
@@ -230,6 +229,8 @@ if ( typeof Object.create !== 'function' )
     resize: function(e) {
 
       var self = this;
+
+      self.scrollInterval = self.$container.height();
 
       var $target = self.getPanel('.active');
 
