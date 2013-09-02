@@ -13,7 +13,6 @@ Javascript:
 <html>
   <head>
     <script src="/path/to/jquery.js"></script>
-    <script src="/path/to/jquery.customEvents.js"></script>
     <script src="/path/to/jquery.panelSnap.js"></script>
     <script>
       $('body').panelSnap();
@@ -80,7 +79,6 @@ The ammount of miliseconds in which the plugin snaps to the desired panel
 <html>
   <head>
     <script src="/path/to/jquery.js"></script>
-    <script src="/path/to/jquery.customEvents.js"></script>
     <script src="/path/to/jquery.panelSnap.js"></script>
     <script>
       var options = {
