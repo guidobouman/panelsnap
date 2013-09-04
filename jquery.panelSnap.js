@@ -479,17 +479,19 @@ if ( typeof Object.create !== 'function' ) {
  */
 (function($) {
 
-  // also handles scrollstop
+  // Also handles the scrollstop event
   $.event.special.scrollstart = {
 
     enabled: true,
 
     setup: function() {
 
-      var thisObject = this,
-          $this = $(thisObject),
-          scrolling,
-          timer;
+      var thisObject = this;
+      var $this = $(thisObject);
+      var scrolling;
+      var timer;
+
+      $this.data('scrollwatch', true);
 
       function trigger(event, scrolling) {
 
@@ -521,6 +523,23 @@ if ( typeof Object.create !== 'function' ) {
       });
     }
   };
+
+  // Proxies scrollstart when needed
+  $.event.special.scrollstop = {
+
+    setup: function() {
+
+      var thisObject = this;
+      var $this = $(thisObject);
+
+      if(!$this.data('scrollwatch')) {
+
+        $(this).on('scrollstart', function(){});
+
+      }
+
+    }
+  }
 
 })(jQuery);
 
