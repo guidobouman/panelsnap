@@ -17,7 +17,6 @@ if ( typeof Object.create !== 'function' ) {
  *
  * Requires:
  * - jQuery 1.7.1 or higher (no jQuery.migrate needed)
- * - jQuery scrollEvents.js (included in the package)
  *
  * https://github.com/guidobouman/jquery-panelsnap
  *
@@ -450,10 +449,10 @@ if ( typeof Object.create !== 'function' ) {
 
 /*!
  * Special flavoured jQuery Mobile Scrollstart & Scrollstop events.
- * Version 0.1.1
+ * Version 0.1.2
  *
  * Requires:
- * - jQuery 1.7.1 or higher (Works with the API changes from 1.9.1 too)
+ * - jQuery 1.7.1 or higher (no jQuery.migrate needed)
  *
  * Copyright 2013, Guido Bouman
  *
