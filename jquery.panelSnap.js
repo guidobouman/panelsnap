@@ -539,7 +539,7 @@ if ( typeof Object.create !== 'function' ) {
       }
 
     }
-  }
+  };
 
 })(jQuery);
 
