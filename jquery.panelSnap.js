@@ -109,7 +109,7 @@ if ( typeof Object.create !== 'function' ) {
       self.bindProxied(self.$eventContainer, 'mousedown', self.mouseDown);
       self.bindProxied(self.$eventContainer, 'mouseup', self.mouseUp);
 
-      self.bindProxied(self.$window, 'resize', self.resize);
+      self.bindProxied(self.$window, 'resizestop', self.resize);
 
       if(self.options.$menu !== false) {
 
@@ -529,9 +529,97 @@ if ( typeof Object.create !== 'function' ) {
       var $this = $(thisObject);
 
       if(!$this.data('scrollwatch')) {
-
         $(this).on('scrollstart', function(){});
+      }
 
+    }
+  };
+
+})(jQuery);
+
+/*!
+ * Resizestart and resizestop events.
+ * Version 0.0.1
+ *
+ * Requires:
+ * - jQuery 1.7.1 or higher (no jQuery.migrate needed)
+ *
+ * Copyright 2013, Guido Bouman
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * Date: Fri Oct 25 15:05:00 2013 +0100
+ */
+(function($) {
+
+  // Also handles the resizestop event
+  $.event.special.resizestart = {
+
+    enabled: true,
+
+    setup: function() {
+
+      var thisObject = this;
+      var $this = $(thisObject);
+      var resizing;
+      var timer;
+
+      $this.data('resizewatch', true);
+
+      function trigger(event, resizing) {
+
+        event.type = resizing ? "resizestart" : "resizestop";
+        $this.trigger(event);
+
+      }
+
+      $this.on("resize", function(event) {
+
+        if(!$.event.special.resizestart.enabled) {
+          return;
+        }
+
+        if(!$.event.special.resizestart.resizing) {
+          $.event.special.resizestart.resizing = true;
+          trigger(event, true);
+        }
+
+        clearTimeout(timer);
+        timer = setTimeout(function() {
+          $.event.special.resizestart.resizing = false;
+          trigger(event, false);
+        }, 200);
+
+      });
+    }
+  };
+
+  // Proxies resizestart when needed
+  $.event.special.resizestop = {
+
+    setup: function() {
+
+      var thisObject = this;
+      var $this = $(thisObject);
+
+      if(!$this.data('resizewatch')) {
+        $(this).on('resizestart', function(){});
       }
 
     }
