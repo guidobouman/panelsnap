@@ -448,8 +448,8 @@ if ( typeof Object.create !== 'function' ) {
 })(jQuery, window, document);
 
 /*!
- * Special flavoured jQuery Mobile Scrollstart & Scrollstop events.
- * Version 0.1.2
+ * Special flavoured jQuery Mobile scrollstart & scrollstop events.
+ * Version 0.1.3
  *
  * Requires:
  * - jQuery 1.7.1 or higher (no jQuery.migrate needed)
@@ -502,23 +502,20 @@ if ( typeof Object.create !== 'function' ) {
       $this.on("touchmove scroll", function(event) {
 
         if(!$.event.special.scrollstart.enabled) {
-
           return;
-
         }
 
-        if(!scrolling) {
-
+        if(!$.event.special.scrollstart.scrolling) {
+          $.event.special.scrollstart.scrolling = true;
           trigger(event, true);
-
         }
 
         clearTimeout(timer);
         timer = setTimeout(function() {
-
+          $.event.special.scrollstart.scrolling = false;
           trigger(event, false);
-
         }, 50);
+
       });
     }
   };
