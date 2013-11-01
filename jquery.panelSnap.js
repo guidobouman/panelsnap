@@ -1,6 +1,5 @@
 // Utility for creating objects in older browsers
 if ( typeof Object.create !== 'function' ) {
-
   Object.create = function( obj ) {
 
     function F() {}
@@ -8,7 +7,6 @@ if ( typeof Object.create !== 'function' ) {
     return new F();
 
   };
-
 }
 
 /*!
@@ -48,6 +46,7 @@ if ( typeof Object.create !== 'function' ) {
   var storageName = 'plugin_' + pluginName;
 
   var pluginObject = {
+
     isMouseDown: false,
     isSnapping: false,
     scrollInterval: 0,
@@ -67,16 +66,12 @@ if ( typeof Object.create !== 'function' ) {
       self.$snapContainer = self.$container;
 
       if(self.$container.is('body')) {
-
         self.$eventContainer = self.$document;
         var ua = navigator.userAgent;
 
         if(!~ua.indexOf("WebKit")) {
-
           self.$snapContainer = $('html');
-
         }
-
       }
 
       self.scrollInterval = self.$container.height();
@@ -86,14 +81,10 @@ if ( typeof Object.create !== 'function' ) {
       self.bind();
 
       if(self.options.$menu !== false && $('.active', self.options.$menu).length > 0) {
-
         $('.active', self.options.$menu).click();
-
       } else {
-
         var $target = self.getPanel(':first');
         self.activatePanel($target);
-
       }
 
       return self;
@@ -112,9 +103,7 @@ if ( typeof Object.create !== 'function' ) {
       self.bindProxied(self.$window, 'resizestop', self.resize);
 
       if(self.options.$menu !== false) {
-
         self.bindProxied($(self.options.$menu), 'click', self.captureMenuClick, self.options.menuSelector);
-
       }
 
     },
@@ -143,9 +132,7 @@ if ( typeof Object.create !== 'function' ) {
       self.$window.off(self.options.namespace);
 
       if(self.options.$menu !== false) {
-
         $(self.options.menuSelector, self.options.$menu).off(self.options.namespace);
-
       }
 
       self.$container.removeData(storageName);
@@ -159,16 +146,12 @@ if ( typeof Object.create !== 'function' ) {
       e.stopPropagation();
 
       if(self.isMouseDown) {
-
         self.$eventContainer.one('mouseup' + self.options.namespace, self.processScroll);
         return;
-
       }
 
       if(self.isSnapping) {
-
         return;
-
       }
 
       var offset = self.$eventContainer.scrollTop();
@@ -177,35 +160,31 @@ if ( typeof Object.create !== 'function' ) {
       var panelCount = self.getPanel().length;
 
       var childNumber;
-      if(scrollDifference < -self.options.directionThreshold &&
-        scrollDifference > -self.scrollInterval) {
-
+      if(
+        scrollDifference < -self.options.directionThreshold &&
+        scrollDifference > -self.scrollInterval
+      ) {
         childNumber = Math.floor(offset / self.scrollInterval);
-
-      } else if(scrollDifference > self.options.directionThreshold &&
-        scrollDifference < self.scrollInterval) {
-
+      } else if(
+        scrollDifference > self.options.directionThreshold &&
+        scrollDifference < self.scrollInterval
+      ) {
         childNumber = Math.ceil(offset / self.scrollInterval);
-
       } else {
-
         childNumber = Math.round(offset / self.scrollInterval);
-
       }
 
       childNumber = Math.max(0, Math.min(childNumber, panelCount));
 
       var $target = self.getPanel(':eq(' + childNumber + ')');
 
-      if((scrollDifference === 0) ||
-        (scrollDifference < 100 && (offset < 0 || offset > maxOffset))) {
-
+      if(
+        (scrollDifference === 0) ||
+        (scrollDifference < 100 && (offset < 0 || offset > maxOffset))
+      ) {
         self.activatePanel($target);
-
       } else {
-
         self.snapToPanel($target);
-
       }
 
     },
@@ -274,13 +253,9 @@ if ( typeof Object.create !== 'function' ) {
 
       var scrollTarget = 0;
       if(self.$container.is('body')) {
-
         scrollTarget = $target.offset().top;
-
       } else {
-
         scrollTarget = self.$eventContainer.scrollTop() + $target.position().top;
-
       }
 
       self.$snapContainer.stop(true).animate({
@@ -308,13 +283,11 @@ if ( typeof Object.create !== 'function' ) {
       $target.addClass('active');
 
       if(self.options.$menu !== false) {
-
         $(self.options.menuSelector + '.active', self.options.$menu).removeClass('active');
 
         var itemSelector = self.options.menuSelector + '[data-panel=' + $target.data('panel') + ']';
         var $activeItem = $(itemSelector, self.options.$menu);
         $activeItem.addClass('active');
-
       }
 
     },
@@ -324,9 +297,7 @@ if ( typeof Object.create !== 'function' ) {
       var self = this;
 
       if(typeof selector === 'undefined') {
-
         selector = '';
-
       }
 
       var panelSelector = '> ' + self.options.panelSelector + selector;
@@ -339,15 +310,12 @@ if ( typeof Object.create !== 'function' ) {
       var self = this;
 
       if(typeof wrap !== 'boolean') {
-
         wrap = true;
-
       }
 
       var $target;
 
       switch(target) {
-
         case 'prev':
 
           $target = self.getPanel('.active').prev(self.options.panelSelector);
@@ -375,63 +343,49 @@ if ( typeof Object.create !== 'function' ) {
 
           $target = self.getPanel(':last');
           break;
-
       }
 
       if($target.length > 0) {
-
         self.snapToPanel($target);
-
       }
 
     }
+
   };
 
   $.fn[pluginName] = function(options) {
+
     var args = Array.prototype.slice.call(arguments);
 
     return this.each(function() {
 
       var pluginInstance = $.data(this, storageName);
       if(typeof options === 'object' || options === 'init' || ! options) {
-
         if(!pluginInstance) {
-
           if(options === 'init') {
-
             options = args[1] || {};
-
           }
 
           pluginInstance = Object.create(pluginObject).init(options, this);
           $.data(this, storageName, pluginInstance);
-
         } else {
-
           $.error('Plugin is already initialized for this object.');
           return;
-
         }
-
       } else if(!pluginInstance) {
-
         $.error('Plugin is not initialized for this object yet.');
         return;
-
       } else if(pluginInstance[options]) {
-
         var method = options;
         options = args.slice(1);
         pluginInstance[method].apply(pluginInstance, options);
-
       } else {
-
         $.error('Method ' +  options + ' does not exist on jQuery.panelSnap.');
         return;
-
       }
 
     });
+
   };
 
   $.fn.panelSnap.options = {
@@ -517,7 +471,9 @@ if ( typeof Object.create !== 'function' ) {
         }, 50);
 
       });
+
     }
+
   };
 
   // Proxies scrollstart when needed
@@ -533,6 +489,7 @@ if ( typeof Object.create !== 'function' ) {
       }
 
     }
+
   };
 
 })(jQuery);
@@ -607,7 +564,9 @@ if ( typeof Object.create !== 'function' ) {
         }, 200);
 
       });
+
     }
+
   };
 
   // Proxies resizestart when needed
@@ -623,6 +582,7 @@ if ( typeof Object.create !== 'function' ) {
       }
 
     }
+
   };
 
 })(jQuery);
