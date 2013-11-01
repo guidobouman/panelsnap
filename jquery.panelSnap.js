@@ -388,7 +388,7 @@ if ( typeof Object.create !== 'function' ) {
 
   };
 
-  $.fn.panelSnap.options = {
+  $.fn[pluginName].options = {
     $menu: false,
     menuSelector: 'a',
     panelSelector: 'section',
