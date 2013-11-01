@@ -176,26 +176,26 @@ if ( typeof Object.create !== 'function' ) {
       var maxOffset = self.$container[0].scrollHeight - self.scrollInterval;
       var panelCount = self.getPanel().length;
 
-      var child_number;
+      var childNumber;
       if(scrollDifference < -self.options.directionThreshold &&
         scrollDifference > -self.scrollInterval) {
 
-        child_number = Math.floor(offset / self.scrollInterval);
+        childNumber = Math.floor(offset / self.scrollInterval);
 
       } else if(scrollDifference > self.options.directionThreshold &&
         scrollDifference < self.scrollInterval) {
 
-        child_number = Math.ceil(offset / self.scrollInterval);
+        childNumber = Math.ceil(offset / self.scrollInterval);
 
       } else {
 
-        child_number = Math.round(offset / self.scrollInterval);
+        childNumber = Math.round(offset / self.scrollInterval);
 
       }
 
-      child_number = Math.max(0, Math.min(child_number, panelCount));
+      childNumber = Math.max(0, Math.min(childNumber, panelCount));
 
-      var $target = self.getPanel(':eq(' + child_number + ')');
+      var $target = self.getPanel(':eq(' + childNumber + ')');
 
       if((scrollDifference === 0) ||
         (scrollDifference < 100 && (offset < 0 || offset > maxOffset))) {
@@ -329,8 +329,8 @@ if ( typeof Object.create !== 'function' ) {
 
       }
 
-      var panel_selector = '> ' + self.options.panelSelector + selector;
-      return $(panel_selector, self.$container);
+      var panelSelector = '> ' + self.options.panelSelector + selector;
+      return $(panelSelector, self.$container);
 
     },
 
