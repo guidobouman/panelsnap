@@ -263,6 +263,7 @@
     <script src="//code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="../jquery.panelSnap.js"></script>
     <script>
+
       // Basic demo
       $('body').panelSnap();
 
@@ -271,30 +272,46 @@
         $menu: $('.menu_demo .menu')
       });
 
+      // Shared log function
+      function log(type, action, $target) {
+
+        var text = '<p>' + action + ':<br>' + $target.find('h1').text() + '</p>';
+        $('.' + type + '_demo .log h2').after(text);
+
+      }
+
       // Callback demo
       $('.callback_demo .panels').panelSnap({
-        onSnapStart: function($target){
-        var text = '<p>onSnapStart:<br>' + $target.find('h1').text() + '</p>';
-        $('.callback_demo .log h2').after(text);
+        onSnapStart: function($target) {
+
+          log('callback', 'onSnapStart', $target);
+
         },
-        onSnapFinish: function($target){
-        var text = '<p>onSnapFinish:<br>' + $target.find('h1').text() + '</p>';
-        $('.callback_demo .log h2').after(text);
+        onSnapFinish: function($target) {
+
+          log('callback', 'onSnapFinish', $target);
+
+        },
+        onActivate: function($target) {
+
+          log('callback', 'onActivate', $target);
+
         }
       });
 
       // Event demo
       $('.event_demo .panels').panelSnap();
 
-      $('.event_demo .panels').on('panelsnap:start', function(e, $target){
-        var text = '<p>panelsnap:start:<br>' + $target.find('h1').text() + '</p>';
-        $('.event_demo .log h2').after(text);
-      });
+      $('.event_demo .panels').on('panelsnap:start', event_log);
+      $('.event_demo .panels').on('panelsnap:finish', event_log);
+      $('.event_demo .panels').on('panelsnap:activate', event_log);
 
-      $('.event_demo .panels').on('panelsnap:finish', function(e, $target){
-        var text = '<p>panelsnap:finish:<br>' + $target.find('h1').text() + '</p>';
-        $('.event_demo .log h2').after(text);
-      });
+      function event_log(e, $target) {
+
+        log('event', e.type, $target);
+
+      }
+
     </script>
 
   </body>

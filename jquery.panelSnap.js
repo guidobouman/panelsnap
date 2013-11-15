@@ -290,6 +290,9 @@ if ( typeof Object.create !== 'function' ) {
         $activeItem.addClass('active');
       }
 
+      self.options.onActivate.call(self, $target);
+      self.$container.trigger('panelsnap:activate', [$target]);
+
     },
 
     getPanel: function(selector) {
@@ -395,6 +398,7 @@ if ( typeof Object.create !== 'function' ) {
     namespace: '.panelSnap',
     onSnapStart: function(){},
     onSnapFinish: function(){},
+    onActivate: function(){},
     directionThreshold: 50,
     slideSpeed: 200
   };
