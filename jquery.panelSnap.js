@@ -49,6 +49,7 @@ if ( typeof Object.create !== 'function' ) {
 
     isMouseDown: false,
     isSnapping: false,
+    enabled: true,
     scrollInterval: 0,
     scrollOffset: 0,
 
@@ -145,6 +146,10 @@ if ( typeof Object.create !== 'function' ) {
 
       e.stopPropagation();
 
+      if(!self.enabled) {
+        return;
+      }
+
       if(self.isMouseDown) {
         self.$eventContainer.one('mouseup' + self.options.namespace, self.processScroll);
         return;
@@ -224,6 +229,10 @@ if ( typeof Object.create !== 'function' ) {
       var self = this;
 
       self.scrollInterval = self.$container.height();
+
+      if(!self.enabled) {
+        return;
+      }
 
       var $target = self.getPanel('.active');
 
@@ -354,6 +363,34 @@ if ( typeof Object.create !== 'function' ) {
 
       if($target.length > 0) {
         self.snapToPanel($target);
+      }
+
+    },
+
+    enable: function() {
+
+      var self = this;
+
+      self.enabled = true;
+
+    },
+
+    disable: function() {
+
+      var self = this;
+
+      self.enabled = false;
+
+    },
+
+    toggle: function() {
+
+      var self = this;
+
+      if(self.enabled) {
+        self.disable();
+      } else {
+        self.enable();
       }
 
     }
