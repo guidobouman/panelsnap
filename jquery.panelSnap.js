@@ -281,15 +281,17 @@ if ( typeof Object.create !== 'function' ) {
 
       var self = this;
 
-      $('> ' + self.options.panelSelector + '.active', self.container).removeClass('active');
+      self.getPanel('.active').removeClass('active');
       $target.addClass('active');
 
       if(self.options.$menu !== false) {
-        $(self.options.menuSelector + '.active', self.options.$menu).removeClass('active');
+        var activeItemSelector = '> ' + self.options.menuSelector + '.active';
+        $(activeItemSelector, self.options.$menu).removeClass('active');
 
-        var itemSelector = self.options.menuSelector + '[data-panel=' + $target.data('panel') + ']';
-        var $activeItem = $(itemSelector, self.options.$menu);
-        $activeItem.addClass('active');
+        var attribute = '[data-panel=' + $target.data('panel') + ']';
+        var itemSelector = '> ' + self.options.menuSelector + attribute;
+        var $itemToActivate = $(itemSelector, self.options.$menu);
+        $itemToActivate.addClass('active');
       }
 
       self.options.onActivate.call(self, $target);
