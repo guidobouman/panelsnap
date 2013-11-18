@@ -8,9 +8,11 @@
         "element",
         "elements",
         "panel",
-        "panels"
+        "panels",
+        "scroll",
+        "scrolling"
     ],
-    "version": "0.9.2",
+    "version": "0.10.0",
     "author": {
         "name": "Guido Bouman",
         "url": "http://guido.vc/"
@@ -25,7 +27,7 @@
     "licenses": [
         {
             "type": "MIT",
-            "url": "https://github.com/guidobouman/jquery-panelsnap/blob/master/LICENSE.txt"
+            "url": "https://github.com/guidobouman/jquery-panelsnap/blob/master/LICENSE"
         }
     ],
     "bugs": "https://github.com/guidobouman/jquery-panelsnap/issues",
