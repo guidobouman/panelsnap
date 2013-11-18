@@ -371,6 +371,9 @@ if ( typeof Object.create !== 'function' ) {
 
       var self = this;
 
+      // Gather scrollOffset for next scroll
+      self.scrollOffset = self.$container[0].scrollHeight;
+
       self.enabled = true;
 
     },
