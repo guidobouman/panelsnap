@@ -113,3 +113,15 @@ The ammount of miliseconds in which the plugin snaps to the desired panel.
     </div>
   </body>
 ```
+
+# Events
+The plugin emits the following events on the container object in the `panelsnap` namespace:
+
+`panelsnap:start`:
+Fired before a panel is being snapped.
+
+`panelsnap:finish`:
+Fired after a panel was snapped.
+
+`panelsnap:activate`:
+Fired after a panel was activated. (This callback will ALWAYS fire when switching to a panel, where onSnapStart & onStapFinish only fire before and after the plugin is actually snapping (animating) towards a panel.)
