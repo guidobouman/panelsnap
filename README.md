@@ -42,6 +42,7 @@ var options = {
   namespace: '.panelSnap',
   onSnapStart: function(){},
   onSnapFinish: function(){},
+  onActivate: function(){},
   directionThreshold: 50,
   slideSpeed: 200
 };
@@ -50,28 +51,31 @@ $('.panel_container').panelSnap(options);
 ```
 
 `$menu`:
-jQuery object referencing a menu that contains menu items
+jQuery object referencing a menu that contains menu items.
 
 `menuSelector`:
-A string containing the css selector to menu items (scoped within the menu)
+A string containing the css selector to menu items (scoped within the menu).
 
 `panelSelector`:
-A string containg the css selector to panels (scoped within the container)
+A string containg the css selector to panels (scoped within the container).
 
 `namespace`:
-A string containing the jQuery event namespace that's being used
+A string containing the jQuery event namespace that's being used.
 
 `onSnapStart`:
-A callback function that is being fired before a panel is being snapped
+A callback function that is being fired before a panel is being snapped.
 
-`onSnapStop`:
-A callback function that is being fired after a panel was snapped
+`onSnapFinish`:
+A callback function that is being fired after a panel was snapped.
+
+`onActivate`:
+A callback function that is being fired after a panel was activated. (This callback will ALWAYS fire, where onSnapStart & onStapFinish only fire before and after the plugin is actually snapping (animating) towards a panel.)
 
 `directionThreshold`:
-An integer specifying the ammount of pixels required to scroll before the plugin detects a direction and snaps to the next panel.
+An integer specifying the amount of pixels required to scroll before the plugin detects a direction and snaps to the next panel.
 
 `slideSpeed`:
-The ammount of miliseconds in which the plugin snaps to the desired panel
+The ammount of miliseconds in which the plugin snaps to the desired panel.
 
 ## Attaching a menu
 
