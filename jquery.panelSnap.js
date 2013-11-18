@@ -178,11 +178,13 @@ if ( typeof Object.create !== 'function' ) {
 
       var $target = self.getPanel(':eq(' + childNumber + ')');
 
-      if(
-        (scrollDifference === 0) ||
-        (scrollDifference < 100 && (offset < 0 || offset > maxOffset))
-      ) {
+      if(scrollDifference === 0) {
+        // Do nothing
+      } else if (offset < 0 || offset > maxOffset) {
+        // Only activate, prevent stuttering
         self.activatePanel($target);
+        // Set scrollOffset to a sane number for next scroll
+        self.scrollOffset = offset < 0 ? 0 : maxOffset;
       } else {
         self.snapToPanel($target);
       }
