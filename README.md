@@ -51,7 +51,7 @@ $('.panel_container').panelSnap(options);
 ```
 
 `$menu`:
-jQuery object referencing a menu that contains menu items.
+jQuery DOM object referencing a menu that contains menu items.
 
 `menuSelector`:
 A string containing the css selector to menu items (scoped within the menu).
@@ -113,6 +113,8 @@ The ammount of miliseconds in which the plugin snaps to the desired panel.
     </div>
   </body>
 ```
+
+Note the `data-panel` attributes on the links and the panels. This way the plugin knows which link matches to which panel.
 
 # Events
 The plugin emits the following events on the container object in the `panelsnap` namespace:
