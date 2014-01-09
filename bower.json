@@ -1,6 +1,6 @@
 {
   "name": "guidobouman/jquery-panelsnap",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "main": "jquery.panelSnap.js",
   "description": "jQuery plugin that provides snapping functionality to a set of panels within your interface.",
   "license": "MIT",
