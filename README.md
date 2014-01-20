@@ -10,12 +10,15 @@ The most basic setup will bind to body and snap all sections.
 
 Javascript:
 ```html
+<!doctype html>
 <html>
   <head>
     <script src="/path/to/jquery.js"></script>
     <script src="/path/to/jquery.panelSnap.js"></script>
     <script>
-      $('body').panelSnap();
+      jQuery(function($) {
+        $('body').panelSnap();
+      });
     </script>
   </head>
   <body>
@@ -80,16 +83,19 @@ The ammount of miliseconds in which the plugin snaps to the desired panel.
 ## Attaching a menu
 
 ```html
+<!doctype html>
 <html>
   <head>
     <script src="/path/to/jquery.js"></script>
     <script src="/path/to/jquery.panelSnap.js"></script>
     <script>
-      var options = {
-        $menu: $('header .menu')
-      };
-
-      $('.panel_container').panelSnap(options);
+      jQuery(function($) {
+        var options = {
+          $menu: $('header .menu')
+        };
+        
+        $('.panel_container').panelSnap(options);
+      });
     </script>
   </head>
   <body>
@@ -112,6 +118,7 @@ The ammount of miliseconds in which the plugin snaps to the desired panel.
       </section>
     </div>
   </body>
+</html>
 ```
 
 Note the `data-panel` attributes on the links and the panels. This way the plugin knows which link matches to which panel.
