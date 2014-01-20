@@ -257,6 +257,10 @@ if ( typeof Object.create !== 'function' ) {
 
       var self = this;
 
+      if (!($target instanceof jQuery)) {
+        return;
+      }
+
       self.isSnapping = true;
 
       self.options.onSnapStart.call(self, $target);
