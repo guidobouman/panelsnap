@@ -220,6 +220,10 @@ if ( typeof Object.create !== 'function' ) {
 
       self.isMouseDown = false;
 
+      if(self.scrollOffset !== self.$snapContainer.scrollTop()) {
+        self.scrollStop(e);
+      }
+
     },
 
     resize: function(e) {
