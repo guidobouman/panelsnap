@@ -61,17 +61,14 @@ if ( typeof Object.create !== 'function' ) {
       self.$container = $(container);
 
       self.$eventContainer = self.$container;
-      self.$offsetContainer = self.$container;
       self.$snapContainer = self.$container;
 
       if(self.$container.is('body')) {
         self.$eventContainer = $(document);
-        self.$offsetContainer = $(document.documentElement);
         self.$snapContainer = $(document.documentElement);
 
         var ua = navigator.userAgent;
         if(~ua.indexOf('WebKit') && !~ua.indexOf('Chrome')) {
-          self.$offsetContainer = $(document);
           self.$snapContainer = $('body');
         }
       }
@@ -160,7 +157,7 @@ if ( typeof Object.create !== 'function' ) {
         return;
       }
 
-      var offset = self.$offsetContainer.scrollTop();
+      var offset = self.$snapContainer.scrollTop();
       var scrollDifference = offset - self.scrollOffset;
       var maxOffset = self.$container[0].scrollHeight - self.scrollInterval;
       var panelCount = self.getPanel().length;
@@ -271,7 +268,7 @@ if ( typeof Object.create !== 'function' ) {
       if(self.$container.is('body')) {
         scrollTarget = $target.offset().top;
       } else {
-        scrollTarget = self.$offsetContainer.scrollTop() + $target.position().top;
+        scrollTarget = self.$snapContainer.scrollTop() + $target.position().top;
       }
 
       self.$snapContainer.stop(true).animate({
