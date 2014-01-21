@@ -57,21 +57,22 @@ if ( typeof Object.create !== 'function' ) {
 
       var self = this;
 
-      self.$window = $(window);
-      self.$document = $(document);
-
       self.container = container;
       self.$container = $(container);
 
       self.$eventContainer = self.$container;
+      self.$offsetContainer = self.$container;
       self.$snapContainer = self.$container;
 
       if(self.$container.is('body')) {
-        self.$eventContainer = self.$document;
-        var ua = navigator.userAgent;
+        self.$eventContainer = $(document);
+        self.$offsetContainer = $(document.documentElement);
+        self.$snapContainer = $(document.documentElement);
 
-        if(!~ua.indexOf("WebKit")) {
-          self.$snapContainer = $('html');
+        var ua = navigator.userAgent;
+        if(~ua.indexOf('WebKit') && !~ua.indexOf('Chrome')) {
+          self.$offsetContainer = $(document);
+          self.$snapContainer = $('body');
         }
       }
 
@@ -101,7 +102,7 @@ if ( typeof Object.create !== 'function' ) {
       self.bindProxied(self.$eventContainer, 'mousedown', self.mouseDown);
       self.bindProxied(self.$eventContainer, 'mouseup', self.mouseUp);
 
-      self.bindProxied(self.$window, 'resizestop', self.resize);
+      self.bindProxied($(window), 'resizestop', self.resize);
 
       if(self.options.$menu !== false) {
         self.bindProxied($(self.options.$menu), 'click', self.captureMenuClick, self.options.menuSelector);
@@ -130,7 +131,7 @@ if ( typeof Object.create !== 'function' ) {
       // Gotta love namespaced events!
       self.$eventContainer.off(self.options.namespace);
 
-      self.$window.off(self.options.namespace);
+      $(window).off(self.options.namespace);
 
       if(self.options.$menu !== false) {
         $(self.options.menuSelector, self.options.$menu).off(self.options.namespace);
@@ -159,7 +160,7 @@ if ( typeof Object.create !== 'function' ) {
         return;
       }
 
-      var offset = self.$eventContainer.scrollTop();
+      var offset = self.$offsetContainer.scrollTop();
       var scrollDifference = offset - self.scrollOffset;
       var maxOffset = self.$container[0].scrollHeight - self.scrollInterval;
       var panelCount = self.getPanel().length;
@@ -270,7 +271,7 @@ if ( typeof Object.create !== 'function' ) {
       if(self.$container.is('body')) {
         scrollTarget = $target.offset().top;
       } else {
-        scrollTarget = self.$eventContainer.scrollTop() + $target.position().top;
+        scrollTarget = self.$offsetContainer.scrollTop() + $target.position().top;
       }
 
       self.$snapContainer.stop(true).animate({
