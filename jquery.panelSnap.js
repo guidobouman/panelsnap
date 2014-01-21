@@ -14,7 +14,7 @@ if ( typeof Object.create !== 'function' ) {
  * Version 0.10.3
  *
  * Requires:
- * - jQuery 1.7.1 or higher (no jQuery.migrate needed)
+ * - jQuery 1.7 or higher (no jQuery.migrate needed)
  *
  * https://github.com/guidobouman/jquery-panelsnap
  *
