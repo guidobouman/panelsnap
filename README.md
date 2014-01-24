@@ -1,5 +1,5 @@
 # jQuery.panelSnap [![Build Status](https://travis-ci.org/guidobouman/jquery-panelsnap.png)](https://travis-ci.org/guidobouman/jquery-panelsnap)
-A jQuery plugin that provides snapping functionality to a set of panels within your interface. Based on [jQuery plugin boilerplate](https://github.com/guidobouman/jquery-plugin-boilerplate)
+A jQuery plugin that provides snapping functionality to a set of panels within your interface. Based on [jQuery Plugin Boilerplate](https://github.com/guidobouman/jquery-plugin-boilerplate)
 
 # Demo
 Check out the homepage at [](http://guidobouman.github.io/jquery-panelsnap) or the demos folder for a working demo that explains most of the features present in the plugin.
