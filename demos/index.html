@@ -23,31 +23,7 @@
         color: #ffffff;
         font-family: 'Lato';
         font-weight: 100;
-        font-size: 32px;
-      }
-
-      h1 {
-        font-weight: inherit;
-        text-transform: uppercase;
-        font-size: 250%;
-        margin: 0;
-      }
-
-      a {
-        color: inherit;
-      }
-
-      img {
-        max-width: 100%;
-      }
-
-      p {
-        max-width: 800px;
-      }
-
-      p.small,
-      pre {
-        font-size: 70%;
+        font-size: 24px;
       }
 
       section {
@@ -63,6 +39,7 @@
         background: #16a085;
       }
 
+      body,
       section section {
         background: #f1c40f;
       }
@@ -79,12 +56,64 @@
         background: #1abc9c;
       }
 
+      section.introduction {
+        text-align: center;
+        display: table;
+
+        background: none;
+      }
+
       section.introduction:after {
+
         display: block;
         position: absolute;
-        bottom: 50px;
-        left: 50%;
-        margin-left: -14.8px;
+        top: -200%;
+        left: -150%;
+        height: 500%;
+        width: 200%;
+
+        background: #f39c12;
+        content: '';
+
+        z-index: -1;
+
+        -moz-transform-origin:  100% 50%;
+        -o-transform-origin:  100% 50%;
+        -webkit-transform-origin: 100% 50%;
+        transform-origin:  100% 50%;
+
+        -moz-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+
+      }
+
+      section.introduction .center {
+        display: table-cell;
+        vertical-align: middle;
+      }
+
+      section.introduction .center p {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 900px;
+      }
+
+      section.introduction .bottom {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding-bottom: 50px;
+
+        text-align: center;
+        font-size: 60%;
+      }
+
+      section.introduction .bottom:after {
+        display: block;
+        margin: 1em auto 0;
         height: 20px;
         width: 20px;
 
@@ -96,6 +125,28 @@
         -o-transform: rotate(45deg);
         -webkit-transform: rotate(45deg);
         transform: rotate(45deg);
+      }
+
+      h1 {
+        font-weight: inherit;
+        text-transform: uppercase;
+        font-size: 300%;
+        margin: 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+        border-bottom: 1px solid #ffffff;
+        padding-bottom: 3px;
+      }
+
+      img {
+        max-width: 100%;
+      }
+
+      pre {
+        font-size: 65%;
       }
 
       .panels,
@@ -127,8 +178,9 @@
         width: 100%;
         padding: 25px;
         background: #f1c40f;
-        text-decoration: none;
         margin: 0 0 25px 0;
+
+        border: none;
       }
 
       .menu a.active,
@@ -136,38 +188,32 @@
       .menu a:hover {
         background: #f39c12;
       }
-
-      @media screen and (max-width: 1000px) {
-        .panels,
-        .log,
-        .menu {
-          top: 300px;
-        }
-      }
     </style>
   </head>
   <body>
     <section class="introduction">
-      <h1>
-        jQuery.panelSnap
-      </h1>
-      <p>
-        A jQuery plugin that, after scrolling, snaps to blocks of content which I like to call panels. You can actually nest sets of panels as you will see throughout this demo page.
-      </p>
-      <p>
-        Each following panel will explain a specific feature of the panelSnap plugin.
-      </p>
-      <p>
-        <a href="http://github.com/guidobouman/jquery-panelsnap">http://github.com/guidobouman/jquery-panelsnap</a>
-      </p>
-      <p class="small">
-        (Scroll down to see more.)
-      </p>
+      <div class="center">
+        <h1>
+          jQuery.panelSnap
+        </h1>
+        <p>
+          A jQuery plugin that, after scrolling, snaps to blocks of content which I like to call panels. You can actually nest sets of panels as you will see throughout this demo page.
+        </p>
+        <p>
+          Each following panel will explain a specific feature of the panelSnap plugin.
+        </p>
+        <p>
+          <a href="http://github.com/guidobouman/jquery-panelsnap">http://github.com/guidobouman/jquery-panelsnap</a>
+        </p>
+      </div>
+      <div class="bottom">
+        Scroll down to see more.
+      </div>
     </section>
 
     <section class="basic_setup">
       <h1>
-        The basic setup
+        Basic setup
       </h1>
       <pre>&lt;!doctype html&gt;
 &lt;html&gt;
@@ -196,7 +242,7 @@
 
     <section class="configuration">
       <h1>
-        Configuration options
+        Options
       </h1>
       <pre>&lt;script&gt;
   jQuery(function($) {
@@ -219,7 +265,7 @@
 
     <section class="menu_demo">
       <h1>
-        Connected menu
+        Menus
       </h1>
       <div class="menu">
         <a href="" data-panel="first">
@@ -247,7 +293,7 @@
 
     <section class="callback_demo">
       <h1>
-        Callback functions
+        Callbacks
       </h1>
       <div class="panels">
         <section>
@@ -267,7 +313,7 @@
 
     <section class="event_demo">
       <h1>
-        Event capturing
+        Events
       </h1>
       <div class="panels">
         <section>
