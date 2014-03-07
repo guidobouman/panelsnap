@@ -247,7 +247,7 @@ if ( typeof Object.create !== 'function' ) {
       var self = this;
 
       var panel = $(e.currentTarget).data('panel');
-      var $target = self.getPanel('[data-panel=' + panel + ']');
+      var $target = self.getPanel('[data-panel="' + panel + '"]');
 
       self.snapToPanel($target);
 
@@ -303,7 +303,7 @@ if ( typeof Object.create !== 'function' ) {
         var activeItemSelector = '> ' + self.options.menuSelector + '.active';
         $(activeItemSelector, self.options.$menu).removeClass('active');
 
-        var attribute = '[data-panel=' + $target.data('panel') + ']';
+        var attribute = '[data-panel="' + $target.data('panel') + '"]';
         var itemSelector = '> ' + self.options.menuSelector + attribute;
         var $itemToActivate = $(itemSelector, self.options.$menu);
         $itemToActivate.addClass('active');
