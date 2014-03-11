@@ -68,7 +68,7 @@ if ( typeof Object.create !== 'function' ) {
         self.$snapContainer = $(document.documentElement);
 
         var ua = navigator.userAgent;
-        if(~ua.indexOf('WebKit') && !~ua.indexOf('Chrome')) {
+        if(~ua.indexOf('WebKit')) {
           self.$snapContainer = $('body');
         }
       }
