@@ -101,6 +101,10 @@ if ( typeof Object.create !== 'function' ) {
 
       self.bindProxied($(window), 'resizestop', self.resize);
 
+      if(self.options.keyboardNavigation.enabled) {
+        self.bindProxied($(window), 'keydown', self.keyDown, self.$eventContainer);
+      }
+
       if(self.options.$menu !== false) {
         self.bindProxied($(self.options.$menu), 'click', self.captureMenuClick, self.options.menuSelector);
       }
@@ -222,6 +226,34 @@ if ( typeof Object.create !== 'function' ) {
 
       if(self.scrollOffset !== self.$snapContainer.scrollTop()) {
         self.scrollStop(e);
+      }
+
+    },
+
+    keyDown: function(e) {
+
+      var self = this;
+
+      var nav = self.options.keyboardNavigation
+
+      if (self.isSnapping) {
+        if(e.which == nav.previousPanelKey || e.which == nav.nextPanelKey) {
+          e.preventDefault();
+          return false;
+        }
+
+        return;
+      }
+
+      switch(e.which) {
+        case nav.previousPanelKey:
+          e.preventDefault();
+          self.snapTo('prev', nav.wrapAround);
+          break;
+        case nav.nextPanelKey:
+          e.preventDefault();
+          self.snapTo('next', nav.wrapAround);
+          break;
       }
 
     },
@@ -450,7 +482,13 @@ if ( typeof Object.create !== 'function' ) {
     onSnapFinish: function(){},
     onActivate: function(){},
     directionThreshold: 50,
-    slideSpeed: 200
+    slideSpeed: 200,
+    keyboardNavigation: {
+      enabled: false,
+      nextPanelKey: 40,
+      previousPanelKey: 38,
+      wrapAround: true
+    }
   };
 
 })(jQuery, window, document);

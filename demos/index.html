@@ -292,6 +292,26 @@
       </div>
     </section>
 
+    <section class="keyboard_demo">
+      <h1>
+        Keyboard
+      </h1>
+      <div class="panels">
+        <section>
+          <h1>First</h1>
+        </section>
+        <section>
+          <h1>Second</h1>
+        </section>
+        <section>
+          <h1>Third</h1>
+        </section>
+      </div>
+      <div class="log">
+        <h2>Try using the left & right keys to navigate trough these panels.</h2>
+      </div>
+    </section>
+
     <section class="callback_demo">
       <h1>
         Callbacks
@@ -344,6 +364,16 @@
         // Menu demo
         $('.menu_demo .panels').panelSnap({
           $menu: $('.menu_demo .menu')
+        });
+
+        // Keyboard demo
+        $('.keyboard_demo .panels').panelSnap({
+          keyboardNavigation: {
+            enabled: true,
+            nextPanelKey: 39,
+            previousPanelKey: 37,
+            wrapAround: false
+          }
         });
 
         // Callback demo
