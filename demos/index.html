@@ -346,14 +346,6 @@
           $menu: $('.menu_demo .menu')
         });
 
-        // Shared log function
-        function log(type, action, $target) {
-
-          var text = '<p>' + action + ':<br>' + $target.find('h1').text() + '</p>';
-          $('.' + type + '_demo .log h2').after(text);
-
-        }
-
         // Callback demo
         $('.callback_demo .panels').panelSnap({
           onSnapStart: function($target) {
@@ -374,15 +366,23 @@
         });
 
         // Event demo
-        $('.event_demo .panels').panelSnap();
-
         $('.event_demo .panels').on('panelsnap:start', event_log);
         $('.event_demo .panels').on('panelsnap:finish', event_log);
         $('.event_demo .panels').on('panelsnap:activate', event_log);
 
+        $('.event_demo .panels').panelSnap();
+
         function event_log(e, $target) {
 
           log('event', e.type, $target);
+
+        }
+
+        // Shared log function
+        function log(type, action, $target) {
+
+          var text = '<p>' + action + ':<br>' + $target.find('h1').text() + '</p>';
+          $('.' + type + '_demo .log h2').after(text);
 
         }
 
