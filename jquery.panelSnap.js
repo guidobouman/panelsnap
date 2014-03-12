@@ -234,7 +234,7 @@ if ( typeof Object.create !== 'function' ) {
 
       var self = this;
 
-      var nav = self.options.keyboardNavigation
+      var nav = self.options.keyboardNavigation;
 
       if (self.isSnapping) {
         if(e.which == nav.previousPanelKey || e.which == nav.nextPanelKey) {
