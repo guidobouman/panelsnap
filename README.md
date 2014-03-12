@@ -47,7 +47,13 @@ var options = {
   onSnapFinish: function(){},
   onActivate: function(){},
   directionThreshold: 50,
-  slideSpeed: 200
+  slideSpeed: 200,
+  keyboardNavigation: {
+    enabled: false,
+    nextPanelKey: 40,
+    previousPanelKey: 38,
+    wrapAround: true
+  }
 };
 
 $('.panel_container').panelSnap(options);
@@ -78,7 +84,22 @@ A callback function that is being fired after a panel was activated. (This callb
 An integer specifying the amount of pixels required to scroll before the plugin detects a direction and snaps to the next panel.
 
 `slideSpeed`:
-The ammount of miliseconds in which the plugin snaps to the desired panel.
+The amount of miliseconds in which the plugin snaps to the desired panel.
+
+`keyboardNavigation`:
+An object containing all the settings for keyboard navigation.
+
+`keyboardNavigation.enabled`:
+Boolean telling the plugin wether or not to use keyboard navigation.
+
+`keyboardNavigation.nextPanelKey`:
+The keycode which triggers the navigation to the next panel.
+
+`keyboardNavigation.previousPanelKey`:
+The keycode which triggers the navigation to the previous panel.
+
+`keyboardNavigation.previousPanelKey`:
+Boolean telling the plugin wether or not keyboard navigation should wrap around the begining and end of the panelset.
 
 ## Attaching a menu
 
@@ -93,7 +114,7 @@ The ammount of miliseconds in which the plugin snaps to the desired panel.
         var options = {
           $menu: $('header .menu')
         };
-        
+
         $('.panel_container').panelSnap(options);
       });
     </script>
