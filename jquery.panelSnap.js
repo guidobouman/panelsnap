@@ -291,7 +291,7 @@ if ( typeof Object.create !== 'function' ) {
 
       var self = this;
 
-      if (!($target instanceof jQuery)) {
+      if (!($target instanceof jQuery) || $target.length === 0) {
         return;
       }
 
