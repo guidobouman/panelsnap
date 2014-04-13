@@ -153,7 +153,7 @@ if ( typeof Object.create !== 'function' ) {
       }
 
       if(self.isMouseDown) {
-        self.$eventContainer.one('mouseup' + self.options.namespace, self.processScroll);
+        self.$eventContainer.one('mouseup' + self.options.namespace, self.scrollStop);
         return;
       }
 
