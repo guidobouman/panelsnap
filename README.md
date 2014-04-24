@@ -155,3 +155,7 @@ Fired after a panel was snapped.
 
 `panelsnap:activate`:
 Fired after a panel was activated. (This callback will ALWAYS fire when switching to a panel, where onSnapStart & onStapFinish only fire before and after the plugin is actually snapping (animating) towards a panel.)
+
+# Credits
+- [jellea](https://github.com/jellea) for early feedback and brainpickings.  
+- [aalexandrov](https://github.com/aalexandrov) for lots of small improvements & bugfixes.
