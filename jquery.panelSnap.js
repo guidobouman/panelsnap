@@ -153,7 +153,6 @@ if ( typeof Object.create !== 'function' ) {
       }
 
       if(self.isMouseDown) {
-        self.$eventContainer.one('mouseup' + self.options.namespace, self.scrollStop);
         return;
       }
 
@@ -191,7 +190,7 @@ if ( typeof Object.create !== 'function' ) {
         // Only activate, prevent stuttering
         self.activatePanel($target);
         // Set scrollOffset to a sane number for next scroll
-        self.scrollOffset = offset < 0 ? 0 : maxOffset;
+        self.scrollOffset = offset <= 0 ? 0 : maxOffset;
       } else {
         self.snapToPanel($target);
       }
@@ -318,9 +317,8 @@ if ( typeof Object.create !== 'function' ) {
         self.options.onSnapFinish.call(self, $target);
         self.$container.trigger('panelsnap:finish', [$target]);
 
+        self.activatePanel($target);
       });
-
-      self.activatePanel($target);
 
     },
 
