@@ -235,6 +235,10 @@ if ( typeof Object.create !== 'function' ) {
 
       var nav = self.options.keyboardNavigation;
 
+      if(!self.enabled) {
+        return;
+      }
+
       if (self.isSnapping) {
         if(e.which == nav.previousPanelKey || e.which == nav.nextPanelKey) {
           e.preventDefault();
