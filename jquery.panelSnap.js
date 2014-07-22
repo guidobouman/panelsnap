@@ -148,10 +148,6 @@ if ( typeof Object.create !== 'function' ) {
 
       e.stopPropagation();
 
-      if(!self.enabled) {
-        return;
-      }
-
       if(self.isMouseDown) {
         return;
       }
@@ -183,6 +179,15 @@ if ( typeof Object.create !== 'function' ) {
       childNumber = Math.max(0, Math.min(childNumber, panelCount));
 
       var $target = self.getPanel(':eq(' + childNumber + ')');
+
+      if(!self.enabled) {
+        // still need to update active based on scrolling
+        var $current = self.getPanel('.active');
+        if (!$target.is($current)) {
+          self.activatePanel($target);
+        }
+        return;
+      }
 
       if(scrollDifference === 0) {
         // Do nothing
