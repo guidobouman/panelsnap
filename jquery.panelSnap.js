@@ -163,7 +163,7 @@ if ( typeof Object.create !== 'function' ) {
       var offset = self.$snapContainer.scrollTop();
       var scrollDifference = offset - self.scrollOffset;
       var maxOffset = self.$container[0].scrollHeight - self.scrollInterval;
-      var panelCount = self.getPanel().length;
+      var panelCount = self.getPanel().length - 1;
 
       var childNumber;
       if(
