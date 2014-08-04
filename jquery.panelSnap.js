@@ -157,7 +157,7 @@ if ( typeof Object.create !== 'function' ) {
       }
 
       var offset = self.$snapContainer.scrollTop();
-      var panelCount = self.getPanel().length;
+      var panelCount = self.getPanel().length - 1;
 
       if(!self.enabled) {
         // still need to update active based on scrolling  
