@@ -157,9 +157,21 @@ if ( typeof Object.create !== 'function' ) {
       }
 
       var offset = self.$snapContainer.scrollTop();
+      var panelCount = self.getPanel().length;
+
+      if(!self.enabled) {
+        // still need to update active based on scrolling  
+        var childNumber = Math.max(0, Math.min(Math.round(offset / self.scrollInterval), panelCount));
+        var $target = self.getPanel(':eq(' + childNumber + ')');
+        var $current = self.getPanel('.active'); 
+        if (!$target.is($current)) {
+          self.activatePanel($target);
+        }
+        return;
+      }
+
       var scrollDifference = offset - self.scrollOffset;
       var maxOffset = self.$container[0].scrollHeight - self.scrollInterval;
-      var panelCount = self.getPanel().length;
 
       var childNumber;
       if(
@@ -179,15 +191,6 @@ if ( typeof Object.create !== 'function' ) {
       childNumber = Math.max(0, Math.min(childNumber, panelCount));
 
       var $target = self.getPanel(':eq(' + childNumber + ')');
-
-      if(!self.enabled) {
-        // still need to update active based on scrolling
-        var $current = self.getPanel('.active');
-        if (!$target.is($current)) {
-          self.activatePanel($target);
-        }
-        return;
-      }
 
       if(scrollDifference === 0) {
         // Do nothing
