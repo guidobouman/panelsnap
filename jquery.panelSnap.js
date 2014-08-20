@@ -491,7 +491,7 @@ if ( typeof Object.create !== 'function' ) {
       previousPanelKey: 38,
       wrapAround: true
     },
-    strictContainerSelection: false
+    strictContainerSelection: true
   };
 
 })(jQuery, window, document);
