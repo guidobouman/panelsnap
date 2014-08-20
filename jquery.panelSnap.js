@@ -356,7 +356,7 @@ if ( typeof Object.create !== 'function' ) {
         selector = '';
       }
 
-      var panelSelector = '> ' + self.options.panelSelector + selector;
+      var panelSelector = (self.options.strictContainerSelection ? '> ' : '') + self.options.panelSelector + selector;
       return $(panelSelector, self.$container);
 
     },
@@ -490,7 +490,8 @@ if ( typeof Object.create !== 'function' ) {
       nextPanelKey: 40,
       previousPanelKey: 38,
       wrapAround: true
-    }
+    },
+    strictContainerSelection: true
   };
 
 })(jQuery, window, document);
