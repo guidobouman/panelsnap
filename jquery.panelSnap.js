@@ -148,10 +148,6 @@ if ( typeof Object.create !== 'function' ) {
 
       e.stopPropagation();
 
-      if(!self.enabled) {
-        return;
-      }
-
       if(self.isMouseDown) {
         return;
       }
@@ -167,11 +163,13 @@ if ( typeof Object.create !== 'function' ) {
 
       var childNumber;
       if(
+        self.enabled &&
         scrollDifference < -self.options.directionThreshold &&
         scrollDifference > -self.scrollInterval
       ) {
         childNumber = Math.floor(offset / self.scrollInterval);
       } else if(
+        self.enabled &&
         scrollDifference > self.options.directionThreshold &&
         scrollDifference < self.scrollInterval
       ) {
@@ -183,6 +181,14 @@ if ( typeof Object.create !== 'function' ) {
       childNumber = Math.max(0, Math.min(childNumber, panelCount));
 
       var $target = self.getPanel(':eq(' + childNumber + ')');
+
+      if(!self.enabled) {
+        if(!$target.is(self.getPanel('.active'))) {
+          self.activatePanel($target);
+        }
+
+        return;
+      }
 
       if(scrollDifference === 0) {
         // Do nothing
