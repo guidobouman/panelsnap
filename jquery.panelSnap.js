@@ -156,12 +156,24 @@ if ( typeof Object.create !== 'function' ) {
         return;
       }
 
+      var childNumber, $target, $current;
       var offset = self.$snapContainer.scrollTop();
-      var scrollDifference = offset - self.scrollOffset;
-      var maxOffset = self.$container[0].scrollHeight - self.scrollInterval;
       var panelCount = self.getPanel().length - 1;
 
-      var childNumber;
+      if(!self.enabled) {
+        // still need to update active based on scrolling  
+        childNumber = Math.max(0, Math.min(Math.round(offset / self.scrollInterval), panelCount));
+        $target = self.getPanel(':eq(' + childNumber + ')');
+        $current = self.getPanel('.active'); 
+        if (!$target.is($current)) {
+          self.activatePanel($target);
+        }
+        return;
+      }
+
+      var scrollDifference = offset - self.scrollOffset;
+      var maxOffset = self.$container[0].scrollHeight - self.scrollInterval;
+
       if(
         self.enabled &&
         scrollDifference < -self.options.directionThreshold &&
@@ -180,7 +192,7 @@ if ( typeof Object.create !== 'function' ) {
 
       childNumber = Math.max(0, Math.min(childNumber, panelCount));
 
-      var $target = self.getPanel(':eq(' + childNumber + ')');
+      $target = self.getPanel(':eq(' + childNumber + ')');
 
       if(!self.enabled) {
         if(!$target.is(self.getPanel('.active'))) {
