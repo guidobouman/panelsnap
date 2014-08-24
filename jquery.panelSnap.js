@@ -317,7 +317,7 @@ if ( typeof Object.create !== 'function' ) {
         scrollTarget = self.$snapContainer.scrollTop() + $target.position().top;
       }
       if (self.$offsetContainer.length) {
-        scrollTarget -= self.$offsetContainer.offset().top;
+        scrollTarget -= self.$offsetContainer.position().top;
       }
 
       self.$snapContainer.stop(true).animate({
