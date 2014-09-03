@@ -344,7 +344,9 @@ if ( typeof Object.create !== 'function' ) {
         scrollTop: scrollTarget
       }, self.options.slideSpeed, function() {
 
-        self.scrollOffset = scrollTarget;
+        // Set scrollOffset to scrollTop
+        // (not to scrollTarget since on iPad those sometimes differ)
+        self.scrollOffset = self.$snapContainer.scrollTop();
         self.isSnapping = false;
 
         // Call callback
