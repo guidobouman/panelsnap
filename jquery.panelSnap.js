@@ -190,6 +190,11 @@ if ( typeof Object.create !== 'function' ) {
         return;
       }
 
+      // To get normal scrolling in panels taller than the viewport,
+      // stop if there's no multiple panels in viewport
+      if (self.getPanelsInViewport().length < 2)
+        return;
+
       if(scrollDifference === 0) {
         // Do nothing
       } else if (offset <= 0 || offset >= maxOffset) {
@@ -201,6 +206,25 @@ if ( typeof Object.create !== 'function' ) {
         self.snapToPanel($target);
       }
 
+    },
+
+    getPanelsInViewport: function() {
+
+      var self = this;
+      var $window = $(window);
+
+      var viewport = { top: $window.scrollTop() };
+      viewport.bottom = viewport.top + $window.height();
+
+      var panels = self.getPanel().filter(function (_, el) {
+        var $el = $(el);
+        var bounds = $el.offset();
+        bounds.bottom = bounds.top + $el.outerHeight();
+
+        return !(viewport.bottom < bounds.top || viewport.top > bounds.bottom);
+      });
+
+      return panels;
     },
 
     mouseWheel: function(e) {
