@@ -570,6 +570,7 @@ if ( typeof Object.create !== 'function' ) {
       var $this = $(thisObject);
       var scrolling;
       var timer;
+      var isTouching;
 
       $this.data('scrollwatch', true);
 
@@ -580,7 +581,19 @@ if ( typeof Object.create !== 'function' ) {
 
       }
 
+      $this.on("touchstart", function(event) {
+        isTouching = true;
+      });
+
+      $this.on("touchleave touchcancel touchend", function(event) {
+        isTouching = false;
+      });
+
       $this.on("touchmove scroll", function(event) {
+
+        if (isTouching) {
+          return;
+        }
 
         if(!$.event.special.scrollstart.enabled) {
           return;
