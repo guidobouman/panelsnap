@@ -587,6 +587,9 @@ if ( typeof Object.create !== 'function' ) {
 
       $this.on("touchleave touchcancel touchend", function(event) {
         isTouching = false;
+        setTimeout(function () {
+          clearTimeout(timer);
+        }, 50);
       });
 
       $this.on("touchmove scroll", function(event) {
