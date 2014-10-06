@@ -300,7 +300,7 @@ if ( typeof Object.create !== 'function' ) {
 
       var self = this;
 
-      if (!($target instanceof jQuery)) {
+      if (!$target.jquery) {
         return;
       }
 
