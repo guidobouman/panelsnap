@@ -318,7 +318,7 @@ if ( typeof Object.create !== 'function' ) {
 
       self.$snapContainer.stop(true).animate({
         scrollTop: scrollTarget
-      }, self.options.slideSpeed, function() {
+      }, self.options.slideSpeed, self.options.easing, function() {
 
         self.scrollOffset = scrollTarget;
         self.isSnapping = false;
@@ -491,6 +491,7 @@ if ( typeof Object.create !== 'function' ) {
     onActivate: function(){},
     directionThreshold: 50,
     slideSpeed: 200,
+    easing: 'linear',
     keyboardNavigation: {
       enabled: false,
       nextPanelKey: 40,

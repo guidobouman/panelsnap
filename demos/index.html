@@ -257,6 +257,7 @@
       onActivate: function(){},
       directionThreshold: 50,
       slideSpeed: 200,
+      easing: 'linear',
       keyboardNavigation: {
         enabled: false,
         nextPanelKey: 40,
@@ -365,7 +366,7 @@
       jQuery(function($) {
 
         // Basic demo
-        $('body').panelSnap();
+        $('body').panelSnap( { easing: 'linear'});
 
         // Menu demo
         $('.menu_demo .panels').panelSnap({
