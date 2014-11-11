@@ -73,7 +73,7 @@ if ( typeof Object.create !== 'function' ) {
         }
       }
 
-      self.scrollInterval = self.$container.height();
+      self.updateScrollInterval();
 
       self.options = $.extend(true, {}, $.fn.panelSnap.options, options);
 
@@ -155,6 +155,8 @@ if ( typeof Object.create !== 'function' ) {
       if(self.isSnapping) {
         return;
       }
+
+      self.updateScrollInterval();
 
       var offset = self.$snapContainer.scrollTop();
       var scrollDifference = offset - self.scrollOffset;
@@ -271,7 +273,7 @@ if ( typeof Object.create !== 'function' ) {
 
       var self = this;
 
-      self.scrollInterval = self.$container.height();
+      self.updateScrollInterval();
 
       if(!self.enabled) {
         return;
@@ -410,6 +412,17 @@ if ( typeof Object.create !== 'function' ) {
       if($target.length > 0) {
         self.snapToPanel($target);
       }
+
+    },
+
+    getScrollInterval: function () {
+
+      return this.$container.is('body') ? window.innerHeight : this.$container.height();
+    },
+
+    updateScrollInterval: function () {
+
+      this.scrollInterval = this.getScrollInterval();
 
     },
 
