@@ -76,6 +76,7 @@ if ( typeof Object.create !== 'function' ) {
       self.updateScrollInterval();
 
       self.options = $.extend(true, {}, $.fn.panelSnap.options, options);
+      self.$offsetContainer = $(self.options.offsetSelector);
 
       self.bind();
 
@@ -317,6 +318,9 @@ if ( typeof Object.create !== 'function' ) {
       } else {
         scrollTarget = self.$snapContainer.scrollTop() + $target.position().top;
       }
+      if (self.$offsetContainer.length) {
+        scrollTarget -= self.$offsetContainer.position().top;
+      }
 
       self.$snapContainer.stop(true).animate({
         scrollTop: scrollTarget
@@ -498,6 +502,7 @@ if ( typeof Object.create !== 'function' ) {
     $menu: false,
     menuSelector: 'a',
     panelSelector: 'section',
+    offsetSelector: '',
     namespace: '.panelSnap',
     onSnapStart: function(){},
     onSnapFinish: function(){},

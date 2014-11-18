@@ -42,6 +42,7 @@ var options = {
   $menu: false,
   menuSelector: 'a',
   panelSelector: 'section',
+  offsetSelector: '',
   namespace: '.panelSnap',
   onSnapStart: function(){},
   onSnapFinish: function(){},
@@ -68,6 +69,9 @@ A string containing the css selector to menu items (scoped within the menu).
 
 `panelSelector`:
 A string containg the css selector to panels (scoped within the container).
+
+`offsetSelector`:
+A string containing the css selector to snap the active panel to (if different from the panel container)
 
 `namespace`:
 A string containing the jQuery event namespace that's being used.
@@ -161,7 +165,7 @@ Fired after a panel was snapped.
 Fired after a panel was activated. (This callback will ALWAYS fire when switching to a panel, where onSnapStart & onStapFinish only fire before and after the plugin is actually snapping (animating) towards a panel.)
 
 # Credits
-- [jellea](https://github.com/jellea) for early feedback and brainpickings.  
+- [jellea](https://github.com/jellea) for early feedback and brainpickings.
 - [aalexandrov](https://github.com/aalexandrov) for lots of small improvements & bugfixes.
 - [akreitals](https://github.com/akreitals)
 - [brumm](https://github.com/brumm)
