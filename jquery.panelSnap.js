@@ -192,6 +192,11 @@ if ( typeof Object.create !== 'function' ) {
         return;
       }
 
+      // To get normal scrolling in panels taller than the viewport,
+      // stop if there's no multiple panels in viewport
+      if (self.getPanelsInViewport().length < 2)
+        return;
+
       if(scrollDifference === 0) {
         // Do nothing
       } else if (offset <= 0 || offset >= maxOffset) {
@@ -203,6 +208,25 @@ if ( typeof Object.create !== 'function' ) {
         self.snapToPanel($target);
       }
 
+    },
+
+    getPanelsInViewport: function() {
+
+      var self = this;
+      var $window = $(window);
+
+      var viewport = { top: $window.scrollTop() };
+      viewport.bottom = viewport.top + $window.height();
+
+      var panels = self.getPanel().filter(function (_, el) {
+        var $el = $(el);
+        var bounds = $el.offset();
+        bounds.bottom = bounds.top + $el.outerHeight();
+
+        return !(viewport.bottom < bounds.top || viewport.top > bounds.bottom);
+      });
+
+      return panels;
     },
 
     mouseWheel: function(e) {
@@ -322,7 +346,9 @@ if ( typeof Object.create !== 'function' ) {
         scrollTop: scrollTarget
       }, self.options.slideSpeed, self.options.easing, function() {
 
-        self.scrollOffset = scrollTarget;
+        // Set scrollOffset to scrollTop
+        // (not to scrollTarget since on iPad those sometimes differ)
+        self.scrollOffset = self.$snapContainer.scrollTop();
         self.isSnapping = false;
 
         // Call callback
@@ -558,6 +584,7 @@ if ( typeof Object.create !== 'function' ) {
       var $this = $(thisObject);
       var scrolling;
       var timer;
+      var isTouching;
 
       $this.data('scrollwatch', true);
 
@@ -568,7 +595,22 @@ if ( typeof Object.create !== 'function' ) {
 
       }
 
+      $this.on("touchstart", function(event) {
+        isTouching = true;
+      });
+
+      $this.on("touchleave touchcancel touchend", function(event) {
+        isTouching = false;
+        setTimeout(function () {
+          clearTimeout(timer);
+        }, 50);
+      });
+
       $this.on("touchmove scroll", function(event) {
+
+        if (isTouching) {
+          return;
+        }
 
         if(!$.event.special.scrollstart.enabled) {
           return;
