@@ -54,7 +54,8 @@ var options = {
     nextPanelKey: 40,
     previousPanelKey: 38,
     wrapAround: true
-  }
+  },
+  strictContainerSelection: true
 };
 
 $('.panel_container').panelSnap(options);
@@ -104,6 +105,9 @@ The keycode which triggers the navigation to the previous panel.
 
 `keyboardNavigation.previousPanelKey`:
 Boolean telling the plugin wether or not keyboard navigation should wrap around the begining and end of the panelset.
+
+`strictContainerSelection`:
+Boolean telling the plugin wether or not container selection should be strict. (immediate descendant)
 
 ## Attaching a menu
 
@@ -161,7 +165,7 @@ Fired after a panel was snapped.
 Fired after a panel was activated. (This callback will ALWAYS fire when switching to a panel, where onSnapStart & onStapFinish only fire before and after the plugin is actually snapping (animating) towards a panel.)
 
 # Credits
-- [jellea](https://github.com/jellea) for early feedback and brainpickings.  
+- [jellea](https://github.com/jellea) for early feedback and brainpickings.
 - [aalexandrov](https://github.com/aalexandrov) for lots of small improvements & bugfixes.
 - [akreitals](https://github.com/akreitals)
 - [brumm](https://github.com/brumm)
