@@ -55,7 +55,8 @@ var options = {
     previousPanelKey: 38,
     wrapAround: true
   },
-  strictContainerSelection: true
+  strictContainerSelection: true,
+  offset: 0
 };
 
 $('.panel_container').panelSnap(options);
@@ -108,6 +109,9 @@ Boolean telling the plugin wether or not keyboard navigation should wrap around 
 
 `strictContainerSelection`:
 Boolean telling the plugin wether or not container selection should be strict. (immediate descendant)
+
+`offset`:
+An integer specifying the number of pixels to offset when snapping to a panel. (Useful when a fixed position menu is displayed at the top of the page)
 
 ## Attaching a menu
 

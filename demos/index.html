@@ -35,6 +35,15 @@
         height: 100%;
         background: #1abc9c;
       }
+	  
+	  .panels.offset section{
+		height: calc(100% - 85px);
+      }
+	  
+	  .panels.offset header{
+		height: 85px;
+		background-color:  #1abc9c;
+	  }
 
       section:nth-child(2n) {
         background: #16a085;
@@ -161,6 +170,7 @@
         left: 400px;
         overflow: scroll;
       }
+	  	 
 
       .log,
       .menu {
@@ -188,7 +198,7 @@
       .menu a:active,
       .menu a:hover {
         background: #f39c12;
-      }
+      }	  
     </style>
   </head>
   <body>
@@ -359,6 +369,26 @@
         <h2>Log:</h2>
       </div>
     </section>
+	
+	<section class="offset_demo">
+      <h1>
+        Offset
+      </h1>
+      <div class="panels offset">		
+		<header>First Section Header</header>
+        <section>
+          <h1>First</h1>
+        </section>
+		<header>Second Section Header</header>
+        <section>
+          <h1>Second</h1>
+        </section>
+		<header>Third Section Header</header>
+        <section>
+          <h1>Third</h1>
+        </section>
+      </div>
+    </section>
 
     <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
     <script src="../jquery.panelSnap.js"></script>
@@ -415,6 +445,11 @@
           log('event', e.type, $target);
 
         }
+		
+		// Offset demo
+		$('.offset_demo .panels').panelSnap({
+			offset: 85
+		});
 
         // Shared log function
         function log(type, action, $target) {
