@@ -173,4 +173,4 @@ Fired after a panel was activated. (This callback will ALWAYS fire when switchin
 - [aalexandrov](https://github.com/aalexandrov) for small improvements & bugfixes.
 - [akreitals](https://github.com/akreitals)
 - [brumm](https://github.com/brumm)
-- [dpaquette](https://github.com/dpaquette) for the offset option
+- [dpaquette](https://github.com/dpaquette) for the offset option.
