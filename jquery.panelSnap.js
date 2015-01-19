@@ -337,9 +337,9 @@ if ( typeof Object.create !== 'function' ) {
 
       var scrollTarget = 0;
       if(self.$container.is('body')) {
-        scrollTarget = $target.offset().top;
+        scrollTarget = $target.offset().top - self.options.offset;
       } else {
-        scrollTarget = self.$snapContainer.scrollTop() + $target.position().top;
+        scrollTarget = self.$snapContainer.scrollTop() + $target.position().top - self.options.offset;
       }
 
       self.$snapContainer.stop(true).animate({
@@ -531,6 +531,7 @@ if ( typeof Object.create !== 'function' ) {
     directionThreshold: 50,
     slideSpeed: 200,
     easing: 'linear',
+    offset: 0,
     keyboardNavigation: {
       enabled: false,
       nextPanelKey: 40,
