@@ -170,6 +170,7 @@ Fired after a panel was activated. (This callback will ALWAYS fire when switchin
 
 # Credits
 - [jellea](https://github.com/jellea) for early feedback and brainpickings.
-- [aalexandrov](https://github.com/aalexandrov) for lots of small improvements & bugfixes.
+- [aalexandrov](https://github.com/aalexandrov) for small improvements & bugfixes.
 - [akreitals](https://github.com/akreitals)
 - [brumm](https://github.com/brumm)
+- [dpaquette](https://github.com/dpaquette) for the offset option
