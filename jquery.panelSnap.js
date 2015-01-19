@@ -531,7 +531,7 @@ if ( typeof Object.create !== 'function' ) {
     directionThreshold: 50,
     slideSpeed: 200,
     easing: 'linear',
-	offset: 0,
+    offset: 0,
     keyboardNavigation: {
       enabled: false,
       nextPanelKey: 40,
