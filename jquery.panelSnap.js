@@ -408,7 +408,7 @@ if ( typeof Object.create !== 'function' ) {
       switch(target) {
         case 'prev':
 
-          $target = self.getPanel('.active').prev(self.options.panelSelector);
+          $target = self.getPanel('.active').prevAll(self.options.panelSelector).last();
           if($target.length < 1 && wrap)
           {
             $target = self.getPanel(':last');
@@ -417,7 +417,7 @@ if ( typeof Object.create !== 'function' ) {
 
         case 'next':
 
-          $target = self.getPanel('.active').next(self.options.panelSelector);
+          $target = self.getPanel('.active').nextAll(self.options.panelSelector).first();
           if($target.length < 1 && wrap)
           {
             $target = self.getPanel(':first');
