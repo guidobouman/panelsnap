@@ -41,7 +41,7 @@ The following is a list of available options. The values are their defaults with
 var options = {
   $menu: false,
   menuSelector: 'a',
-  panelSelector: 'section',
+  panelSelector: '> section',
   namespace: '.panelSnap',
   onSnapStart: function(){},
   onSnapFinish: function(){},
@@ -49,13 +49,13 @@ var options = {
   directionThreshold: 50,
   slideSpeed: 200,
   easing: 'linear',
+  offset: 0,
   keyboardNavigation: {
     enabled: false,
     nextPanelKey: 40,
     previousPanelKey: 38,
     wrapAround: true
-  },
-  offset: 0
+  }
 };
 
 $('.panel_container').panelSnap(options);
@@ -91,6 +91,9 @@ The amount of miliseconds in which the plugin snaps to the desired panel.
 `easing`:
 The jQuery easing animation to use.
 
+`offset`:
+An integer specifying the number of pixels to offset when snapping to a panel. (Useful when a fixed position menu is displayed at the top of the page)
+
 `keyboardNavigation`:
 An object containing all the settings for keyboard navigation.
 
@@ -105,9 +108,6 @@ The keycode which triggers the navigation to the previous panel.
 
 `keyboardNavigation.previousPanelKey`:
 Boolean telling the plugin wether or not keyboard navigation should wrap around the begining and end of the panelset.
-
-`offset`:
-An integer specifying the number of pixels to offset when snapping to a panel. (Useful when a fixed position menu is displayed at the top of the page)
 
 ## Attaching a menu
 
