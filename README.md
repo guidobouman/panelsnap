@@ -55,7 +55,6 @@ var options = {
     previousPanelKey: 38,
     wrapAround: true
   },
-  strictContainerSelection: true,
   offset: 0
 };
 
@@ -106,9 +105,6 @@ The keycode which triggers the navigation to the previous panel.
 
 `keyboardNavigation.previousPanelKey`:
 Boolean telling the plugin wether or not keyboard navigation should wrap around the begining and end of the panelset.
-
-`strictContainerSelection`:
-Boolean telling the plugin wether or not container selection should be strict. (panels being immediate descendants of the panelSnap container in the DOM)
 
 `offset`:
 An integer specifying the number of pixels to offset when snapping to a panel. (Useful when a fixed position menu is displayed at the top of the page)
