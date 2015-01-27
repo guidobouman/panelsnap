@@ -234,8 +234,11 @@ if ( typeof Object.create !== 'function' ) {
       // This event only fires when the user actually scrolls with their input device.
       // Be it a trackpad, legacy mouse or anything else.
 
-      self.$container.stop(true);
-      self.isSnapping = false;
+      if(self.isSnapping) {
+        self.scrollOffset = self.$snapContainer.scrollTop();
+        self.$container.stop(true);
+        self.isSnapping = false;
+      }
 
     },
 
