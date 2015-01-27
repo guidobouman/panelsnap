@@ -197,9 +197,7 @@ if ( typeof Object.create !== 'function' ) {
       if (self.getPanelsInViewport().length < 2)
         return;
 
-      if(scrollDifference === 0) {
-        // Do nothing
-      } else if (offset <= 0 || offset >= maxOffset) {
+      if (offset <= 0 || offset >= maxOffset) {
         // Only activate, prevent stuttering
         self.activatePanel($target);
         // Set scrollOffset to a sane number for next scroll
