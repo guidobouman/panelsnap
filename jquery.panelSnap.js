@@ -403,35 +403,37 @@ if ( typeof Object.create !== 'function' ) {
         wrap = true;
       }
 
+      var $panels = self.getPanel();
+      var index = $panels.index(self.getPanel('.active'));
       var $target;
 
       switch(target) {
         case 'prev':
 
-          $target = self.getPanel('.active').prevAll(self.options.panelSelector).last();
-          if($target.length < 1 && wrap)
+          $target = $panels.eq(index - 1);
+          if(index < 1 && !wrap)
           {
-            $target = self.getPanel(':last');
+            $target = []; // Clear target, because negative indexes wrap automatically
           }
           break;
 
         case 'next':
 
-          $target = self.getPanel('.active').nextAll(self.options.panelSelector).first();
+          $target = $panels.eq(index + 1);
           if($target.length < 1 && wrap)
           {
-            $target = self.getPanel(':first');
+            $target = $panels.filter(':first');
           }
           break;
 
         case 'first':
 
-          $target = self.getPanel(':first');
+          $target = $panels.filter(':first');
           break;
 
         case 'last':
 
-          $target = self.getPanel(':last');
+          $target = $panels.filter(':last');
           break;
       }
 
