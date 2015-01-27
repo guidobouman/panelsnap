@@ -197,9 +197,7 @@ if ( typeof Object.create !== 'function' ) {
       if (self.getPanelsInViewport().length < 2)
         return;
 
-      if(scrollDifference === 0) {
-        // Do nothing
-      } else if (offset <= 0 || offset >= maxOffset) {
+      if (offset <= 0 || offset >= maxOffset) {
         // Only activate, prevent stuttering
         self.activatePanel($target);
         // Set scrollOffset to a sane number for next scroll
@@ -236,8 +234,11 @@ if ( typeof Object.create !== 'function' ) {
       // This event only fires when the user actually scrolls with their input device.
       // Be it a trackpad, legacy mouse or anything else.
 
-      self.$container.stop(true);
-      self.isSnapping = false;
+      if(self.isSnapping) {
+        self.scrollOffset = self.$snapContainer.scrollTop();
+        self.$container.stop(true);
+        self.isSnapping = false;
+      }
 
     },
 
@@ -402,35 +403,37 @@ if ( typeof Object.create !== 'function' ) {
         wrap = true;
       }
 
+      var $panels = self.getPanel();
+      var index = $panels.index(self.getPanel('.active'));
       var $target;
 
       switch(target) {
         case 'prev':
 
-          $target = self.getPanel('.active').prevAll(self.options.panelSelector).last();
-          if($target.length < 1 && wrap)
+          $target = $panels.eq(index - 1);
+          if(index < 1 && !wrap)
           {
-            $target = self.getPanel(':last');
+            $target = []; // Clear target, because negative indexes wrap automatically
           }
           break;
 
         case 'next':
 
-          $target = self.getPanel('.active').nextAll(self.options.panelSelector).first();
+          $target = $panels.eq(index + 1);
           if($target.length < 1 && wrap)
           {
-            $target = self.getPanel(':first');
+            $target = $panels.filter(':first');
           }
           break;
 
         case 'first':
 
-          $target = self.getPanel(':first');
+          $target = $panels.filter(':first');
           break;
 
         case 'last':
 
-          $target = self.getPanel(':last');
+          $target = $panels.filter(':last');
           break;
       }
 
