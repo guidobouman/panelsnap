@@ -48,6 +48,7 @@ var options = {
   onActivate: function(){},
   directionThreshold: 50,
   slideSpeed: 200,
+  delay: 300,
   easing: 'linear',
   offset: 0,
   keyboardNavigation: {
@@ -87,6 +88,9 @@ An integer specifying the amount of pixels required to scroll before the plugin 
 
 `slideSpeed`:
 The amount of miliseconds in which the plugin snaps to the desired panel.
+
+`delay`:
+Delay the snap by x milliseconds.
 
 `easing`:
 The jQuery easing animation to use.
