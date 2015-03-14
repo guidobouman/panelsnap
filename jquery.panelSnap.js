@@ -532,9 +532,9 @@ if ( typeof Object.create !== 'function' ) {
     onActivate: function(){},
     directionThreshold: 50,
     slideSpeed: 200,
+    delay: 0,
     easing: 'linear',
     offset: 0,
-    delay: 0,
     keyboardNavigation: {
       enabled: false,
       nextPanelKey: 40,
