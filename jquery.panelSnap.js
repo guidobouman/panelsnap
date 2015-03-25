@@ -343,7 +343,7 @@ if ( typeof Object.create !== 'function' ) {
         scrollTarget = self.$snapContainer.scrollTop() + $target.position().top - self.options.offset;
       }
 
-      self.$snapContainer.stop(true).animate({
+      self.$snapContainer.stop(true).delay(self.options.delay).animate({
         scrollTop: scrollTarget
       }, self.options.slideSpeed, self.options.easing, function() {
 
@@ -532,6 +532,7 @@ if ( typeof Object.create !== 'function' ) {
     onActivate: function(){},
     directionThreshold: 50,
     slideSpeed: 200,
+    delay: 0,
     easing: 'linear',
     offset: 0,
     keyboardNavigation: {
