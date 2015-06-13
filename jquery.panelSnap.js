@@ -108,6 +108,14 @@ if ( typeof Object.create !== 'function' ) {
       if(self.options.$menu !== false) {
         self.bindProxied($(self.options.$menu), 'click', self.captureMenuClick, self.options.menuSelector);
       }
+      
+      if ( self.options.npNavigation.$nextButton !== false ) {
+        self.bindProxied($(self.options.npNavigation.$nextButton), 'click', self.captureNextClick);
+      }
+            
+      if ( self.options.npNavigation.$prevButton !== false ) {
+        self.bindProxied($(self.options.npNavigation.$prevButton), 'click', self.capturePrevClick);
+      }
 
     },
 
@@ -322,6 +330,34 @@ if ( typeof Object.create !== 'function' ) {
       return false;
 
     },
+    
+    captureNextClick: function(e) {
+    	
+    	var self = this;
+    	
+    	e.preventDefault();
+    	
+    	if (self.isSnapping) {
+        return;
+      }
+      
+      self.snapTo('next', self.options.npNavigation.wrapAround);
+    	
+    },
+    
+    capturePrevClick: function(e) {
+    	
+    	var self = this;
+    	
+    	e.preventDefault();
+    	
+    	if (self.isSnapping) {
+        return;
+      }
+      
+      self.snapTo('prev', self.options.npNavigation.wrapAround);
+    	
+    },
 
     snapToPanel: function($target) {
 
@@ -376,6 +412,46 @@ if ( typeof Object.create !== 'function' ) {
         var itemSelector = self.options.menuSelector + attribute;
         var $itemToActivate = $(itemSelector, self.options.$menu);
         $itemToActivate.addClass('active');
+      }
+      
+      if( $( self.options.npNavigation.$nextButton ).is('button') ) {
+      	$( self.options.npNavigation.$nextButton ).removeAttr('disabled');
+      }
+      else {
+      	$( self.options.npNavigation.$nextButton ).removeClass('disabled');
+      }
+      
+      if( $( self.options.npNavigation.$prevButton ).is('button') ) {
+      	$( self.options.npNavigation.$prevButton ).removeAttr('disabled');
+      }
+      else {
+      	$( self.options.npNavigation.$prevButton ).removeClass('disabled');
+      }
+      
+      if(self.options.npNavigation.wrapAround === false ) {
+      	if (self.options.npNavigation.$nextButton !== false ) {
+      		$next = $target.next(self.options.panelSelector);
+          	if($next.length < 1) {
+			      if( $( self.options.npNavigation.$nextButton ).is('button') ) {
+			      	$( self.options.npNavigation.$nextButton ).attr('disabled', 'disabled');
+			      }
+			      else {
+			      	$( self.options.npNavigation.$nextButton ).addClass('disabled');
+			      }
+          	}
+      	}
+
+      	if (self.options.npNavigation.$prevButton !== false ) {
+      		$prev = $target.prev(self.options.panelSelector);
+          	if($prev.length < 1) {
+			      if( $( self.options.npNavigation.$prevButton ).is('button') ) {
+			      	$( self.options.npNavigation.$prevButton ).attr('disabled', 'disabled');
+			      }
+			      else {
+			      	$( self.options.npNavigation.$prevButton ).addClass('disabled');
+			      }
+          	}
+      	}
       }
 
       self.options.onActivate.call(self, $target);
@@ -540,6 +616,11 @@ if ( typeof Object.create !== 'function' ) {
       nextPanelKey: 40,
       previousPanelKey: 38,
       wrapAround: true
+    },
+    npNavigation: {
+		  $nextButton: false,
+		  $prevButton: false,
+		  wrapAround: true   
     }
   };
 
