@@ -414,43 +414,31 @@ if ( typeof Object.create !== 'function' ) {
         $itemToActivate.addClass('active');
       }
       
-      if( $( self.options.npNavigation.$nextButton ).is('button') ) {
-      	$( self.options.npNavigation.$nextButton ).removeAttr('disabled');
-      }
-      else {
-      	$( self.options.npNavigation.$nextButton ).removeClass('disabled');
-      }
-      
-      if( $( self.options.npNavigation.$prevButton ).is('button') ) {
-      	$( self.options.npNavigation.$prevButton ).removeAttr('disabled');
-      }
-      else {
-      	$( self.options.npNavigation.$prevButton ).removeClass('disabled');
-      }
-      
       if(self.options.npNavigation.wrapAround === false ) {
+      	
+      	var $panels = self.getPanel();
+      	var index = $panels.index(self.getPanel('.active'));      	
+      	
       	if (self.options.npNavigation.$nextButton !== false ) {
-      		$next = $target.next(self.options.panelSelector);
-          	if($next.length < 1) {
-			      if( $( self.options.npNavigation.$nextButton ).is('button') ) {
-			      	$( self.options.npNavigation.$nextButton ).attr('disabled', 'disabled');
-			      }
-			      else {
-			      	$( self.options.npNavigation.$nextButton ).addClass('disabled');
-			      }
+				$target = $panels.eq(index + 1);
+          	if( $target.length < 1) {
+			$( self.options.npNavigation.$nextButton ).prop('disabled', true);
+			$( self.options.npNavigation.$nextButton ).addClass('disabled');
+          	} else {
+          		$( self.options.npNavigation.$nextButton ).prop('disabled', false);
+      			$( self.options.npNavigation.$nextButton ).removeClass('disabled');
           	}
+          	
       	}
 
       	if (self.options.npNavigation.$prevButton !== false ) {
-      		$prev = $target.prev(self.options.panelSelector);
-          	if($prev.length < 1) {
-			      if( $( self.options.npNavigation.$prevButton ).is('button') ) {
-			      	$( self.options.npNavigation.$prevButton ).attr('disabled', 'disabled');
-			      }
-			      else {
-			      	$( self.options.npNavigation.$prevButton ).addClass('disabled');
-			      }
-          	}
+          	if( index < 1 ) {
+			 $( self.options.npNavigation.$prevButton ).prop('disabled', true);
+			 $( self.options.npNavigation.$prevButton ).addClass('disabled');
+      		} else {
+      			$( self.options.npNavigation.$prevButton ).prop('disabled', false);
+      			$( self.options.npNavigation.$prevButton ).removeClass('disabled');
+      		}
       	}
       }
 
