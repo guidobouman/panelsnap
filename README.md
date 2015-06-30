@@ -51,17 +51,17 @@ var options = {
   delay: 0,
   easing: 'linear',
   offset: 0,
-    navigation: {
-      keys: {
-        nextKey: 40,
-        prevKey: 38,
-      },
-      buttons: {
-        $nextButton: $('#nextButton'),
-        $prevButton: $('#prevButton'),
-      },
-      wrapAround: true
-    }
+  navigation: {
+    keys: {
+      nextKey: 40,
+       prevKey: 38,
+    },
+    buttons: {
+      $nextButton: $('#nextButton'),
+      $prevButton: $('#prevButton'),
+    },
+    wrapAround: true
+  }
 };
 
 $('.panel_container').panelSnap(options);
@@ -116,13 +116,13 @@ The keycode which triggers the navigation to the next panel.
 The keycode which triggers the navigation to the previous panel.
 
 `navigation.buttons`:
-An object containing $nextButtony and $prevButton.
+An object containing $nextButton and $prevButton.
 
 `navigation.buttons.$nextButton`:
-A jQuery Object to bind a click-event to trigger the navigation to the next panel.
+A jQuery Object to bind a click-event to to trigger the navigation to the next panel.
 
 `navigation.buttons.$prevButton`:
-A jQuery Object to bind a click-event to trigger the navigation to the previous panel.
+A jQuery Object to bind a click-event to to trigger the navigation to the previous panel.
 
 `navigation.wrapAround`:
 Boolean telling the plugin wether or not next/prev navigation should wrap around the begining and end of the panelset.
