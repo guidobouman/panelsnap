@@ -125,7 +125,7 @@ A jQuery Object to bind a click-event to to trigger the navigation to the next p
 A jQuery Object to bind a click-event to to trigger the navigation to the previous panel.
 
 `navigation.wrapAround`:
-Boolean telling the plugin wether or not next/prev navigation should wrap around the begining and end of the panelset.
+Boolean telling the plugin wether or not next/prev navigation should wrap around the beginning and end of the panelset.
 
 ## Attaching a menu
 
