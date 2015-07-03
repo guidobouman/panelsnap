@@ -108,11 +108,11 @@ if ( typeof Object.create !== 'function' ) {
       if(self.options.$menu !== false) {
         self.bindProxied($(self.options.$menu), 'click', self.captureMenuClick, self.options.menuSelector);
       }
-      
+
       if (self.options.navigation.buttons.$nextButton !== false) {
         self.bindProxied($(self.options.navigation.buttons.$nextButton), 'click', self.captureNextClick);
       }
-            
+
       if (self.options.navigation.buttons.$prevButton !== false) {
         self.bindProxied($(self.options.navigation.buttons.$prevButton), 'click', self.capturePrevClick);
       }
@@ -301,33 +301,33 @@ if ( typeof Object.create !== 'function' ) {
       }
 
     },
-    
+
     captureNextClick: function(e) {
-    	
-    	var self = this;
-    	
-    	e.preventDefault();
-    	
-    	if (self.isSnapping) {
+
+      var self = this;
+
+      e.preventDefault();
+
+      if (self.isSnapping) {
         return;
       }
-      
+
       self.snapTo('next', self.options.navigation.wrapAround);
-    	
+
     },
-    
+
     capturePrevClick: function(e) {
-    	
-    	var self = this;
-    	
-    	e.preventDefault();
-    	
-    	if (self.isSnapping) {
+
+      var self = this;
+
+      e.preventDefault();
+
+      if (self.isSnapping) {
         return;
       }
-      
+
       self.snapTo('prev', self.options.navigation.wrapAround);
-    	
+
     },
 
     resize: function(e) {
@@ -413,14 +413,14 @@ if ( typeof Object.create !== 'function' ) {
         var $itemToActivate = $(itemSelector, self.options.$menu);
         $itemToActivate.addClass('active');
       }
-      
+
       var nav = self.options.navigation;
-      
+
       if(!nav.wrapAround) {
-      	
-      	var $panels = self.getPanel();
-        var index = $panels.index(self.getPanel('.active'));      	
-      	
+
+        var $panels = self.getPanel();
+        var index = $panels.index(self.getPanel('.active'));
+
         if (nav.buttons.$nextButton !== false ) {
           $target = $panels.eq(index + 1);
           if($target.length < 1) {
