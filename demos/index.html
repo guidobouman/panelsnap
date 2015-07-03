@@ -83,7 +83,6 @@
       }
 
       section.introduction:after {
-
         display: block;
         position: absolute;
         top: -200%;
@@ -193,8 +192,7 @@
       }
 
       .menu a,
-      #prevButton,
-      #nextButton {
+      .button {
         display: block;
         width: 100%;
         padding: 25px;
@@ -209,10 +207,9 @@
       .menu a:hover {
         background: #f39c12;
       }
-      
-      #prevButton.disabled,
-      #nextButton.disabled {
-        background: #555555;
+
+      .button.disabled {
+        background: #7f8c8d;
       }
     </style>
   </head>
@@ -293,7 +290,7 @@
           $nextButton: false,
           $prevButton: false,
         },
-        wrapAround: true
+        wrapAround: false
       }
     };
 
@@ -349,8 +346,8 @@
         <h2>Try using the left & right keys to navigate through these panels.</h2>
       </div>
     </section>
-    
-   <section class="npbuttons_demo">
+
+    <section class="button_demo">
       <h1>
         Next/Prev Buttons
       </h1>
@@ -367,8 +364,8 @@
       </div>
       <div class="log">
         <nav>
-          <a id="prevButton">Prev</a>
-          <a id="nextButton">Next</a>
+          <a class="button prev">Previous</a>
+          <a class="button next">Next</a>
         </nav>
       </div>
     </section>
@@ -453,19 +450,17 @@
             keys: {
               nextKey: 39,
               prevKey: 37,
-            },
-            wrapAround: false
+            }
           }
         });
-        
-        // Keyboard demo
-        $('.npbuttons_demo .panels').panelSnap({
+
+        // Button demo
+        $('.button_demo .panels').panelSnap({
           navigation: {
             buttons: {
-              $nextButton: $('#nextButton'),
-              $prevButton: $('#prevButton'),
-            },
-            wrapAround: false
+              $nextButton: $('.button.next'),
+              $prevButton: $('.button.prev'),
+            }
           }
         });
 
