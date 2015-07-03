@@ -192,7 +192,9 @@
         padding: 50px;
       }
 
-      .menu a {
+      .menu a,
+      #prevButton,
+      #nextButton {
         display: block;
         width: 100%;
         padding: 25px;
@@ -206,6 +208,11 @@
       .menu a:active,
       .menu a:hover {
         background: #f39c12;
+      }
+      
+      #prevButton.disabled,
+      #nextButton.disabled {
+        background: #555555;
       }
     </style>
   </head>
@@ -277,10 +284,15 @@
       slideSpeed: 200,
       easing: 'linear',
       offset: 0,
-      keyboardNavigation: {
-        enabled: false,
-        nextPanelKey: 40,
-        previousPanelKey: 38,
+      navigation: {
+        keys: {
+          nextKey: 40,
+          prevKey: 38,
+        },
+        buttons: {
+          $nextButton: $('#nextButton'),
+          $prevButton: $('#prevButton'),
+        },
         wrapAround: true
       }
     };
@@ -335,6 +347,29 @@
       </div>
       <div class="log">
         <h2>Try using the left & right keys to navigate through these panels.</h2>
+      </div>
+    </section>
+    
+   <section class="npbuttons_demo">
+      <h1>
+        Next/Prev Buttons
+      </h1>
+      <div class="panels">
+        <section>
+          <h1>First</h1>
+        </section>
+        <section>
+          <h1>Second</h1>
+        </section>
+        <section>
+          <h1>Third</h1>
+        </section>
+      </div>
+      <div class="log">
+        <nav>
+          <a id="prevButton">Prev</a>
+          <a id="nextButton">Next</a>
+        </nav>
       </div>
     </section>
 
@@ -414,10 +449,22 @@
 
         // Keyboard demo
         $('.keyboard_demo .panels').panelSnap({
-          keyboardNavigation: {
-            enabled: true,
-            nextPanelKey: 39,
-            previousPanelKey: 37,
+          navigation: {
+            keys: {
+              nextKey: 39,
+              prevKey: 37,
+            },
+            wrapAround: false
+          }
+        });
+        
+        // Keyboard demo
+        $('.npbuttons_demo .panels').panelSnap({
+          navigation: {
+            buttons: {
+              $nextButton: $('#nextButton'),
+              $prevButton: $('#prevButton'),
+            },
             wrapAround: false
           }
         });

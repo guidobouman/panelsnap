@@ -101,12 +101,20 @@ if ( typeof Object.create !== 'function' ) {
 
       self.bindProxied($(window), 'resizestop', self.resize);
 
-      if(self.options.keyboardNavigation.enabled) {
+      if($.isNumeric(self.options.navigation.keys.nextKey) || $.isNumeric(self.options.navigation.keys.prevKey)) {
         self.bindProxied($(window), 'keydown', self.keyDown, self.$eventContainer);
       }
 
       if(self.options.$menu !== false) {
         self.bindProxied($(self.options.$menu), 'click', self.captureMenuClick, self.options.menuSelector);
+      }
+      
+      if (self.options.navigation.buttons.$nextButton !== false) {
+        self.bindProxied($(self.options.navigation.buttons.$nextButton), 'click', self.captureNextClick);
+      }
+            
+      if (self.options.navigation.buttons.$prevButton !== false) {
+        self.bindProxied($(self.options.navigation.buttons.$prevButton), 'click', self.capturePrevClick);
       }
 
     },
@@ -266,14 +274,14 @@ if ( typeof Object.create !== 'function' ) {
 
       var self = this;
 
-      var nav = self.options.keyboardNavigation;
+      var nav = self.options.navigation;
 
       if(!self.enabled) {
         return;
       }
 
       if (self.isSnapping) {
-        if(e.which == nav.previousPanelKey || e.which == nav.nextPanelKey) {
+        if(e.which == nav.keys.nextKey || e.which == nav.keys.prevKey) {
           e.preventDefault();
           return false;
         }
@@ -282,16 +290,44 @@ if ( typeof Object.create !== 'function' ) {
       }
 
       switch(e.which) {
-        case nav.previousPanelKey:
+        case nav.keys.prevKey:
           e.preventDefault();
           self.snapTo('prev', nav.wrapAround);
           break;
-        case nav.nextPanelKey:
+        case nav.keys.nextKey:
           e.preventDefault();
           self.snapTo('next', nav.wrapAround);
           break;
       }
 
+    },
+    
+    captureNextClick: function(e) {
+    	
+    	var self = this;
+    	
+    	e.preventDefault();
+    	
+    	if (self.isSnapping) {
+        return;
+      }
+      
+      self.snapTo('next', self.options.navigation.wrapAround);
+    	
+    },
+    
+    capturePrevClick: function(e) {
+    	
+    	var self = this;
+    	
+    	e.preventDefault();
+    	
+    	if (self.isSnapping) {
+        return;
+      }
+      
+      self.snapTo('prev', self.options.navigation.wrapAround);
+    	
     },
 
     resize: function(e) {
@@ -376,6 +412,35 @@ if ( typeof Object.create !== 'function' ) {
         var itemSelector = self.options.menuSelector + attribute;
         var $itemToActivate = $(itemSelector, self.options.$menu);
         $itemToActivate.addClass('active');
+      }
+      
+      var nav = self.options.navigation;
+      
+      if(!nav.wrapAround) {
+      	
+      	var $panels = self.getPanel();
+        var index = $panels.index(self.getPanel('.active'));      	
+      	
+        if (nav.buttons.$nextButton !== false ) {
+          $target = $panels.eq(index + 1);
+          if($target.length < 1) {
+            $(nav.buttons.$nextButton).attr('aria-disabled', "true");
+            $(nav.buttons.$nextButton).addClass('disabled');
+          } else {
+            $(nav.buttons.$nextButton).attr('aria-disabled', "false");
+            $(nav.buttons.$nextButton).removeClass('disabled');
+          }
+        }
+
+      	if (nav.buttons.$prevButton !== false ) {
+          if(index < 1) {
+            $(nav.buttons.$prevButton).attr('aria-disabled', "true");
+            $(nav.buttons.$prevButton).addClass('disabled');
+          } else {
+            $(nav.buttons.$prevButton).attr('aria-disabled', "false");
+            $(nav.buttons.$prevButton).removeClass('disabled');
+          }
+        }
       }
 
       self.options.onActivate.call(self, $target);
@@ -535,10 +600,15 @@ if ( typeof Object.create !== 'function' ) {
     delay: 0,
     easing: 'linear',
     offset: 0,
-    keyboardNavigation: {
-      enabled: false,
-      nextPanelKey: 40,
-      previousPanelKey: 38,
+    navigation: {
+      keys: {
+        nextKey: 40,
+        prevKey: 38
+      },
+      buttons: {
+        $nextButton: false,
+        $prevButton: false
+      },
       wrapAround: true
     }
   };

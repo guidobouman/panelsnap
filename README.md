@@ -51,10 +51,15 @@ var options = {
   delay: 0,
   easing: 'linear',
   offset: 0,
-  keyboardNavigation: {
-    enabled: false,
-    nextPanelKey: 40,
-    previousPanelKey: 38,
+  navigation: {
+    keys: {
+      nextKey: 40,
+       prevKey: 38,
+    },
+    buttons: {
+      $nextButton: $('#nextButton'),
+      $prevButton: $('#prevButton'),
+    },
     wrapAround: true
   }
 };
@@ -98,20 +103,29 @@ The jQuery easing animation to use.
 `offset`:
 An integer specifying the number of pixels to offset when snapping to a panel. (Useful when a fixed position menu is displayed at the top of the page)
 
-`keyboardNavigation`:
-An object containing all the settings for keyboard navigation.
+`navigation`:
+An object containing all the settings for next/prev navigation through buttons or keys.
 
-`keyboardNavigation.enabled`:
-Boolean telling the plugin wether or not to use keyboard navigation.
+`navigation.keys`:
+An object containing nextKey and prevKey.
 
-`keyboardNavigation.nextPanelKey`:
+`navigation.keys.nextKey`:
 The keycode which triggers the navigation to the next panel.
 
-`keyboardNavigation.previousPanelKey`:
+`navigation.keys.prevKey`:
 The keycode which triggers the navigation to the previous panel.
 
-`keyboardNavigation.previousPanelKey`:
-Boolean telling the plugin wether or not keyboard navigation should wrap around the begining and end of the panelset.
+`navigation.buttons`:
+An object containing $nextButton and $prevButton.
+
+`navigation.buttons.$nextButton`:
+A jQuery Object to bind a click-event to to trigger the navigation to the next panel.
+
+`navigation.buttons.$prevButton`:
+A jQuery Object to bind a click-event to to trigger the navigation to the previous panel.
+
+`navigation.wrapAround`:
+Boolean telling the plugin wether or not next/prev navigation should wrap around the begining and end of the panelset.
 
 ## Attaching a menu
 
