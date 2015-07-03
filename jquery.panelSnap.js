@@ -101,19 +101,19 @@ if ( typeof Object.create !== 'function' ) {
 
       self.bindProxied($(window), 'resizestop', self.resize);
 
-      if($.isNumeric(self.options.navigation.keys.nextKey) || $.isNumeric(self.options.navigation.keys.prevKey)) {
-        self.bindProxied($(window), 'keydown', self.keyDown, self.$eventContainer);
-      }
-
-      if(self.options.$menu !== false) {
+      if(self.options.$menu) {
         self.bindProxied($(self.options.$menu), 'click', self.captureMenuClick, self.options.menuSelector);
       }
 
-      if (self.options.navigation.buttons.$nextButton !== false) {
+      if(self.options.navigation.keys.nextKey || self.options.navigation.keys.prevKey) {
+        self.bindProxied($(window), 'keydown', self.keyDown, self.$eventContainer);
+      }
+
+      if (self.options.navigation.buttons.$nextButton) {
         self.bindProxied($(self.options.navigation.buttons.$nextButton), 'click', self.captureNextClick);
       }
 
-      if (self.options.navigation.buttons.$prevButton !== false) {
+      if (self.options.navigation.buttons.$prevButton) {
         self.bindProxied($(self.options.navigation.buttons.$prevButton), 'click', self.capturePrevClick);
       }
 
