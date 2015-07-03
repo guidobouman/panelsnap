@@ -53,14 +53,14 @@ var options = {
   offset: 0,
   navigation: {
     keys: {
-      nextKey: 40,
-       prevKey: 38,
+      nextKey: false,
+      prevKey: false,
     },
     buttons: {
-      $nextButton: $('#nextButton'),
-      $prevButton: $('#prevButton'),
+      $nextButton: false,
+      $prevButton: false,
     },
-    wrapAround: true
+    wrapAround: false
   }
 };
 

@@ -602,14 +602,14 @@ if ( typeof Object.create !== 'function' ) {
     offset: 0,
     navigation: {
       keys: {
-        nextKey: 40,
-        prevKey: 38
+        nextKey: false,
+        prevKey: false
       },
       buttons: {
         $nextButton: false,
         $prevButton: false
       },
-      wrapAround: true
+      wrapAround: false
     }
   };
 
