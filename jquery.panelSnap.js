@@ -280,22 +280,21 @@ if ( typeof Object.create !== 'function' ) {
         return;
       }
 
-      if (self.isSnapping) {
-        if(e.which == nav.keys.nextKey || e.which == nav.keys.prevKey) {
+      switch(e.which) {
+        case nav.keys.prevKey:
+        case nav.keys.nextKey:
           e.preventDefault();
-          return false;
-        }
+      }
 
+      if (self.isSnapping) {
         return;
       }
 
       switch(e.which) {
         case nav.keys.prevKey:
-          e.preventDefault();
           self.snapTo('prev', nav.wrapAround);
           break;
         case nav.keys.nextKey:
-          e.preventDefault();
           self.snapTo('next', nav.wrapAround);
           break;
       }
