@@ -416,7 +416,6 @@ if ( typeof Object.create !== 'function' ) {
       var nav = self.options.navigation;
 
       if(!nav.wrapAround) {
-
         var $panels = self.getPanel();
         var index = $panels.index(self.getPanel('.active'));
 
