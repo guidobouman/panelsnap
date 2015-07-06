@@ -106,7 +106,7 @@ if ( typeof Object.create !== 'function' ) {
       }
 
       if(self.options.navigation.keys.nextKey || self.options.navigation.keys.prevKey) {
-        self.bindProxied($(window), 'keydown', self.keyDown, self.$eventContainer);
+        self.bindProxied($(window), 'keydown', self.keyDown);
       }
 
       if (self.options.navigation.buttons.$nextButton) {
