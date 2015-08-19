@@ -41,6 +41,7 @@ if ( typeof Object.create !== 'function' ) {
  * Date: Wed Feb 13 16:05:00 2013 +0100
  */
 (function($, window, document, undefined) {
+  'use strict';
 
   var pluginName = 'panelSnap';
   var storageName = 'plugin_' + pluginName;
