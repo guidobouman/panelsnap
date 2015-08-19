@@ -1,0 +1,6 @@
+{
+	"rules": {
+		"quotes": [1, "single"],
+		"comma-dangle": [1, "never"],
+	}
+}
