@@ -423,20 +423,20 @@ if ( typeof Object.create !== 'function' ) {
         if (nav.buttons.$nextButton !== false ) {
           $target = $panels.eq(index + 1);
           if($target.length < 1) {
-            $(nav.buttons.$nextButton).attr('aria-disabled', "true");
+            $(nav.buttons.$nextButton).attr('aria-disabled', 'true');
             $(nav.buttons.$nextButton).addClass('disabled');
           } else {
-            $(nav.buttons.$nextButton).attr('aria-disabled', "false");
+            $(nav.buttons.$nextButton).attr('aria-disabled', 'false');
             $(nav.buttons.$nextButton).removeClass('disabled');
           }
         }
 
       	if (nav.buttons.$prevButton !== false ) {
           if(index < 1) {
-            $(nav.buttons.$prevButton).attr('aria-disabled', "true");
+            $(nav.buttons.$prevButton).attr('aria-disabled', 'true');
             $(nav.buttons.$prevButton).addClass('disabled');
           } else {
-            $(nav.buttons.$prevButton).attr('aria-disabled', "false");
+            $(nav.buttons.$prevButton).attr('aria-disabled', 'false');
             $(nav.buttons.$prevButton).removeClass('disabled');
           }
         }
@@ -662,23 +662,23 @@ if ( typeof Object.create !== 'function' ) {
 
       function trigger(event, scrolling) {
 
-        event.type = scrolling ? "scrollstart" : "scrollstop";
+        event.type = scrolling ? 'scrollstart' : 'scrollstop';
         $this.trigger(event);
 
       }
 
-      $this.on("touchstart", function(event) {
+      $this.on('touchstart', function(event) {
         isTouching = true;
       });
 
-      $this.on("touchleave touchcancel touchend", function(event) {
+      $this.on('touchleave touchcancel touchend', function(event) {
         isTouching = false;
         setTimeout(function () {
           clearTimeout(timer);
         }, 50);
       });
 
-      $this.on("touchmove scroll", function(event) {
+      $this.on('touchmove scroll', function(event) {
 
         if (isTouching) {
           return;
@@ -770,12 +770,12 @@ if ( typeof Object.create !== 'function' ) {
 
       function trigger(event, resizing) {
 
-        event.type = resizing ? "resizestart" : "resizestop";
+        event.type = resizing ? 'resizestart' : 'resizestop';
         $this.trigger(event);
 
       }
 
-      $this.on("resize", function(event) {
+      $this.on('resize', function(event) {
 
         if(!$.event.special.resizestart.enabled) {
           return;
@@ -861,11 +861,11 @@ if ( typeof Object.create !== 'function' ) {
 
   $.fn.extend({
     mousewheel: function(fn) {
-      return fn ? this.bind("mousewheel", fn) : this.trigger("mousewheel");
+      return fn ? this.bind('mousewheel', fn) : this.trigger('mousewheel');
     },
 
     unmousewheel: function(fn) {
-      return this.unbind("mousewheel", fn);
+      return this.unbind('mousewheel', fn);
     }
   });
 
@@ -878,7 +878,7 @@ if ( typeof Object.create !== 'function' ) {
         deltaY = 0;
 
     event = $.event.fix(orgEvent);
-    event.type = "mousewheel";
+    event.type = 'mousewheel';
 
     // Old school scrollwheel delta
     if ( orgEvent.wheelDelta ) { delta = orgEvent.wheelDelta/120; }
