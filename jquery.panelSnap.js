@@ -245,7 +245,7 @@ if ( typeof Object.create !== 'function' ) {
 
       if(self.isSnapping) {
         self.scrollOffset = self.$snapContainer.scrollTop();
-        self.$container.stop(true);
+        self.$snapContainer.stop(true);
         self.isSnapping = false;
       }
 
