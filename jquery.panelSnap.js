@@ -51,7 +51,6 @@ if ( typeof Object.create !== 'function' ) {
     isMouseDown: false,
     isSnapping: false,
     enabled: true,
-    scrollInterval: 0,
     scrollOffset: 0,
 
     init: function(options, container) {
@@ -73,8 +72,6 @@ if ( typeof Object.create !== 'function' ) {
           self.$snapContainer = $('body');
         }
       }
-
-      self.updateScrollInterval();
 
       self.options = $.extend(true, {}, $.fn.panelSnap.options, options);
 
@@ -165,35 +162,12 @@ if ( typeof Object.create !== 'function' ) {
         return;
       }
 
-      self.updateScrollInterval();
+      console.log('Time to snap!')
 
-      var offset = self.$snapContainer.scrollTop();
-      var scrollDifference = offset - self.scrollOffset;
-      var maxOffset = self.$container[0].scrollHeight - self.scrollInterval;
-      var panelCount = self.getPanel().length - 1;
-
-      var childNumber;
-      if(
-        self.enabled &&
-        scrollDifference < -self.options.directionThreshold &&
-        scrollDifference > -self.scrollInterval
-      ) {
-        childNumber = Math.floor(offset / self.scrollInterval);
-      } else if(
-        self.enabled &&
-        scrollDifference > self.options.directionThreshold &&
-        scrollDifference < self.scrollInterval
-      ) {
-        childNumber = Math.ceil(offset / self.scrollInterval);
-      } else {
-        childNumber = Math.round(offset / self.scrollInterval);
-      }
-
-      childNumber = Math.max(0, Math.min(childNumber, panelCount));
-
-      var $target = self.getPanel(':eq(' + childNumber + ')');
-
-      if(!self.enabled) {
+      // Check if enabled or just 1 panel in viewport
+      var panelsInViewPort = self.getPanelsInViewport();
+      if (!self.enabled || panelsInViewPort.length < 2) {
+        $target = panelsInViewPort.eq(0);
         if(!$target.is(self.getPanel('.active'))) {
           self.activatePanel($target);
         }
@@ -201,10 +175,24 @@ if ( typeof Object.create !== 'function' ) {
         return;
       }
 
-      // To get normal scrolling in panels taller than the viewport,
-      // stop if there's no multiple panels in viewport
-      if (self.getPanelsInViewport().length < 2)
+      var offset = self.$snapContainer.scrollTop();
+      var scrollDifference = offset - self.scrollOffset;
+      var overThreshold = Math.abs(scrollDifference) > self.options.directionThreshold;
+
+      var panelNumber;
+      if(scrollDifference > 0) {
+        panelNumber = overThreshold ? 1 : 0;
+        console.log(1, overThreshold, panelsInViewPort);
+      } else if(scrollDifference < 0) {
+        panelNumber = overThreshold ? 0 : 1;
+        console.log(2, overThreshold, panelsInViewPort);
+      } else {
+        console.log('No scroll');
         return;
+      }
+
+      var $target = panelsInViewPort.eq(panelNumber);
+      var maxOffset = self.$container[0].scrollHeight - self.scrollInterval;
 
       if (offset <= 0 || offset >= maxOffset) {
         // Only activate, prevent stuttering
@@ -333,8 +321,6 @@ if ( typeof Object.create !== 'function' ) {
     resize: function(e) {
 
       var self = this;
-
-      self.updateScrollInterval();
 
       if(!self.enabled) {
         return;
@@ -506,17 +492,6 @@ if ( typeof Object.create !== 'function' ) {
       if($target.length > 0) {
         self.snapToPanel($target);
       }
-
-    },
-
-    getScrollInterval: function () {
-
-      return this.$container.is('body') ? window.innerHeight : this.$container.height();
-    },
-
-    updateScrollInterval: function () {
-
-      this.scrollInterval = this.getScrollInterval();
 
     },
 
