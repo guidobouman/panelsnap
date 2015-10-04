@@ -374,10 +374,12 @@ if ( typeof Object.create !== 'function' ) {
 
       var scrollTarget = 0;
       if(self.$container.is('body')) {
-        scrollTarget = $target.offset().top - self.options.offset;
+        scrollTarget = $target.offset().top;
       } else {
-        scrollTarget = self.$snapContainer.scrollTop() + $target.position().top - self.options.offset;
+        scrollTarget = self.$snapContainer.scrollTop() + $target.position().top;
       }
+
+      scrollTarget -=  self.options.offset;
 
       self.$snapContainer.stop(true).delay(self.options.delay).animate({
         scrollTop: scrollTarget
