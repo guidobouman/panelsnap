@@ -162,8 +162,6 @@ if ( typeof Object.create !== 'function' ) {
         return;
       }
 
-      console.log('Time to snap!')
-
       // Check if enabled or just 1 panel in viewport
       var panelsInViewPort = self.getPanelsInViewport();
       if (!self.enabled || panelsInViewPort.length < 2) {
@@ -182,12 +180,10 @@ if ( typeof Object.create !== 'function' ) {
       var panelNumber;
       if(scrollDifference > 0) {
         panelNumber = overThreshold ? 1 : 0;
-        console.log(1, overThreshold, panelsInViewPort);
       } else if(scrollDifference < 0) {
         panelNumber = overThreshold ? 0 : 1;
-        console.log(2, overThreshold, panelsInViewPort);
       } else {
-        console.log('No scroll');
+        // Nothing to scroll, get out.
         return;
       }
 
