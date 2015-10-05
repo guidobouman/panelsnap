@@ -204,14 +204,21 @@ if ( typeof Object.create !== 'function' ) {
     getPanelsInViewport: function() {
 
       var self = this;
-      var $window = $(window);
 
-      var viewport = { top: $window.scrollTop() };
-      viewport.bottom = viewport.top + $window.height();
+      var viewport = { top: self.$snapContainer.scrollTop() };
+      viewport.bottom = viewport.top + self.$snapContainer.height();
 
       var panels = self.getPanel().filter(function (_, el) {
         var $el = $(el);
-        var bounds = $el.offset();
+        var bounds;
+
+        if(self.$container.is('body')) {
+          bounds = $el.offset();
+        } else {
+          bounds = $el.position();
+          bounds.top += self.$snapContainer.scrollTop();
+        }
+
         bounds.bottom = bounds.top + $el.outerHeight();
 
         return !(viewport.bottom < bounds.top || viewport.top > bounds.bottom);
