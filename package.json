@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/spatie-custom/jquery-panelsnap.git"
+    "url": "https://github.com/guidobouman/jquery-panelsnap"
   },
   "author": "Guido Bouman",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/spatie-custom/jquery-panelsnap/issues"
+    "url": "https://github.com/guidobouman/jquery-panelsnap/issues"
   },
-  "homepage": "https://github.com/spatie-custom/jquery-panelsnap",
+  "homepage": "https://github.com/guidobouman/jquery-panelsnap",
   "keywords": [
     "snap",
     "snapping",
