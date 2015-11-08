@@ -1,6 +1,6 @@
 {
   "name": "panelsnap",
-  "version": "0.15.0",
+  "version": "0.15.1",
   "main": "jquery.panelSnap.js",
   "description": "jQuery plugin that provides snapping functionality to a set of panels within your interface.",
   "keywords": [
