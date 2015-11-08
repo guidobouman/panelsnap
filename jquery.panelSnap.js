@@ -422,7 +422,7 @@ if ( typeof Object.create !== 'function' ) {
           }
         }
 
-      	if (nav.buttons.$prevButton !== false ) {
+        if (nav.buttons.$prevButton !== false ) {
           if(index < 1) {
             $(nav.buttons.$prevButton).attr('aria-disabled', 'true');
             $(nav.buttons.$prevButton).addClass('disabled');
