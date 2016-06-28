@@ -170,6 +170,25 @@ Boolean telling the plugin wether or not next/prev navigation should wrap around
 
 Note the `data-panel` attributes on the links and the panels. This way the plugin knows which link matches to which panel.
 
+## Activating panels manually
+
+The `snapTo` method which allows for navigating through panels with the following commands: `next`, `prev`, `first`, `last`
+
+```
+$('#mylink').on('click', function() {
+  $('.container').panelSnap('snapTo', 'next');
+});
+```
+
+The direct `snapToPanel` method snaps to a given target panel. Get your target panel by calling the `getPanel` method which takes a CSS string that points to your panel (scoped within the container!), or using an existing jQuery selection.
+
+```
+$('#mylink').on('click', function() {
+  var $target = $('.container').panelSnap('getPanel', '.panel_two');
+  $('.container').panelSnap('snapToPanel', $target);
+});
+```
+
 # Events
 The plugin emits the following events on the container object in the `panelsnap` namespace:
 
