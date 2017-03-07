@@ -180,11 +180,11 @@ $('#mylink').on('click', function() {
 });
 ```
 
-The direct `snapToPanel` method snaps to a given target panel. Get your target panel by calling the `getPanel` method which takes a CSS string that points to your panel (scoped within the container!), or using an existing jQuery selection.
+The direct `snapToPanel` method snaps to a given target panel. It accepts a jQuery element that's an actual panel.
 
 ```
 $('#mylink').on('click', function() {
-  var $target = $('.container').panelSnap('getPanel', '.panel_two');
+  var $target = $('.container > .panel_two');
   $('.container').panelSnap('snapToPanel', $target);
 });
 ```
