@@ -274,7 +274,9 @@ if ( typeof Object.create !== 'function' ) {
 
       switch(e.which) {
         case nav.keys.prevKey:
+        case (typeof nav.keys.prevKey == 'object' && (nav.keys.prevKey.indexOf(e.which) != -1)):
         case nav.keys.nextKey:
+        case (typeof nav.keys.nextKey == 'object' && (nav.keys.nextKey.indexOf(e.which) != -1)):
           e.preventDefault();
       }
 
@@ -282,15 +284,25 @@ if ( typeof Object.create !== 'function' ) {
         return;
       }
 
-      switch(e.which) {
-        case nav.keys.prevKey:
-          self.snapTo('prev', nav.wrapAround);
-          break;
-        case nav.keys.nextKey:
-          self.snapTo('next', nav.wrapAround);
-          break;
+      if (self.keyIs('prev', e.which)) {
+        self.snapTo('prev', nav.wrapAround);
+      }
+      else if (self.keyIs('next', e.which)) {
+        self.snapTo('next', nav.wrapAround);
       }
 
+    },
+
+    keyIs: function(dir, key) {
+      var nav = this.options.navigation.keys;
+
+      if (dir == 'prev') {
+        return (key == nav.prevKey || (typeof nav.prevKey == 'object' && (nav.prevKey.indexOf(key) != -1)))
+      }
+
+      if (dir == 'next') {
+        return (key == nav.nextKey || (typeof nav.nextKey == 'object' && (nav.nextKey.indexOf(key) != -1)))
+      }
     },
 
     captureNextClick: function(e) {
