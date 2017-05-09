@@ -266,30 +266,22 @@ if ( typeof Object.create !== 'function' ) {
 
       var self = this;
 
+      if(!self.enabled || self.isSnapping) {
+        return;
+      }
+
       var nav = self.options.navigation;
+      var prev = self.keyIs('prev', e.which);
+      var next = self.keyIs('next', e.which);
 
-      if(!self.enabled) {
-        return;
+      if (prev || next) {
+        e.preventDefault();
       }
 
-      switch(e.which) {
-        case nav.keys.prevKey:
-        case (typeof nav.keys.prevKey == 'object' && (nav.keys.prevKey.indexOf(e.which) != -1)):
-        case nav.keys.nextKey:
-        case (typeof nav.keys.nextKey == 'object' && (nav.keys.nextKey.indexOf(e.which) != -1)):
-          e.preventDefault();
-      }
-
-      if (self.isSnapping) {
-        return;
-      }
-
-      if (self.keyIs('prev', e.which)) {
+      if (prev)
         self.snapTo('prev', nav.wrapAround);
-      }
-      else if (self.keyIs('next', e.which)) {
+      else if (next)
         self.snapTo('next', nav.wrapAround);
-      }
 
     },
 
@@ -297,11 +289,11 @@ if ( typeof Object.create !== 'function' ) {
       var nav = this.options.navigation.keys;
 
       if (dir == 'prev') {
-        return (key == nav.prevKey || (typeof nav.prevKey == 'object' && (nav.prevKey.indexOf(key) != -1)));
+        return (key == nav.prevKey || (typeof nav.prevKey === 'object' && nav.prevKey.indexOf(key) != -1))
       }
 
       if (dir == 'next') {
-        return (key == nav.nextKey || (typeof nav.nextKey == 'object' && (nav.nextKey.indexOf(key) != -1)));
+        return (key == nav.nextKey || (typeof nav.nextKey === 'object' && nav.nextKey.indexOf(key) != -1))
       }
     },
 
