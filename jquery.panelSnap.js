@@ -289,11 +289,11 @@ if ( typeof Object.create !== 'function' ) {
       var nav = this.options.navigation.keys;
 
       if (dir == 'prev') {
-        return (key == nav.prevKey || (typeof nav.prevKey === 'object' && nav.prevKey.indexOf(key) != -1))
+        return (key == nav.prevKey || (typeof nav.prevKey === 'object' && nav.prevKey.indexOf(key) != -1));
       }
 
       if (dir == 'next') {
-        return (key == nav.nextKey || (typeof nav.nextKey === 'object' && nav.nextKey.indexOf(key) != -1))
+        return (key == nav.nextKey || (typeof nav.nextKey === 'object' && nav.nextKey.indexOf(key) != -1));
       }
     },
 
