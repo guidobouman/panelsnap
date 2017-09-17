@@ -65,10 +65,10 @@ if ( typeof Object.create !== 'function' ) {
 
       if(self.$container.is('body')) {
         self.$eventContainer = $(document);
-        self.$snapContainer = $(document.documentElement);
+        self.$snapContainer = $(document.scrollingElement || document.documentElement);
 
         var ua = navigator.userAgent;
-        if(~ua.indexOf('WebKit')) {
+        if(~ua.indexOf('WebKit') && !~ua.indexOf('Chrome')) {
           self.$snapContainer = $('body');
         }
       }
