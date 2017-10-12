@@ -266,31 +266,35 @@ if ( typeof Object.create !== 'function' ) {
 
       var self = this;
 
+      if(!self.enabled || self.isSnapping) {
+        return;
+      }
+
       var nav = self.options.navigation;
+      var prev = self.keyIs('prev', e.which);
+      var next = self.keyIs('next', e.which);
 
-      if(!self.enabled) {
-        return;
+      if (prev || next) {
+        e.preventDefault();
       }
 
-      switch(e.which) {
-        case nav.keys.prevKey:
-        case nav.keys.nextKey:
-          e.preventDefault();
+      if (prev)
+        self.snapTo('prev', nav.wrapAround);
+      else if (next)
+        self.snapTo('next', nav.wrapAround);
+
+    },
+
+    keyIs: function(dir, key) {
+      var nav = this.options.navigation.keys;
+
+      if (dir == 'prev') {
+        return (key == nav.prevKey || (typeof nav.prevKey === 'object' && nav.prevKey.indexOf(key) != -1));
       }
 
-      if (self.isSnapping) {
-        return;
+      if (dir == 'next') {
+        return (key == nav.nextKey || (typeof nav.nextKey === 'object' && nav.nextKey.indexOf(key) != -1));
       }
-
-      switch(e.which) {
-        case nav.keys.prevKey:
-          self.snapTo('prev', nav.wrapAround);
-          break;
-        case nav.keys.nextKey:
-          self.snapTo('next', nav.wrapAround);
-          break;
-      }
-
     },
 
     captureNextClick: function(e) {
