@@ -1,7 +1,17 @@
 language: node_js
-node_js:
-  - 0.12
+cache:
+  directories:
+    - node_modules
+notifications:
+  email: false
 before_script:
-  - npm install grunt-cli
-  - npm install grunt-contrib-jshint --save-dev
-script: grunt ci --verbose
+  - npm prune
+script:
+  - npm run lint
+  - npm run test
+after_success:
+  - npm run semantic-release
+branches:
+  except:
+    # ignore version tag branches from semantic release
+    - /^v\d+\.\d+\.\d+$/
