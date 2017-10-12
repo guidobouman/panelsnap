@@ -5,7 +5,7 @@
   "main": "jquery.panelSnap.js",
   "scripts": {
     "lint": "eslint *.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
     "scrolling"
   ],
   "devDependencies": {
+    "ava": "^0.22.0",
     "eslint": "^4.8.0",
     "eslint-config-airbnb-base": "^12.0.2",
     "eslint-plugin-import": "^2.7.0"
