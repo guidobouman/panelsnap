@@ -1,5 +1,2 @@
 language: node_js
-before_script:
-  - npm install grunt-cli
-  - npm install grunt-contrib-jshint --save-dev
-script: grunt ci --verbose
+script: npm run lint
