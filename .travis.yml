@@ -13,4 +13,5 @@ after_success:
   - npm run semantic-release
 branches:
   except:
+    # ignore version tag branches from semantic release
     - /^v\d+\.\d+\.\d+$/
