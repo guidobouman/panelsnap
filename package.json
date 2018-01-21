@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint .",
     "test": "ava",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
@@ -30,10 +30,16 @@
   ],
   "devDependencies": {
     "ava": "^0.22.0",
+    "cz-conventional-changelog": "^2.1.0",
     "eslint": "^4.8.0",
     "eslint-config-airbnb-base": "^12.0.2",
     "eslint-plugin-import": "^2.7.0",
-    "semantic-release": "^8.0.3"
+    "semantic-release": "^12.2.2"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }
