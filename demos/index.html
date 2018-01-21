@@ -16,7 +16,8 @@
         -moz-box-sizing: border-box;
       }
 
-      html, body {
+      html,
+      body {
         margin: 0;
         padding: 0;
         height: 100%;
@@ -101,10 +102,10 @@
 
         z-index: -1;
 
-        -moz-transform-origin:  100% 50%;
-        -o-transform-origin:  100% 50%;
+        -moz-transform-origin: 100% 50%;
+        -o-transform-origin: 100% 50%;
         -webkit-transform-origin: 100% 50%;
-        transform-origin:  100% 50%;
+        transform-origin: 100% 50%;
 
         -moz-transform: rotate(-45deg);
         -o-transform: rotate(-45deg);
@@ -221,6 +222,7 @@
       .button.disabled {
         background: #7f8c8d;
       }
+
     </style>
   </head>
   <body>
@@ -230,7 +232,8 @@
           jQuery.panelSnap
         </h1>
         <p>
-          A jQuery plugin that, after scrolling, snaps to blocks of content which I like to call panels. You can actually nest sets of panels as you will see throughout this demo page.
+          A jQuery plugin that, after scrolling, snaps to blocks of content which I like to call panels. You can actually nest sets
+          of panels as you will see throughout this demo page.
         </p>
         <p>
           Each following panel will explain a specific feature of the panelSnap plugin.
@@ -464,7 +467,7 @@
     <script src="../jquery.panelSnap.js"></script>
     <script>
 
-      jQuery(function($) {
+      jQuery(function ($) {
 
         // Basic demo
         $('body').panelSnap();
@@ -496,17 +499,17 @@
 
         // Callback demo
         $('.callback_demo .panels').panelSnap({
-          onSnapStart: function($target) {
+          onSnapStart: function ($target) {
 
             log('callback', 'onSnapStart', $target);
 
           },
-          onSnapFinish: function($target) {
+          onSnapFinish: function ($target) {
 
             log('callback', 'onSnapFinish', $target);
 
           },
-          onActivate: function($target) {
+          onActivate: function ($target) {
 
             log('callback', 'onActivate', $target);
 
@@ -528,7 +531,7 @@
 
         // Offset demo
         $('.offset_demo .panels').panelSnap({
-            offset: 85
+          offset: 85
         });
 
         // Large panels demo
