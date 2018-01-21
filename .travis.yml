@@ -13,7 +13,7 @@ jobs:
 stages:
   - name: test
   - name: semantic release
-    if: branch = master
+    if: branch = master AND type = push
 branches:
   except:
     # ignore version tag branches from semantic release
