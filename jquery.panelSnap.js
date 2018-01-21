@@ -332,6 +332,14 @@ if (typeof Object.create !== 'function') {
 
       scrollTarget -= self.options.offset;
 
+      var isScrollingUp = self.scrollOffset > scrollTarget;
+      var isLargeTarget = $target.outerHeight() > self.$snapContainer.outerHeight();
+      if (isScrollingUp && isLargeTarget) {
+        // Snap to bottom of target
+        scrollTarget += $target.outerHeight();
+        scrollTarget -= self.$snapContainer.outerHeight();
+      }
+
       self.$snapContainer.stop(true).delay(self.options.delay).animate({
         scrollTop: scrollTarget
       }, self.options.slideSpeed, self.options.easing, function () {
