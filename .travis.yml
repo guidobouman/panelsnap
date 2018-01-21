@@ -1,16 +1,20 @@
 language: node_js
 cache:
   directories:
-    - node_modules
+    - ~/.npm
 notifications:
   email: false
-before_script:
-  - npm prune
-script:
-  - npm run lint
-  - npm run test
-after_success:
-  - npm run semantic-release
+jobs:
+  include:
+    - stage: test
+      script: npm run lint
+      script: npm run test
+    - stage: semantic release
+      script: npm run semantic-release
+stages:
+  - name: test
+  - name: semantic release
+    if: branch = master
 branches:
   except:
     # ignore version tag branches from semantic release
