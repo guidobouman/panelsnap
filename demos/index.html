@@ -45,13 +45,19 @@
         background: #1abc9c;
       }
 
-      .panels.offset section{
+      .panels.large section {
+        height: 150%;
+      }
+
+      .panels.offset section {
         height: calc(100% - 85px);
       }
 
-      .panels.offset header{
+      .panels.offset header {
         height: 85px;
-        background-color:  #1abc9c;
+        padding: 0 50px;
+        line-height: 85px;
+        background: #f1c40f;
       }
 
       section:nth-child(2n) {
@@ -150,6 +156,10 @@
         text-transform: uppercase;
         font-size: 300%;
         margin: 0;
+      }
+
+      h2 {
+        font-weight: inherit;
       }
 
       a {
