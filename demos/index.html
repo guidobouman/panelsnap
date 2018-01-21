@@ -430,6 +430,26 @@
       </div>
     </section>
 
+    <section class="large_demo">
+      <h1>
+        Large panels
+      </h1>
+      <div class="panels large">
+        <section>
+          <h1>First</h1>
+        </section>
+        <section>
+          <h1>Second</h1>
+        </section>
+        <section>
+          <h1>Third</h1>
+        </section>
+      </div>
+      <div class="log">
+        <h2>Large panels will snap to the top when scrolling down, and snap to their bottom when scrolling up.</h2>
+      </div>
+    </section>
+
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="../jquery.panelSnap.js"></script>
     <script>
@@ -500,6 +520,9 @@
         $('.offset_demo .panels').panelSnap({
             offset: 85
         });
+
+        // Large panels demo
+        $('.large_demo .panels').panelSnap();
 
         // Shared log function
         function log(type, action, $target) {
