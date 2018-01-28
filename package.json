@@ -33,10 +33,10 @@
     "ava": "^0.22.0",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.1.0",
-    "eslint": "^4.8.0",
-    "eslint-config-airbnb-base": "^12.0.2",
-    "eslint-plugin-import": "^2.7.0",
-    "semantic-release": "^12.2.2"
+    "eslint": "^4.16.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "semantic-release": "^12.4.1"
   },
   "dependencies": {},
   "config": {
