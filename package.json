@@ -5,7 +5,7 @@
   "main": "jquery.panelSnap.js",
   "scripts": {
     "lint": "eslint .",
-    "test": "ava",
+    "test": "jest",
     "semantic-release": "semantic-release",
     "commit": "git-cz"
   },
@@ -30,12 +30,14 @@
     "scrolling"
   ],
   "devDependencies": {
-    "ava": "^0.22.0",
+    "babel-jest": "^22.1.0",
+    "babel-preset-env": "^1.6.1",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.1.0",
     "eslint": "^4.16.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
+    "jest": "^22.1.4",
     "semantic-release": "^12.4.1"
   },
   "dependencies": {},

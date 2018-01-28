@@ -1,3 +1,3 @@
-import test from 'ava';
-
-test('is set up', t => t.pass());
+test('Jest is set up', () => {
+  expect(true).toBe(true);
+});
