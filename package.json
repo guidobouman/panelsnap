@@ -2,9 +2,11 @@
   "name": "jquery-panelsnap",
   "version": "0.0.0-development",
   "description": "jQuery plugin that provides snapping functionality to a set of panels within your interface.",
-  "main": "jquery.panelSnap.js",
+  "main": "lib/jquery.panelSnap.js",
   "scripts": {
     "lint": "eslint .",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
     "test": "jest",
     "semantic-release": "semantic-release",
     "commit": "git-cz"
@@ -38,7 +40,9 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
     "jest": "^22.1.4",
-    "semantic-release": "^12.4.1"
+    "semantic-release": "^12.4.1",
+    "webpack": "^4.1.0",
+    "webpack-cli": "^2.0.10"
   },
   "dependencies": {},
   "config": {
