@@ -12,6 +12,11 @@
       * {
         box-sizing: border-box;
         -moz-box-sizing: border-box;
+        outline-offset: 3px;
+      }
+
+      *:focus {
+        outline: 3px solid #ffffff;
       }
 
       html,
@@ -200,24 +205,29 @@
         padding: 50px;
       }
 
-      .menu a,
-      .button {
+      button {
+        font: inherit;
+        text-align: inherit;
+        color: inherit;
+        border: none;
+        border-radius: 0;
+        cursor: pointer;
+
         display: block;
+        margin: 0 0 25px 0;
         width: 100%;
         padding: 25px;
         background: #f1c40f;
-        margin: 0 0 25px 0;
-
-        border: none;
+        outline-offset: -3px;
       }
 
-      .menu a.active,
-      .menu a:active,
-      .menu a:hover {
+      button.active,
+      button:active,
+      button:hover {
         background: #f39c12;
       }
 
-      .button.disabled {
+      button.disabled {
         background: #7f8c8d;
       }
 
@@ -273,7 +283,6 @@
   &lt;/body&gt;
 &lt;/html&gt;</pre>
     </section>
-
     <section class="configuration">
       <h1>
         Options
@@ -315,15 +324,15 @@
         Menus
       </h1>
       <div class="menu">
-        <a href="" data-panel="first">
+        <button data-panel="first">
           First panel
-        </a>
-        <a href="" data-panel="second" class="active">
+        </button>
+        <button data-panel="second" class="active">
           Second panel
-        </a>
-        <a href="" data-panel="third">
-          Third panel
-        </a>
+          </a>
+          <button data-panel="third">
+            Third panel
+          </button>
       </div>
       <div class="panels">
         <section data-panel="first">
@@ -362,6 +371,14 @@
       <h1>
         Next/Prev Buttons
       </h1>
+      <div class="menu">
+        <button class="prev">
+          Previous
+        </button>
+        <button class="next">
+          Next
+        </button>
+      </div>
       <div class="panels">
         <section>
           <h1>First</h1>
@@ -372,12 +389,6 @@
         <section>
           <h1>Third</h1>
         </section>
-      </div>
-      <div class="log">
-        <nav>
-          <a class="button prev">Previous</a>
-          <a class="button next">Next</a>
-        </nav>
       </div>
     </section>
 
@@ -472,7 +483,8 @@
 
         // Menu demo
         $('.menu_demo .panels').panelSnap({
-          $menu: $('.menu_demo .menu')
+          $menu: $('.menu_demo .menu'),
+          menuSelector: 'button'
         });
 
         // Keyboard demo
@@ -489,8 +501,8 @@
         $('.button_demo .panels').panelSnap({
           navigation: {
             buttons: {
-              $nextButton: $('.button.next'),
-              $prevButton: $('.button.prev'),
+              $nextButton: $('.button_demo .next'),
+              $prevButton: $('.button_demo .prev'),
             }
           }
         });
