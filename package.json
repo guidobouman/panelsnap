@@ -5,7 +5,7 @@
   "main": "lib/jquery.panelSnap.js",
   "scripts": {
     "lint": "eslint .",
-    "dev": "webpack --mode development",
+    "dev": "webpack --mode development --watch",
     "build": "webpack --mode production",
     "test": "jest",
     "semantic-release": "semantic-release",
