@@ -32,18 +32,18 @@
     "scrolling"
   ],
   "devDependencies": {
-    "babel-jest": "^22.1.0",
+    "babel-jest": "^22.4.1",
     "babel-preset-env": "^1.6.1",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.1.0",
-    "eslint": "^4.17.0",
+    "eslint": "^4.19.0",
     "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jest": "^21.12.2",
-    "jest": "^22.1.4",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jest": "^21.15.0",
+    "jest": "^22.4.2",
     "semantic-release": "^12.4.1",
-    "webpack": "^4.1.0",
-    "webpack-cli": "^2.0.10"
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12"
   },
   "dependencies": {},
   "config": {
