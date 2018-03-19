@@ -16,7 +16,7 @@ if (typeof Object.create !== 'function') {
   };
 }
 
-/*!
+/**
  * jQuery panelSnap
  * Version 0.15.1
  *
@@ -533,7 +533,7 @@ if (typeof Object.create !== 'function') {
   };
 }(jQuery, window, document));
 
-/*!
+/**
  * Special flavoured jQuery Mobile scrollstart & scrollstop events.
  * Version 0.1.3
  *
@@ -609,7 +609,7 @@ if (typeof Object.create !== 'function') {
   };
 }(jQuery));
 
-/*!
+/**
  * Resizestart and resizestop events.
  * Version 0.0.1
  *
@@ -671,7 +671,8 @@ if (typeof Object.create !== 'function') {
 
 /* eslint-disable */
 
-/*! Copyright (c) 2011 Brandon Aaron (http://brandonaaron.net)
+/**
+ * Copyright (c) 2011 Brandon Aaron (http://brandonaaron.net)
  * Licensed under the MIT License (LICENSE.txt).
  *
  * Thanks to: http://adomas.org/javascript-mouse-wheel/ for some pointers.
