@@ -1,4 +1,4 @@
-/**
+/** @license
  * Copyright (c) 2013-present, Guido Bouman
  *
  * This source code is licensed under the MIT license found in the
