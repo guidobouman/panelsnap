@@ -17,6 +17,7 @@ export default {
     { file: pkg.main, format: 'cjs' },
     { file: pkg.module, format: 'es' },
     { file: pkg.browser, format: 'umd' },
+    { file: 'docs/jquery.panelSnap.js', format: 'umd' },
   ],
   plugins: [
     babel({
