@@ -1,3 +1,5 @@
+import { getScrollingElement } from './utilities';
+
 /** @license
  * Copyright (c) 2013-present, Guido Bouman
  *
@@ -43,16 +45,10 @@ if (typeof Object.create !== 'function') {
       self.$container = $(container);
 
       self.$eventContainer = self.$container;
-      self.$snapContainer = self.$container;
+      self.$snapContainer = $(getScrollingElement(self.$container[0]));
 
       if (self.$container.is('body')) {
         self.$eventContainer = $(document);
-        self.$snapContainer = $(document.scrollingElement || document.documentElement);
-
-        const ua = navigator.userAgent;
-        if (ua.indexOf('WebKit') !== -1 && ua.indexOf('Chrome') === -1) {
-          self.$snapContainer = $('body');
-        }
       }
 
       self.options = $.extend(true, {}, $.fn.panelSnap.options, options);
