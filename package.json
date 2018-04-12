@@ -51,7 +51,7 @@
     "dev": "rollup -c -w",
     "build": "rollup -c",
     "lint": "eslint .",
-    "test": "jest",
+    "test": "jest --coverage",
     "semantic-release": "semantic-release",
     "commit": "git-cz"
   },
