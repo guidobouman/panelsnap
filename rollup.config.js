@@ -11,6 +11,16 @@ const banner = `/**
  * LICENSE file in the root directory of this source tree.
  */`;
 
+const plugins = [
+  babel({
+    exclude: ['node_modules/**'],
+  }),
+  uglify(),
+  license({
+    banner,
+  }),
+];
+
 export default [
   {
     input: 'src/jquery.panelSnap.js',
@@ -20,15 +30,7 @@ export default [
       { file: pkg.browser, format: 'umd' },
       { file: 'docs/jquery.panelSnap.js', format: 'umd' },
     ],
-    plugins: [
-      babel({
-        exclude: ['node_modules/**'],
-      }),
-      uglify(),
-      license({
-        banner,
-      }),
-    ],
+    plugins,
   },
   {
     input: 'src/panelSnap.js',
@@ -38,14 +40,6 @@ export default [
       { file: 'lib/panelSnap.umd.js', format: 'umd', name: 'panelSnap' },
       { file: 'docs/panelSnap.js', format: 'umd', name: 'panelSnap' },
     ],
-    plugins: [
-      babel({
-        exclude: ['node_modules/**'],
-      }),
-      uglify(),
-      license({
-        banner,
-      }),
-    ],
+    plugins,
   },
 ];
