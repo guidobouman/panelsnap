@@ -25,7 +25,9 @@
     "scroll",
     "scrolling"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "tweezer.js": "^1.4.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.44",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.44",
@@ -42,6 +44,7 @@
     "rollup": "^0.57.1",
     "rollup-plugin-babel": "^4.0.0-beta.4",
     "rollup-plugin-license": "^0.6.0",
+    "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-uglify": "^3.0.0",
     "semantic-release": "^12.4.1"
   },

@@ -1,6 +1,7 @@
 import babel from 'rollup-plugin-babel';
 import license from 'rollup-plugin-license';
 import uglify from 'rollup-plugin-uglify';
+import resolve from 'rollup-plugin-node-resolve';
 import pkg from './package.json';
 
 const banner = `/**
@@ -37,9 +38,16 @@ export default [
     output: [
       { file: 'lib/panelSnap.cjs.js', format: 'cjs' },
       { file: 'lib/panelSnap.esm.js', format: 'es' },
+    ],
+    external: ['tweezer.js'],
+    plugins,
+  },
+  {
+    input: 'src/panelSnap.js',
+    output: [
       { file: 'lib/panelSnap.umd.js', format: 'umd', name: 'panelSnap' },
       { file: 'docs/panelSnap.js', format: 'umd', name: 'panelSnap' },
     ],
-    plugins,
+    plugins: [...plugins, resolve()],
   },
 ];
