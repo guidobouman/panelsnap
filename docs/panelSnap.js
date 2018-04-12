@@ -1,8 +1,0 @@
-/**
- * panelSnap.js v0.0.0-development
- * Copyright (c) 2013-present, Guido Bouman
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-!function(n,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):n.panelSnap=t()}(this,function(){"use strict";function n(n,t,e){return t in n?Object.defineProperty(n,t,{value:e,enumerable:!0,configurable:!0,writable:!0}):n[t]=e,n}var t={container:document.body,panelSelector:"> section",offset:0,directionThreshold:50,delay:0,slideSpeed:200,easing:function(n){return n},onSnapStart:function(n){return n},onSnapFinish:function(n){return n},onActivate:function(n){return n}};return function e(o){var i;!function(n,t){if(!(n instanceof t))throw new TypeError("Cannot call a class as a function")}(this,e),this.options=function(t){for(var e=1;e<arguments.length;e++){var o=null!=arguments[e]?arguments[e]:{},i=Object.keys(o);"function"==typeof Object.getOwnPropertySymbols&&(i=i.concat(Object.getOwnPropertySymbols(o).filter(function(n){return Object.getOwnPropertyDescriptor(o,n).enumerable}))),i.forEach(function(e){n(t,e,o[e])})}return t}({},t,o),this.container=this.options.container,this.scrollingContainer=(i=this.container)!==document.body?i:"scrollingElement"in document?document.scrollingElement:navigator.userAgent.indexOf("WebKit")>-1?document.body:document.documentElement,this.panelList=this.container.querySelectorAll(this.options.panelSelector),this.isEnabled=!0,this.isMouseDown=!1,this.animation=null,this.currentScrollOffset=this.scrollingContainer.scrollTop,this.targetScrollOffset=this.currentScrollOffset}});
