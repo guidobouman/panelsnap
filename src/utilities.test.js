@@ -6,6 +6,16 @@ describe('getScrolllingElement', () => {
     expect(getScrollingElement(container)).toBe(container);
   });
 
+  test('returns scrollingElement when container is body on modern browser', () => {
+    const container = document.body;
+    const scrollContainer = document.createElement('div');
+    document.scrollingElement = scrollContainer;
+    expect(getScrollingElement(container)).toBe(scrollContainer);
+
+    // TODO: Jest should clean this up...
+    delete document.scrollingElement;
+  });
+
   test('returns same element when container is body on WebKit browser', () => {
     Object.defineProperty(window.navigator, 'userAgent', { value: 'WebKit', configurable: true });
     const container = document.body;
