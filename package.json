@@ -27,8 +27,11 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "babel-jest": "^22.4.1",
-    "babel-preset-env": "^1.6.1",
+    "@babel/core": "^7.0.0-beta.44",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.44",
+    "@babel/preset-env": "^7.0.0-beta.44",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^22.4.3",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.1.0",
     "eslint": "^4.19.0",
@@ -37,7 +40,7 @@
     "eslint-plugin-jest": "^21.15.0",
     "jest": "^22.4.2",
     "rollup": "^0.57.1",
-    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-babel": "^4.0.0-beta.4",
     "rollup-plugin-license": "^0.6.0",
     "rollup-plugin-uglify": "^3.0.0",
     "semantic-release": "^12.4.1"
