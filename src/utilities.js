@@ -15,5 +15,9 @@ export function getScrollingElement(container) {
   return document.documentElement;
 }
 
-// TODO: remove me
-export function placeholder() {}
+export function getTargetScrollTop(scrollContainer, element) {
+  const elementTop = element.getBoundingClientRect().top;
+  const containerTop = scrollContainer.getBoundingClientRect().top;
+  const scrollOffset = elementTop - containerTop;
+  return scrollOffset + scrollContainer.scrollTop;
+}

@@ -1,4 +1,4 @@
-import { getScrollingElement } from './utilities';
+import { getScrollingElement, getTargetScrollTop } from './utilities';
 
 describe('getScrolllingElement', () => {
   test('returns same element when container is not body', () => {
@@ -17,5 +17,32 @@ describe('getScrolllingElement', () => {
     const container = document.body;
     const scrollContainer = document.documentElement;
     expect(getScrollingElement(container)).toBe(scrollContainer);
+  });
+});
+
+
+describe('getTargetScrollTop', () => {
+  function getElements(scrollTop, containerTop, targetTop) {
+    const container = document.createElement('div');
+    container.scrollTop = scrollTop;
+    container.getBoundingClientRect = () => ({
+      top: containerTop,
+    });
+
+    const target = document.createElement('div');
+    target.getBoundingClientRect = () => ({
+      top: targetTop,
+    });
+
+    return [container, target];
+  }
+
+  test('calculates scrollTop for target element', () => {
+    expect(getTargetScrollTop(...getElements(0, 0, 0))).toEqual(0);
+    expect(getTargetScrollTop(...getElements(100, 0, -100))).toEqual(0);
+    expect(getTargetScrollTop(...getElements(100, 0, 0))).toEqual(100);
+    expect(getTargetScrollTop(...getElements(0, 0, 100))).toEqual(100);
+    expect(getTargetScrollTop(...getElements(100, 0, 100))).toEqual(200);
+    expect(getTargetScrollTop(...getElements(100, 100, 100))).toEqual(100);
   });
 });
