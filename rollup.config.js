@@ -45,8 +45,8 @@ export default [
   {
     input: 'src/panelSnap.js',
     output: [
-      { file: 'lib/panelSnap.umd.js', format: 'umd', name: 'panelSnap' },
-      { file: 'docs/panelSnap.js', format: 'umd', name: 'panelSnap' },
+      { file: 'lib/panelSnap.umd.js', format: 'umd', name: 'PanelSnap' },
+      { file: 'docs/panelSnap.js', format: 'umd', name: 'PanelSnap' },
     ],
     plugins: [...plugins, resolve()],
   },
