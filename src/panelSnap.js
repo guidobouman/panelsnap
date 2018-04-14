@@ -5,6 +5,8 @@ import {
   getTargetScrollTop,
 } from './utilities';
 
+let INSTANCE_COUNTER = 0;
+
 const defaultOptions = {
   container: document.body,
   panelSelector: '> section',
@@ -26,8 +28,12 @@ export default class PanelSnap {
     };
 
     this.container = this.options.container;
+
+    INSTANCE_COUNTER += 1;
+    this.instanceIndex = INSTANCE_COUNTER;
+
     this.scrollingContainer = getScrollingElement(this.container);
-    this.panelList = this.container.querySelectorAll(this.options.panelSelector);
+    this.panelList = document.querySelectorAll(`[data-panelsnap-id="${this.instanceIndex}"] ${this.options.panelSelector}`);
 
     this.isEnabled = true;
     this.isMouseDown = false;
