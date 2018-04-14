@@ -7,16 +7,17 @@ describe('Constructor', () => {
   });
 
   test('prevents duplicate init of panelSnap on the same element', () => {
-    const container = document.createElement('div');
-    // eslint-disable-next-line no-unused-vars
-    const firstInstance = new PanelSnap({ container });
-    expect(() => new PanelSnap({ container })).toThrow('already initialised');
-  });
+    // On default container: body
+    expect(() => [
+      new PanelSnap(),
+      new PanelSnap(),
+    ]).toThrow('already initialised');
 
-  test('prevents duplicate init of panelSnap on the same element', () => {
+    // On custom element
     const container = document.createElement('div');
-    // eslint-disable-next-line no-unused-vars
-    const firstInstance = new PanelSnap({ container });
-    expect(() => new PanelSnap({ container })).toThrow('already initialised');
+    expect(() => [
+      new PanelSnap({ container }),
+      new PanelSnap({ container }),
+    ]).toThrow('already initialised');
   });
 });
