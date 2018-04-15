@@ -27,16 +27,17 @@ export default class PanelSnap {
       ...options,
     };
 
-    this.container = this.options.container;
-    if (this.container.dataset.panelsnapId) {
+    if (this.options.container.dataset.panelsnapId) {
       throw new Error('PanelSnap is already initialised on this container, aborting.');
     }
+
+    this.container = this.options.container;
+    this.scrollingContainer = getScrollingElement(this.container);
 
     INSTANCE_COUNTER += 1;
     this.instanceIndex = INSTANCE_COUNTER;
     this.container.dataset.panelsnapId = this.instanceIndex;
 
-    this.scrollingContainer = getScrollingElement(this.container);
     this.panelList = document.querySelectorAll(`[data-panelsnap-id="${this.instanceIndex}"] ${this.options.panelSelector}`);
 
     this.isEnabled = true;
