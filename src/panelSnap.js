@@ -38,7 +38,8 @@ export default class PanelSnap {
     this.instanceIndex = INSTANCE_COUNTER;
     this.container.dataset.panelsnapId = this.instanceIndex;
 
-    this.panelList = document.querySelectorAll(`[data-panelsnap-id="${this.instanceIndex}"] ${this.options.panelSelector}`);
+    const panelQuery = `[data-panelsnap-id="${this.instanceIndex}"] ${this.options.panelSelector}`;
+    this.panelList = Array.from(document.querySelectorAll(panelQuery));
 
     this.isEnabled = true;
     this.isMouseDown = false;
