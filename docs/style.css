@@ -8,19 +8,14 @@
   outline: 3px solid #ffffff;
 }
 
-html,
 body {
   margin: 0;
-  padding: 0;
-  height: 100%;
-}
-
-body {
   overflow-x: hidden;
   color: #ffffff;
   font-family: 'Lato';
   font-weight: 100;
   font-size: 24px;
+  min-height: 100vh;
 }
 
 @media screen and (max-width: 768px) {
@@ -34,7 +29,7 @@ section {
   overflow: hidden;
   padding: 50px;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background: #1abc9c;
 }
 
