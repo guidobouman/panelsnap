@@ -32,7 +32,7 @@ export default class PanelSnap {
     }
 
     this.container = this.options.container;
-    this.scrollingContainer = getScrollingElement(this.container);
+    this.scrollContainer = getScrollingElement(this.container);
 
     INSTANCE_COUNTER += 1;
     this.instanceIndex = INSTANCE_COUNTER;
@@ -44,7 +44,7 @@ export default class PanelSnap {
     this.isEnabled = true;
     this.isMouseDown = false;
     this.animation = null;
-    this.currentScrollOffset = this.scrollingContainer.scrollTop;
+    this.currentScrollOffset = this.scrollContainer.scrollTop;
     this.targetScrollOffset = this.currentScrollOffset;
   }
 
