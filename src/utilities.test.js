@@ -1,4 +1,8 @@
-import { getScrollingElement, getTargetScrollTop } from './utilities';
+import {
+  getScrollingElement,
+  getTargetScrollTop,
+  getElementsInContainerViewport,
+} from './utilities';
 
 describe('getScrolllingElement', () => {
   test('returns same element when container is not body', () => {
@@ -30,7 +34,6 @@ describe('getScrolllingElement', () => {
   });
 });
 
-
 describe('getTargetScrollTop', () => {
   function getElements(scrollTop, containerTop, targetTop) {
     const container = document.createElement('div');
@@ -54,5 +57,44 @@ describe('getTargetScrollTop', () => {
     expect(getTargetScrollTop(...getElements(0, 0, 100))).toEqual(100);
     expect(getTargetScrollTop(...getElements(100, 0, 100))).toEqual(200);
     expect(getTargetScrollTop(...getElements(100, 100, 100))).toEqual(100);
+  });
+});
+
+describe('getElementsInContainerViewport', () => {
+  const SCREEN_WIDTH = 800;
+  function getElements(scrollTop, amountOfElements, elementHeight) {
+    return Array.from(Array(amountOfElements), (_, i) => {
+      const target = document.createElement('div');
+      target.getBoundingClientRect = () => ({
+        top: (i * elementHeight) - scrollTop,
+        bottom: ((i + 1) * elementHeight) - scrollTop,
+        left: 0,
+        right: SCREEN_WIDTH,
+      });
+
+      return target;
+    });
+  }
+
+  test('finds elements in body viewport', () => {
+    window.innerWidth = SCREEN_WIDTH;
+    window.innerHeight = 600;
+    const elementsInViewport1 = getElementsInContainerViewport(document.body, getElements(0, 5, 300));
+    expect(elementsInViewport1).toHaveLength(2);
+
+    const elementsInViewport2 = getElementsInContainerViewport(document.body, getElements(200, 5, 300));
+    expect(elementsInViewport2).toHaveLength(3);
+
+    const elementsInViewport3 = getElementsInContainerViewport(document.body, getElements(600, 3, 300));
+    expect(elementsInViewport3).toHaveLength(1);
+  });
+
+  test('finds elements in non-body viewport', () => {
+    const container = getElements(0, 1, 400)[0];
+
+    const elementsInViewport1 = getElementsInContainerViewport(container, getElements(0, 5, 300));
+    expect(elementsInViewport1).toHaveLength(2);
+    const elementsInViewport2 = getElementsInContainerViewport(container, getElements(0, 5, 400));
+    expect(elementsInViewport2).toHaveLength(1);
   });
 });

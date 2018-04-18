@@ -33,15 +33,11 @@ export function getElementsInContainerViewport(container, elementList) {
   return elementList.filter((element) => {
     const elementRect = element.getBoundingClientRect();
 
-    // Top inside viewport?
-    if (elementRect.top >= containerRect.top && elementRect.top <= containerRect.bottom) {
-      return true;
-    }
-
-    // Bottom inside viewport?
-    if (elementRect.bottom >= containerRect.top && elementRect.bottom <= containerRect.bottom) {
-      return true;
-    }
-    return false;
+    return (
+      elementRect.top < containerRect.bottom &&
+      elementRect.right > containerRect.left &&
+      elementRect.bottom > containerRect.top &&
+      elementRect.left < containerRect.right
+    );
   });
 }
