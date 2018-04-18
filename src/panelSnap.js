@@ -3,6 +3,7 @@ import Tweezer from 'tweezer.js';
 import {
   getScrollingElement,
   getTargetScrollTop,
+  getElementsInContainerViewport,
 } from './utilities';
 
 let INSTANCE_COUNTER = 0;
@@ -46,6 +47,47 @@ export default class PanelSnap {
     this.animation = null;
     this.currentScrollOffset = this.scrollContainer.scrollTop;
     this.targetScrollOffset = this.currentScrollOffset;
+
+    this.container.addEventListener('mouseup', this.onMouseUp.bind(this));
+    this.container.addEventListener('mousedown', this.onMouseDown.bind(this));
+    this.scrollContainer.addEventListener('wheel', this.onWheel.bind(this), { passive: true });
+  }
+
+  onMouseDown() {
+    this.isMouseDown = true;
+  }
+
+  onMouseUp() {
+    this.isMouseDown = false;
+
+    if (this.currentScrollOffset !== this.scrollContainer.scrollTop) {
+      this.findSnapTarget();
+    }
+  }
+
+  onWheel() {
+    clearTimeout(this.scrollTimeout);
+
+    if (this.currentScrollOffset === this.scrollContainer.scrollTop) {
+      return;
+    }
+
+    this.scrollTimeout = setTimeout(this.findSnapTarget.bind(this), 50);
+  }
+
+  findSnapTarget() {
+    const delta = this.scrollContainer.scrollTop - this.currentScrollOffset;
+
+    if (Math.abs(delta) < this.options.directionThreshold && this.activePanel) {
+      this.snapToPanel(this.activePanel);
+      return;
+    }
+
+    const panelsInViewport = getElementsInContainerViewport(this.container, this.panelList);
+
+    console.log('snap!', this.currentScrollOffset, delta, panelsInViewport);
+
+    this.currentScrollOffset = this.scrollContainer.scrollTop;
   }
 
   snapToPanel(panel) {
