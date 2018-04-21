@@ -79,22 +79,22 @@ describe('getElementsInContainerViewport', () => {
   test('finds elements in body viewport', () => {
     window.innerWidth = SCREEN_WIDTH;
     window.innerHeight = 600;
-    const elementsInViewport1 = getElementsInContainerViewport(document.body, getElements(0, 5, 300));
-    expect(elementsInViewport1).toHaveLength(2);
+    const test1 = getElementsInContainerViewport(document.body, getElements(0, 5, 300));
+    expect(test1).toHaveLength(2);
 
-    const elementsInViewport2 = getElementsInContainerViewport(document.body, getElements(200, 5, 300));
-    expect(elementsInViewport2).toHaveLength(3);
+    const test2 = getElementsInContainerViewport(document.body, getElements(200, 5, 300));
+    expect(test2).toHaveLength(3);
 
-    const elementsInViewport3 = getElementsInContainerViewport(document.body, getElements(600, 3, 300));
-    expect(elementsInViewport3).toHaveLength(1);
+    const test3 = getElementsInContainerViewport(document.body, getElements(600, 3, 300));
+    expect(test3).toHaveLength(1);
   });
 
   test('finds elements in non-body viewport', () => {
     const container = getElements(0, 1, 400)[0];
 
-    const elementsInViewport1 = getElementsInContainerViewport(container, getElements(0, 5, 300));
-    expect(elementsInViewport1).toHaveLength(2);
-    const elementsInViewport2 = getElementsInContainerViewport(container, getElements(0, 5, 400));
-    expect(elementsInViewport2).toHaveLength(1);
+    const test1 = getElementsInContainerViewport(container, getElements(0, 5, 300));
+    expect(test1).toHaveLength(2);
+    const test2 = getElementsInContainerViewport(container, getElements(0, 5, 400));
+    expect(test2).toHaveLength(1);
   });
 });
