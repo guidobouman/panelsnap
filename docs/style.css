@@ -16,6 +16,7 @@ body {
   font-weight: 100;
   font-size: 24px;
   min-height: 100vh;
+  background: #f1c40f;
 }
 
 @media screen and (max-width: 768px) {
@@ -33,6 +34,19 @@ section {
   background: #1abc9c;
 }
 
+section:nth-child(2n) {
+  background: #16a085;
+}
+
+section section {
+  background: #f1c40f;
+  height: 100%;
+}
+
+section section:nth-child(2n) {
+  background: #f39c12;
+}
+
 .panels.large section {
   height: 150%;
 }
@@ -46,19 +60,6 @@ section {
   padding: 0 50px;
   line-height: 85px;
   background: #f1c40f;
-}
-
-section:nth-child(2n) {
-  background: #16a085;
-}
-
-body,
-section section {
-  background: #f1c40f;
-}
-
-section section:nth-child(2n) {
-  background: #f39c12;
 }
 
 section .explanation,
