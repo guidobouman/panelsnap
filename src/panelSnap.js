@@ -54,6 +54,7 @@ export default class PanelSnap {
   }
 
   onMouseDown() {
+    this.stopAnimation();
     this.isMouseDown = true;
   }
 
@@ -71,6 +72,8 @@ export default class PanelSnap {
     if (this.currentScrollOffset === this.scrollContainer.scrollTop) {
       return;
     }
+
+    this.stopAnimation();
 
     this.scrollTimeout = setTimeout(this.findSnapTarget.bind(this), 50);
   }
