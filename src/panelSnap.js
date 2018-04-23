@@ -77,6 +77,7 @@ export default class PanelSnap {
 
   findSnapTarget() {
     const delta = this.scrollContainer.scrollTop - this.currentScrollOffset;
+    this.currentScrollOffset = this.scrollContainer.scrollTop;
 
     if (Math.abs(delta) < this.options.directionThreshold && this.activePanel) {
       this.snapToPanel(this.activePanel);
@@ -85,9 +86,16 @@ export default class PanelSnap {
 
     const panelsInViewport = getElementsInContainerViewport(this.container, this.panelList);
 
-    console.log('snap!', this.currentScrollOffset, delta, panelsInViewport);
-
-    this.currentScrollOffset = this.scrollContainer.scrollTop;
+    switch (panelsInViewport.length) {
+      case 1:
+        this.snapToPanel(panelsInViewport[0]);
+        break;
+      case 2:
+        this.snapToPanel(panelsInViewport[delta > 0 ? 1 : 0]);
+        break;
+      default:
+        throw new Error('PanelSnap could not find a snappable panel, aborting.');
+    }
   }
 
   snapToPanel(panel) {
@@ -95,25 +103,23 @@ export default class PanelSnap {
       return;
     }
 
+    this.activatePanel(panel);
+
     if (this.animation) {
       this.animation.stop();
     }
 
-    this.currentScrollOffset = this.scrollContainer.scrollTop;
-    this.targetScrollOffset = getTargetScrollTop(this.scrollContainer, panel);
+    const start = this.scrollContainer.scrollTop;
+    const end = getTargetScrollTop(this.container, panel);
+    const duration = 300;
 
-    this.animation = new Tweezer({
-      start: this.currentScrollOffset,
-      end: this.targetScrollOffset,
+    this.animation = new Tweezer({ start, end, duration });
+
+    this.animation.on('tick', (value) => {
+      this.scrollContainer.scrollTop = value;
     });
-
-    this.animation.on('tick', this.updateScroll);
-    this.animation.on('stop', this.clearAnimation);
-    this.animation.start();
-  }
-
-  updateScroll(value) {
-    this.scrollContainer.scrollTop = value;
+    this.animation.on('stop', this.clearAnimation.bind(this));
+    this.animation.begin();
   }
 
   stopAnimation() {
@@ -126,7 +132,11 @@ export default class PanelSnap {
   }
 
   clearAnimation() {
-    this.currentScrollOffset = this.targetScrollOffset;
+    this.currentScrollOffset = this.scrollContainer.scrollTop;
     this.animation = null;
+  }
+
+  activatePanel(panel) {
+    this.activePanel = panel;
   }
 }
