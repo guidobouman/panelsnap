@@ -58,6 +58,26 @@ describe('getTargetScrollTop', () => {
     expect(getTargetScrollTop(...getElements(100, 0, 100))).toEqual(200);
     expect(getTargetScrollTop(...getElements(100, 100, 100))).toEqual(100);
   });
+
+  function getBodyElements(scrollTop, targetTop) {
+    const container = document.body;
+    getScrollingElement(document.body).scrollTop = scrollTop;
+
+    const target = document.createElement('div');
+    target.getBoundingClientRect = () => ({
+      top: targetTop,
+    });
+
+    return [container, target];
+  }
+
+  test('calculates scrollTop for target element in body', () => {
+    expect(getTargetScrollTop(...getBodyElements(0, 0))).toEqual(0);
+    expect(getTargetScrollTop(...getBodyElements(100, -100))).toEqual(0);
+    expect(getTargetScrollTop(...getBodyElements(100, 0))).toEqual(100);
+    expect(getTargetScrollTop(...getBodyElements(0, 100))).toEqual(100);
+    expect(getTargetScrollTop(...getBodyElements(100, 100))).toEqual(200);
+  });
 });
 
 describe('getElementsInContainerViewport', () => {
