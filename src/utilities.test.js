@@ -2,6 +2,7 @@ import {
   getScrollingElement,
   getTargetScrollTop,
   getElementsInContainerViewport,
+  elementFillsContainer,
 } from './utilities';
 
 describe('getScrolllingElement', () => {
@@ -116,5 +117,35 @@ describe('getElementsInContainerViewport', () => {
     expect(test1).toHaveLength(2);
     const test2 = getElementsInContainerViewport(container, getElements(0, 5, 400));
     expect(test2).toHaveLength(1);
+  });
+});
+
+
+describe('elementFillsContainer', () => {
+  const SCREEN_WIDTH = 800;
+  function getElement(top, bottom, left = 0, right = SCREEN_WIDTH) {
+    const target = document.createElement('div');
+    target.getBoundingClientRect = () => ({
+      top, bottom, left, right,
+    });
+
+    return target;
+  }
+
+  test('checks element in body viewport', () => {
+    window.innerWidth = SCREEN_WIDTH;
+    window.innerHeight = 600;
+    expect(elementFillsContainer(document.body, getElement(-100, 700))).toBe(true);
+    expect(elementFillsContainer(document.body, getElement(0, 600))).toBe(true);
+    expect(elementFillsContainer(document.body, getElement(1, 601))).toBe(false);
+    expect(elementFillsContainer(document.body, getElement(-1, 599))).toBe(false);
+  });
+
+  test('checks element in non-body viewport', () => {
+    const container = getElement(200, 500);
+    expect(elementFillsContainer(container, getElement(100, 600))).toBe(true);
+    expect(elementFillsContainer(container, getElement(200, 500))).toBe(true);
+    expect(elementFillsContainer(container, getElement(201, 501))).toBe(false);
+    expect(elementFillsContainer(container, getElement(99, 499))).toBe(false);
   });
 });
