@@ -5,6 +5,12 @@ import {
   elementFillsContainer,
 } from './utilities';
 
+const SCREEN_WIDTH = 800;
+const SCREEN_HEIGHT = 600;
+
+window.innerWidth = SCREEN_WIDTH;
+window.innerHeight = SCREEN_HEIGHT;
+
 describe('getScrolllingElement', () => {
   test('returns same element when container is not body', () => {
     const container = document.createElement('div');
@@ -82,7 +88,6 @@ describe('getTargetScrollTop', () => {
 });
 
 describe('getElementsInContainerViewport', () => {
-  const SCREEN_WIDTH = 800;
   function getElements(scrollTop, amountOfElements, elementHeight) {
     return Array.from(Array(amountOfElements), (_, i) => {
       const target = document.createElement('div');
@@ -98,8 +103,6 @@ describe('getElementsInContainerViewport', () => {
   }
 
   test('finds elements in body viewport', () => {
-    window.innerWidth = SCREEN_WIDTH;
-    window.innerHeight = 600;
     const test1 = getElementsInContainerViewport(document.body, getElements(0, 5, 300));
     expect(test1).toHaveLength(2);
 
@@ -122,7 +125,6 @@ describe('getElementsInContainerViewport', () => {
 
 
 describe('elementFillsContainer', () => {
-  const SCREEN_WIDTH = 800;
   function getElement(top, bottom, left = 0, right = SCREEN_WIDTH) {
     const target = document.createElement('div');
     target.getBoundingClientRect = () => ({
@@ -133,8 +135,6 @@ describe('elementFillsContainer', () => {
   }
 
   test('checks element in body viewport', () => {
-    window.innerWidth = SCREEN_WIDTH;
-    window.innerHeight = 600;
     expect(elementFillsContainer(document.body, getElement(-100, 700))).toBe(true);
     expect(elementFillsContainer(document.body, getElement(0, 600))).toBe(true);
     expect(elementFillsContainer(document.body, getElement(1, 601))).toBe(false);
