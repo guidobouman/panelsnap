@@ -4,6 +4,7 @@ import {
   getScrollingElement,
   getTargetScrollTop,
   getElementsInContainerViewport,
+  elementFillsContainer,
 } from './utilities';
 
 let INSTANCE_COUNTER = 0;
@@ -107,6 +108,10 @@ export default class PanelSnap {
     }
 
     this.activatePanel(panel);
+
+    if (elementFillsContainer(this.container, panel)) {
+      return;
+    }
 
     if (this.animation) {
       this.animation.stop();
