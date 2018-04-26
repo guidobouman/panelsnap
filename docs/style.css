@@ -142,6 +142,10 @@ section.introduction .bottom:after {
   transform: rotate(45deg);
 }
 
+section.options_explained {
+  height: auto;
+}
+
 h1 {
   font-weight: inherit;
   text-transform: uppercase;
@@ -189,7 +193,6 @@ button.disabled {
 .panels,
 .log,
 .menu,
-.explanation,
 pre {
   position: absolute;
   top: 200px;
@@ -206,7 +209,6 @@ pre {
   width: 300px;
 }
 
-.explanation:not(.with-side),
 pre:not(.with-side) {
   left: 50px;
 }
@@ -221,7 +223,7 @@ pre {
 }
 
 .explanation {
-  margin: 0;
+  margin: 64px 0 0;
 }
 
 .explanation dt {

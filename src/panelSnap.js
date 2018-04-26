@@ -92,17 +92,17 @@ export default class PanelSnap {
 
     switch (panelsInViewport.length) {
       case 1:
-        this.snapToPanel(panelsInViewport[0]);
+        this.snapToPanel(panelsInViewport[0], delta < 0);
         break;
       case 2:
-        this.snapToPanel(panelsInViewport[delta > 0 ? 1 : 0]);
+        this.snapToPanel(panelsInViewport[delta > 0 ? 1 : 0], delta < 0);
         break;
       default:
         throw new Error('PanelSnap could not find a snappable panel, aborting.');
     }
   }
 
-  snapToPanel(panel) {
+  snapToPanel(panel, toBottom = false) {
     if (!this.isEnabled) {
       return;
     }
@@ -118,7 +118,7 @@ export default class PanelSnap {
     }
 
     const start = this.scrollContainer.scrollTop;
-    const end = getTargetScrollTop(this.container, panel);
+    const end = getTargetScrollTop(this.container, panel, toBottom);
     const duration = 300;
 
     this.animation = new Tweezer({ start, end, duration });
