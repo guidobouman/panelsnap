@@ -135,10 +135,10 @@ describe('elementFillsContainer', () => {
   }
 
   test('checks element in body viewport', () => {
-    expect(elementFillsContainer(document.body, getElement(-100, 700))).toBe(true);
-    expect(elementFillsContainer(document.body, getElement(0, 600))).toBe(true);
-    expect(elementFillsContainer(document.body, getElement(1, 601))).toBe(false);
-    expect(elementFillsContainer(document.body, getElement(-1, 599))).toBe(false);
+    expect(elementFillsContainer(document.body, getElement(-100, SCREEN_HEIGHT + 100))).toBe(true);
+    expect(elementFillsContainer(document.body, getElement(0, SCREEN_HEIGHT))).toBe(true);
+    expect(elementFillsContainer(document.body, getElement(1, SCREEN_HEIGHT + 1))).toBe(false);
+    expect(elementFillsContainer(document.body, getElement(-1, SCREEN_HEIGHT - 1))).toBe(false);
   });
 
   test('checks element in non-body viewport', () => {
