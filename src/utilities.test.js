@@ -42,48 +42,128 @@ describe('getScrolllingElement', () => {
 });
 
 describe('getTargetScrollTop', () => {
-  function getElements(scrollTop, containerTop, targetTop) {
+  function getElements(scrollTop, containerDimensions, targetDimensions) {
     const container = document.createElement('div');
     container.scrollTop = scrollTop;
     container.getBoundingClientRect = () => ({
-      top: containerTop,
+      ...containerDimensions,
+      height: containerDimensions.bottom - containerDimensions.top,
     });
 
     const target = document.createElement('div');
     target.getBoundingClientRect = () => ({
-      top: targetTop,
+      ...targetDimensions,
+      height: targetDimensions.bottom - targetDimensions.top,
     });
 
     return [container, target];
   }
 
   test('calculates scrollTop for target element', () => {
-    expect(getTargetScrollTop(...getElements(0, 0, 0))).toEqual(0);
-    expect(getTargetScrollTop(...getElements(100, 0, -100))).toEqual(0);
-    expect(getTargetScrollTop(...getElements(100, 0, 0))).toEqual(100);
-    expect(getTargetScrollTop(...getElements(0, 0, 100))).toEqual(100);
-    expect(getTargetScrollTop(...getElements(100, 0, 100))).toEqual(200);
-    expect(getTargetScrollTop(...getElements(100, 100, 100))).toEqual(100);
+    expect(getTargetScrollTop(...getElements(0, { top: 0 }, { top: 0 }))).toEqual(0);
+    expect(getTargetScrollTop(...getElements(100, { top: 0 }, { top: -100 }))).toEqual(0);
+    expect(getTargetScrollTop(...getElements(100, { top: 0 }, { top: 0 }))).toEqual(100);
+    expect(getTargetScrollTop(...getElements(0, { top: 0 }, { top: 100 }))).toEqual(100);
+    expect(getTargetScrollTop(...getElements(100, { top: 0 }, { top: 100 }))).toEqual(200);
+    expect(getTargetScrollTop(...getElements(100, { top: 100 }, { top: 100 }))).toEqual(100);
   });
 
-  function getBodyElements(scrollTop, targetTop) {
+  test('calculates scrollTop for target element bottom', () => {
+    expect(getTargetScrollTop(...getElements(0, {
+      top: 0,
+      bottom: 300,
+    }, {
+      top: 0,
+      bottom: 300,
+    }), true)).toEqual(0);
+
+    expect(getTargetScrollTop(...getElements(100, {
+      top: 0,
+      bottom: 300,
+    }, {
+      top: -100,
+      bottom: 200,
+    }), true)).toEqual(0);
+
+    expect(getTargetScrollTop(...getElements(100, {
+      top: 0,
+      bottom: 300,
+    }, {
+      top: 0,
+      bottom: 300,
+    }), true)).toEqual(100);
+
+    expect(getTargetScrollTop(...getElements(0, {
+      top: 0,
+      bottom: 300,
+    }, {
+      top: 100,
+      bottom: 400,
+    }), true)).toEqual(100);
+
+    expect(getTargetScrollTop(...getElements(100, {
+      top: 0,
+      bottom: 300,
+    }, {
+      top: 100,
+      bottom: 400,
+    }), true)).toEqual(200);
+
+    expect(getTargetScrollTop(...getElements(100, {
+      top: 100,
+      bottom: 400,
+    }, {
+      top: 100,
+      bottom: 400,
+    }), true)).toEqual(100);
+  });
+
+  function getBodyElements(scrollTop, targetDimensions) {
     const container = document.body;
     getScrollingElement(document.body).scrollTop = scrollTop;
 
     const target = document.createElement('div');
     target.getBoundingClientRect = () => ({
-      top: targetTop,
+      ...targetDimensions,
+      height: targetDimensions.bottom - targetDimensions.top,
     });
 
     return [container, target];
   }
 
   test('calculates scrollTop for target element in body', () => {
-    expect(getTargetScrollTop(...getBodyElements(0, 0))).toEqual(0);
-    expect(getTargetScrollTop(...getBodyElements(100, -100))).toEqual(0);
-    expect(getTargetScrollTop(...getBodyElements(100, 0))).toEqual(100);
-    expect(getTargetScrollTop(...getBodyElements(0, 100))).toEqual(100);
-    expect(getTargetScrollTop(...getBodyElements(100, 100))).toEqual(200);
+    expect(getTargetScrollTop(...getBodyElements(0, { top: 0 }))).toEqual(0);
+    expect(getTargetScrollTop(...getBodyElements(100, { top: -100 }))).toEqual(0);
+    expect(getTargetScrollTop(...getBodyElements(100, { top: 0 }))).toEqual(100);
+    expect(getTargetScrollTop(...getBodyElements(0, { top: 100 }))).toEqual(100);
+    expect(getTargetScrollTop(...getBodyElements(100, { top: 100 }))).toEqual(200);
+  });
+
+  test('calculates scrollTop for target element bottom in body', () => {
+    expect(getTargetScrollTop(...getBodyElements(0, {
+      top: 0,
+      bottom: SCREEN_HEIGHT,
+    }), true)).toEqual(0);
+
+    expect(getTargetScrollTop(...getBodyElements(100, {
+      top: -100,
+      bottom: SCREEN_HEIGHT - 100,
+    }), true)).toEqual(0);
+
+    expect(getTargetScrollTop(...getBodyElements(100, {
+      top: 0,
+      bottom: SCREEN_HEIGHT,
+    }), true)).toEqual(100);
+
+    expect(getTargetScrollTop(...getBodyElements(0, {
+      top: 100,
+      bottom: SCREEN_HEIGHT + 100,
+    }), true)).toEqual(100);
+
+    expect(getTargetScrollTop(...getBodyElements(100, {
+      top: 100,
+      bottom: SCREEN_HEIGHT + 100,
+    }), true)).toEqual(200);
   });
 });
 

@@ -21,14 +21,17 @@ function getContainerRect(container) {
     left: 0,
     bottom: window.innerHeight,
     right: window.innerWidth,
+    height: window.innerHeight,
+    width: window.innerWidth,
   } : container.getBoundingClientRect();
 }
 
-export function getTargetScrollTop(container, element) {
+export function getTargetScrollTop(container, element, toBottom = false) {
   const containerRect = getContainerRect(container);
   const elementRect = element.getBoundingClientRect();
   const scrollOffset = elementRect.top - containerRect.top;
-  return scrollOffset + getScrollingElement(container).scrollTop;
+  const offsetCorrection = toBottom ? elementRect.height - containerRect.height : 0;
+  return scrollOffset + offsetCorrection + getScrollingElement(container).scrollTop;
 }
 
 export function getElementsInContainerViewport(container, elementList) {
