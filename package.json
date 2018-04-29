@@ -29,24 +29,23 @@
     "tweezer.js": "^1.4.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.44",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.44",
-    "@babel/preset-env": "^7.0.0-beta.44",
+    "@babel/core": "^7.0.0-beta.46",
+    "@babel/preset-env": "^7.0.0-beta.46",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^22.4.3",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.1.0",
-    "eslint": "^4.19.0",
+    "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.9.0",
-    "eslint-plugin-jest": "^21.15.0",
-    "jest": "^22.4.2",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jest": "^21.15.1",
+    "jest": "^22.4.3",
     "rollup": "^0.57.1",
     "rollup-plugin-babel": "^4.0.0-beta.4",
     "rollup-plugin-license": "^0.6.0",
     "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-uglify": "^3.0.0",
-    "semantic-release": "^12.4.1"
+    "semantic-release": "^15.1.7"
   },
   "config": {
     "commitizen": {
