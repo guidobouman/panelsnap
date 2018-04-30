@@ -47,11 +47,6 @@
     "rollup-plugin-uglify": "^3.0.0",
     "semantic-release": "^15.1.7"
   },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
   "scripts": {
     "dev": "rollup -c -w",
     "build": "rollup -c",
@@ -62,5 +57,10 @@
   },
   "browserslist": [
     "> 0.25%"
-  ]
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }
