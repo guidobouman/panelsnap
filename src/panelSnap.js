@@ -40,6 +40,7 @@ export default class PanelSnap {
     const panelQuery = `[data-panelsnap-id="${this.instanceIndex}"] ${this.options.panelSelector}`;
     this.panelList = Array.from(document.querySelectorAll(panelQuery));
 
+    this.events = [];
     this.isEnabled = true;
     this.isMouseDown = false;
     this.animation = null;
