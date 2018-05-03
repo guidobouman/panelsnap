@@ -102,13 +102,25 @@ export default class PanelSnap {
     }
 
     const panelsInViewport = getElementsInContainerViewport(this.container, this.panelList);
-
     if (panelsInViewport.length === 0) {
       throw new Error('PanelSnap could not find a snappable panel, aborting.');
     }
 
-    const targetIndex = delta > 0 ? panelsInViewport.length - 1 : 0;
-    this.snapToPanel(panelsInViewport[targetIndex], delta < 0);
+    if (panelsInViewport.length > 1) {
+      const targetIndex = delta > 0 ? 1 : panelsInViewport.length - 2;
+      this.snapToPanel(panelsInViewport[targetIndex], delta < 0);
+      return;
+    }
+
+    const visiblePanel = panelsInViewport[0];
+    if (elementFillsContainer(this.container, visiblePanel)) {
+      return;
+    }
+
+    // TODO: Only one partial panel in viewport, add support for space between panels?
+    // eslint-disable-next-line no-console
+    console.error('PanelSnap does not support space between panels, snapping back.');
+    this.snapToPanel(visiblePanel, delta > 0);
   }
 
   snapToPanel(panel, toBottom = false) {
@@ -117,10 +129,6 @@ export default class PanelSnap {
     }
 
     this.activatePanel(panel);
-
-    if (elementFillsContainer(this.container, panel)) {
-      return;
-    }
 
     if (this.animation) {
       this.animation.stop();
