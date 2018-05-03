@@ -17,9 +17,6 @@ const defaultOptions = {
   delay: 0,
   slideSpeed: 200,
   easing: t => t,
-  onSnapStart: e => e,
-  onSnapFinish: e => e,
-  onActivate: e => e,
 };
 
 export default class PanelSnap {
@@ -52,6 +49,21 @@ export default class PanelSnap {
     this.container.addEventListener('mouseup', this.onMouseUp.bind(this));
     this.container.addEventListener('mousedown', this.onMouseDown.bind(this));
     this.scrollContainer.addEventListener('wheel', this.onWheel.bind(this), { passive: true });
+  }
+
+  on(name, handler) {
+    const currentHandlers = this.events[name] || [];
+    this.events[name] = [...currentHandlers, handler];
+  }
+
+  off(name, handler) {
+    const currentHandlers = this.events[name] || [];
+    this.events[name] = currentHandlers.filter(h => h !== handler);
+  }
+
+  emit(name, value) {
+    const currentHandlers = this.events[name] || [];
+    currentHandlers.forEach(h => h.call(this, value));
   }
 
   onMouseDown() {
@@ -126,7 +138,12 @@ export default class PanelSnap {
     this.animation.on('tick', (value) => {
       this.scrollContainer.scrollTop = value;
     });
-    this.animation.on('stop', this.clearAnimation.bind(this));
+    this.animation.on('stop', () => {
+      this.emit('snapStop', panel);
+      this.clearAnimation();
+    });
+
+    this.emit('snapStart', panel);
     this.animation.begin();
   }
 
@@ -145,6 +162,7 @@ export default class PanelSnap {
   }
 
   activatePanel(panel) {
+    this.emit('activatePanel', panel);
     this.activePanel = panel;
   }
 }
