@@ -102,16 +102,12 @@ export default class PanelSnap {
 
     const panelsInViewport = getElementsInContainerViewport(this.container, this.panelList);
 
-    switch (panelsInViewport.length) {
-      case 1:
-        this.snapToPanel(panelsInViewport[0], delta < 0);
-        break;
-      case 2:
-        this.snapToPanel(panelsInViewport[delta > 0 ? 1 : 0], delta < 0);
-        break;
-      default:
-        throw new Error('PanelSnap could not find a snappable panel, aborting.');
+    if (panelsInViewport.length === 0) {
+      throw new Error('PanelSnap could not find a snappable panel, aborting.');
     }
+
+    const targetIndex = delta > 0 ? panelsInViewport.length - 1 : 0;
+    this.snapToPanel(panelsInViewport[targetIndex], delta < 0);
   }
 
   snapToPanel(panel, toBottom = false) {
