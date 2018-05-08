@@ -2,6 +2,7 @@ import Tweezer from 'tweezer.js';
 
 import {
   getScrollingElement,
+  getScrollEventContainer,
   getTargetScrollTop,
   getElementsInContainerViewport,
   elementFillsContainer,
@@ -33,6 +34,7 @@ export default class PanelSnap {
 
     this.container = this.options.container;
     this.scrollContainer = getScrollingElement(this.container);
+    this.scrollEventContainer = getScrollEventContainer(this.container);
 
     INSTANCE_COUNTER += 1;
     this.instanceIndex = INSTANCE_COUNTER;
@@ -43,14 +45,18 @@ export default class PanelSnap {
 
     this.events = [];
     this.isEnabled = true;
-    this.isMouseDown = false;
+    this.isInteracting = false;
     this.animation = null;
     this.currentScrollOffset = this.scrollContainer.scrollTop;
     this.targetScrollOffset = this.currentScrollOffset;
 
-    this.container.addEventListener('mouseup', this.onMouseUp.bind(this));
-    this.container.addEventListener('mousedown', this.onMouseDown.bind(this));
-    this.scrollContainer.addEventListener('wheel', this.onWheel.bind(this), passiveIsSupported && { passive: true });
+    this.scrollEventContainer.addEventListener('keydown', this.onInteractStart.bind(this), passiveIsSupported && { passive: true });
+    this.scrollEventContainer.addEventListener('keyup', this.onInteractStop.bind(this), passiveIsSupported && { passive: true });
+    this.scrollEventContainer.addEventListener('mousedown', this.onInteractStart.bind(this), passiveIsSupported && { passive: true });
+    this.scrollEventContainer.addEventListener('mouseup', this.onInteractStop.bind(this), passiveIsSupported && { passive: true });
+    this.scrollEventContainer.addEventListener('touchstart', this.onInteractStart.bind(this), passiveIsSupported && { passive: true });
+    this.scrollEventContainer.addEventListener('touchend', this.onInteractStop.bind(this), passiveIsSupported && { passive: true });
+    this.scrollEventContainer.addEventListener('scroll', this.onScroll.bind(this), passiveIsSupported && { passive: true });
   }
 
   on(name, handler) {
@@ -68,21 +74,27 @@ export default class PanelSnap {
     currentHandlers.forEach(h => h.call(this, value));
   }
 
-  onMouseDown() {
+  onInteractStart() {
     this.stopAnimation();
-    this.isMouseDown = true;
+    this.isInteracting = true;
   }
 
-  onMouseUp() {
-    this.isMouseDown = false;
-
-    if (this.currentScrollOffset !== this.scrollContainer.scrollTop) {
-      this.findSnapTarget();
-    }
+  onInteractStop() {
+    this.isInteracting = false;
+    this.onScroll();
   }
 
-  onWheel() {
+  onInteract() {
     clearTimeout(this.scrollTimeout);
+    this.stopAnimation();
+  }
+
+  onScroll() {
+    clearTimeout(this.scrollTimeout);
+
+    if (this.isInteracting || this.animation) {
+      return;
+    }
 
     if (this.currentScrollOffset === this.scrollContainer.scrollTop) {
       return;
@@ -144,7 +156,7 @@ export default class PanelSnap {
     this.animation.on('tick', (value) => {
       this.scrollContainer.scrollTop = value;
     });
-    this.animation.on('stop', () => {
+    this.animation.on('done', () => {
       this.emit('snapStop', panel);
       this.clearAnimation();
     });

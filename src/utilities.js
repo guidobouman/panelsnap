@@ -15,6 +15,10 @@ export function getScrollingElement(container) {
   return document.documentElement;
 }
 
+export function getScrollEventContainer(container) {
+  return container === document.body ? window : getScrollingElement(container);
+}
+
 function getContainerRect(container) {
   return container === document.body ? {
     top: 0,
