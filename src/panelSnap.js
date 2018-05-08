@@ -109,17 +109,17 @@ export default class PanelSnap {
     const delta = this.scrollContainer.scrollTop - this.currentScrollOffset;
     this.currentScrollOffset = this.scrollContainer.scrollTop;
 
-    if (Math.abs(delta) < this.options.directionThreshold && this.activePanel) {
-      this.snapToPanel(this.activePanel);
-      return;
-    }
-
     const panelsInViewport = getElementsInContainerViewport(this.container, this.panelList);
     if (panelsInViewport.length === 0) {
       throw new Error('PanelSnap could not find a snappable panel, aborting.');
     }
 
     if (panelsInViewport.length > 1) {
+      if (Math.abs(delta) < this.options.directionThreshold && this.activePanel) {
+        this.snapToPanel(this.activePanel);
+        return;
+      }
+
       const targetIndex = delta > 0 ? 1 : panelsInViewport.length - 2;
       this.snapToPanel(panelsInViewport[targetIndex], delta < 0);
       return;
