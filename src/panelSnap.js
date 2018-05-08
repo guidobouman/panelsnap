@@ -5,6 +5,7 @@ import {
   getTargetScrollTop,
   getElementsInContainerViewport,
   elementFillsContainer,
+  passiveIsSupported,
 } from './utilities';
 
 let INSTANCE_COUNTER = 0;
@@ -49,7 +50,7 @@ export default class PanelSnap {
 
     this.container.addEventListener('mouseup', this.onMouseUp.bind(this));
     this.container.addEventListener('mousedown', this.onMouseDown.bind(this));
-    this.scrollContainer.addEventListener('wheel', this.onWheel.bind(this), { passive: true });
+    this.scrollContainer.addEventListener('wheel', this.onWheel.bind(this), passiveIsSupported && { passive: true });
   }
 
   on(name, handler) {

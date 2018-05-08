@@ -60,3 +60,24 @@ export function elementFillsContainer(container, element) {
     elementRect.right >= containerRect.right
   );
 }
+
+// Taken from MDN
+// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Safely_detecting_option_support
+export const passiveIsSupported = (function () {
+  let isSupported = false;
+
+  try {
+    const options = Object.defineProperty({}, 'passive', {
+      get() { // eslint-disable-line getter-return
+        isSupported = true;
+      },
+    });
+
+    window.addEventListener('test', null, options);
+    window.removeEventListener('test', null, options);
+  } catch (e) {
+    // Do nothing
+  }
+
+  return isSupported;
+}());

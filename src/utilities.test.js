@@ -3,6 +3,7 @@ import {
   getTargetScrollTop,
   getElementsInContainerViewport,
   elementFillsContainer,
+  passiveIsSupported,
 } from './utilities';
 
 const SCREEN_WIDTH = 800;
@@ -227,5 +228,11 @@ describe('elementFillsContainer', () => {
     expect(elementFillsContainer(container, getElement(200, 500))).toBe(true);
     expect(elementFillsContainer(container, getElement(201, 501))).toBe(false);
     expect(elementFillsContainer(container, getElement(99, 499))).toBe(false);
+  });
+});
+
+describe('isPassiveSupported', () => {
+  test('returns false in JSDOM', () => {
+    expect(passiveIsSupported).toBe(false);
   });
 });
