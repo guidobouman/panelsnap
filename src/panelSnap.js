@@ -127,6 +127,7 @@ export default class PanelSnap {
 
     const visiblePanel = panelsInViewport[0];
     if (elementFillsContainer(this.container, visiblePanel)) {
+      this.activatePanel(visiblePanel);
       return;
     }
 
@@ -180,6 +181,10 @@ export default class PanelSnap {
   }
 
   activatePanel(panel) {
+    if (this.activePanel === panel) {
+      return;
+    }
+
     this.emit('activatePanel', panel);
     this.activePanel = panel;
   }
