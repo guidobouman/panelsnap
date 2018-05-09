@@ -116,7 +116,7 @@ export default class PanelSnap {
 
     if (panelsInViewport.length > 1) {
       if (Math.abs(delta) < this.options.directionThreshold && this.activePanel) {
-        this.snapToPanel(this.activePanel);
+        this.snapToPanel(this.activePanel, delta > 0);
         return;
       }
 
