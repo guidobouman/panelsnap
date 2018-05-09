@@ -46,6 +46,7 @@ export default class PanelSnap {
     this.events = [];
     this.isEnabled = true;
     this.isInteracting = false;
+    this.scrollTimeout = null;
     this.animation = null;
     this.currentScrollOffset = this.scrollContainer.scrollTop;
     this.targetScrollOffset = this.currentScrollOffset;
