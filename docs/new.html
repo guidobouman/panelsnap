@@ -41,12 +41,9 @@
       <pre>&lt;!doctype html&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;script src="/path/to/jquery.js"&gt;&lt;/script&gt;
-    &lt;script src="/path/to/jquery.panelSnap.js"&gt;&lt;/script&gt;
+    &lt;script src="/path/to/panelSnap.js"&gt;&lt;/script&gt;
     &lt;script&gt;
-      jQuery(function($) {
-        $('body').panelSnap();
-      });
+        new PanelSnap();
     &lt;/script&gt;
   &lt;/head&gt;
   &lt;body&gt;
@@ -67,220 +64,55 @@
         Options
       </h1>
       <pre>&lt;script&gt;
-  jQuery(function($) {
-    var options = {
-      $menu: false,
-      menuSelector: 'a',
-      panelSelector: '> section',
-      namespace: '.panelSnap',
-      onSnapStart: function(){},
-      onSnapFinish: function(){},
-      onActivate: function(){},
-      directionThreshold: 50,
-      slideSpeed: 200,
-      easing: 'linear',
-      offset: 0,
-      navigation: {
-        keys: {
-          nextKey: false,
-          prevKey: false,
-        },
-        buttons: {
-          $nextButton: false,
-          $prevButton: false,
-        },
-        wrapAround: false
-      }
-    };
+  var defaultOptions = {
+    container: document.body,
+    panelSelector: '> section',
+    directionThreshold: 50,
+    delay: 0,
+    slideSpeed: 200,
+    easing: function(t) { return t },
+  };
 
-    $('.panel_container').panelSnap(options);
-  });
+  new PanelSnap(options);
 &lt;/script&gt;</pre>
     </section>
 
     <section class="options_explained">
       <h1>Options explained</h1>
       <dl class="explanation">
-        <dt>$menu</dt>
-        <dd>jQuery DOM object referencing a menu that contains menu items.</dd>
-        <dt>menuSelector</dt>
-        <dd>A string containing the css selector to menu items (scoped within the menu).</dd>
+        <dt>container</dt>
+        <dd>(element) The (scrolling) container that contains the panels.</dd>
         <dt>panelSelector</dt>
-        <dd>A string containg the css selector to panels (scoped within the container).</dd>
-        <dt>namespace</dt>
-        <dd>A string containing the jQuery event namespace that's being used.</dd>
-        <dt>onSnapStart</dt>
-        <dd>A callback function that is being fired before a panel is being snapped.</dd>
-        <dt>onSnapFinish</dt>
-        <dd>A callback function that is being fired after a panel was snapped.</dd>
-        <dt>onActivate</dt>
-        <dd>A callback function that is being fired after a panel was activated. (This callback will ALWAYS fire, where onSnapStart
-          & onStapFinish only fire before and after the plugin is actually snapping (animating) towards a panel.)</dd>
+        <dd>(string) The css selector to find the panels. (scoped within the container).</dd>
         <dt>directionThreshold</dt>
-        <dd>An integer specifying the amount of pixels required to scroll before the plugin detects a direction and snaps to
-          the next panel.</dd>
-        <dt>slideSpeed</dt>
-        <dd>The amount of miliseconds in which the plugin snaps to the desired panel.</dd>
+        <dd>(interger) The amount of pixels required to scroll before the plugin detects a direction and snaps to the next panel.</dd>
         <dt>delay</dt>
-        <dd>An integer representing the delay (in milliseconds) before snapping to a panel.</dd>
+        <dd>(integer) The amount of miliseconds the plugin pauzes before snapping to a panel.</dd>
+        <dt>slideSpeed</dt>
+        <dd>(integer) The amount of miliseconds in which the plugin snaps to the desired panel.</dd>
         <dt>easing</dt>
-        <dd>The jQuery easing animation to use.</dd>
-        <dt>offset</dt>
-        <dd>An integer specifying the number of pixels to offset when snapping to a panel. (Useful when a fixed position menu
-          is displayed at the top of the page)</dd>
-        <dt>navigation</dt>
-        <dd>An object containing all the settings for next/prev navigation through buttons or keys.</dd>
-        <dt>navigation.keys</dt>
-        <dd>An object containing nextKey and prevKey.</dd>
-        <dt>navigation.keys.nextKey</dt>
-        <dd>The keycode which triggers the navigation to the next panel.</dd>
-        <dt>navigation.keys.prevKey</dt>
-        <dd>The keycode which triggers the navigation to the previous panel.</dd>
-        <dt>navigation.buttons</dt>
-        <dd>An object containing $nextButton and $prevButton.</dd>
-        <dt>navigation.buttons.$nextButton</dt>
-        <dd>A jQuery Object to bind a click-event to to trigger the navigation to the next panel.</dd>
-        <dt>navigation.buttons.$prevButton</dt>
-        <dd>A jQuery Object to bind a click-event to to trigger the navigation to the previous panel.</dd>
-        <dt>navigation.wrapAround</dt>
-        <dd>Boolean telling the plugin wether or not next/prev navigation should wrap around the beginning and end of the panelset.
-        </dd>
+        <dd>(function) An easing function specificing the snapping motion.</dd>
       </dl>
-    </section>
-
-    <section class="menu_demo">
-      <h1>
-        Menus
-      </h1>
-      <div class="menu">
-        <button data-panel="first">
-          First panel
-        </button>
-        <button data-panel="second" class="active">
-          Second panel
-        </button>
-        <button data-panel="third">
-          Third panel
-        </button>
-        <p>
-          Note the `data-panel` attributes on the links and the panels. This way the plugin knows which link matches to which panel.
-        </p>
-      </div>
-      <div class="panels">
-        <section data-panel="first">
-          <h1>First</h1>
-        </section>
-        <section data-panel="second">
-          <h1>Second</h1>
-        </section>
-        <section data-panel="third">
-          <h1>Third</h1>
-        </section>
-      </div>
-    </section>
-
-    <section class="keyboard_demo">
-      <h1>
-        Keyboard
-      </h1>
-      <div class="panels">
-        <section>
-          <h1>First</h1>
-        </section>
-        <section>
-          <h1>Second</h1>
-        </section>
-        <section>
-          <h1>Third</h1>
-        </section>
-      </div>
-      <div class="log">
-        <h2>Try using the left & right keys to navigate through these panels.</h2>
-      </div>
-    </section>
-
-    <section class="button_demo">
-      <h1>
-        Next/Prev Buttons
-      </h1>
-      <div class="menu">
-        <button class="prev">
-          Previous
-        </button>
-        <button class="next">
-          Next
-        </button>
-      </div>
-      <div class="panels">
-        <section>
-          <h1>First</h1>
-        </section>
-        <section>
-          <h1>Second</h1>
-        </section>
-        <section>
-          <h1>Third</h1>
-        </section>
-      </div>
-    </section>
-
-    <section class="callback_demo">
-      <h1>
-        Callbacks
-      </h1>
-      <div class="panels">
-        <section>
-          <h1>First</h1>
-        </section>
-        <section>
-          <h1>Second</h1>
-        </section>
-        <section>
-          <h1>Third</h1>
-        </section>
-      </div>
-      <div class="log">
-        <h2>Log:</h2>
-      </div>
     </section>
 
     <section class="event_demo">
       <h1>
         Events
       </h1>
-      <div class="panels">
-        <section>
-          <h1>First</h1>
-        </section>
-        <section>
-          <h1>Second</h1>
-        </section>
-        <section>
-          <h1>Third</h1>
-        </section>
-      </div>
-      <div class="log">
-        <h2>Log:</h2>
-      </div>
-    </section>
-
-    <section class="offset_demo">
-      <h1>
-        Offset
-      </h1>
-      <div class="panels offset">
-        <header>First Section Header</header>
-        <section>
-          <h1>First</h1>
-        </section>
-        <header>Second Section Header</header>
-        <section>
-          <h1>Second</h1>
-        </section>
-        <header>Third Section Header</header>
-        <section>
-          <h1>Third</h1>
-        </section>
+      <div class="group">
+        <div class="panels">
+          <section>
+            <h1>First</h1>
+          </section>
+          <section>
+            <h1>Second</h1>
+          </section>
+          <section>
+            <h1>Third</h1>
+          </section>
+        </div>
+        <div class="aside">
+        </div>
       </div>
     </section>
 
@@ -288,19 +120,24 @@
       <h1>
         Large panels
       </h1>
-      <div class="panels large">
-        <section>
-          <h1>First</h1>
-        </section>
-        <section>
-          <h1>Second</h1>
-        </section>
-        <section>
-          <h1>Third</h1>
-        </section>
-      </div>
-      <div class="log">
-        <h2>Large panels will snap to the top when scrolling down, and snap to their bottom when scrolling up.</h2>
+      <div class="group">
+        <div class="panels large">
+          <section>
+            <h1>First</h1>
+          </section>
+          <section>
+            <h1>Second</h1>
+          </section>
+          <section>
+            <h1>Third</h1>
+          </section>
+        </div>
+        <div class="aside">
+          <p>
+            When a panel is larger than the viewport, PanelSnap will snap to the top of a panel when scrolling down, and snap to it's
+            bottom when scrolling up.
+          </p>
+        </div>
       </div>
     </section>
 
@@ -308,7 +145,8 @@
       <h1>
         Manual snapping
       </h1>
-      <pre class="with-side">$('#mylink').on('click', function() {
+      <div class="group">
+        <pre class="with-side">$('#mylink').on('click', function() {
   $('.container').panelSnap('snapTo', 'next');
 });
 
@@ -316,13 +154,14 @@ $('#mylink').on('click', function() {
   var $target = $('.container > .panel_two');
   $('.container').panelSnap('snapToPanel', $target);
 });</pre>
-      <div class="log">
-        <p>
-          The `snapTo` method allows for navigating through panels with the following commands: `next`, `prev`, `first` & `last`.
-        </p>
-        <p>
-          The direct `snapToPanel` method snaps to a given target panel. It accepts a jQuery element that's an actual panel.
-        </p>
+        <div class="aside">
+          <p>
+            The `snapTo` method allows for navigating through panels with the following commands: `next`, `prev`, `first` & `last`.
+          </p>
+          <p>
+            The direct `snapToPanel` method snaps to a given target panel. It accepts a jQuery element that's an actual panel.
+          </p>
+        </div>
       </div>
     </section>
 

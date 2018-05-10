@@ -1,5 +1,9 @@
-var instance = new PanelSnap();
+var main = new PanelSnap();
 
-var instance2 = new PanelSnap({
-  container: document.querySelector('.menu_demo .panels')
+var event_demo = new PanelSnap({
+  container: document.querySelector('.event_demo .panels')
+});
+
+var large_demo = new PanelSnap({
+  container: document.querySelector('.large_demo .panels')
 });

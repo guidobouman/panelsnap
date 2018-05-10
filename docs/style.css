@@ -8,9 +8,13 @@
   outline: 3px solid #ffffff;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
-  overflow-x: hidden;
   color: #ffffff;
   font-family: 'Lato';
   font-weight: 100;
@@ -21,17 +25,25 @@ body {
 
 @media screen and (max-width: 768px) {
   body {
-    font-size: 16px;
+    font-size: 20px;
   }
 }
 
 section {
+  display: flex;
+  flex-direction: column;
   position: relative;
   overflow: hidden;
   padding: 50px;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background: #1abc9c;
+}
+
+@media screen and (max-width: 768px) {
+  section {
+    padding: 25px;
+  }
 }
 
 section:nth-child(2n) {
@@ -40,7 +52,7 @@ section:nth-child(2n) {
 
 section section {
   background: #f1c40f;
-  height: 100%;
+  min-height: 100%;
 }
 
 section section:nth-child(2n) {
@@ -49,17 +61,6 @@ section section:nth-child(2n) {
 
 .panels.large section {
   height: 150%;
-}
-
-.panels.offset section {
-  height: calc(100% - 85px);
-}
-
-.panels.offset header {
-  height: 85px;
-  padding: 0 50px;
-  line-height: 85px;
-  background: #f1c40f;
 }
 
 section .explanation,
@@ -73,8 +74,8 @@ section:nth-child(2n) pre {
 }
 
 section.introduction {
-  text-align: center;
-  display: table;
+  align-items: center;
+  justify-content: center;
 
   background: none;
 }
@@ -105,14 +106,17 @@ section.introduction:after {
 }
 
 section.introduction .center {
-  display: table-cell;
-  vertical-align: middle;
+  text-align: center;
 }
 
 section.introduction .center p {
   margin-left: auto;
   margin-right: auto;
   max-width: 900px;
+}
+
+section.introduction .center p a {
+  word-break: break-all;
 }
 
 section.introduction .bottom {
@@ -142,7 +146,9 @@ section.introduction .bottom:after {
   transform: rotate(45deg);
 }
 
+section.options,
 section.options_explained {
+  min-height: 100vh;
   height: auto;
 }
 
@@ -150,7 +156,13 @@ h1 {
   font-weight: inherit;
   text-transform: uppercase;
   font-size: 300%;
-  margin: 0;
+  margin: 0 0 25px;
+}
+
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 200%;
+  }
 }
 
 h2 {
@@ -190,44 +202,49 @@ button.disabled {
   background: #7f8c8d;
 }
 
+.group {
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  margin: -25px;
+}
+
+.group > * {
+  margin: 25px;
+}
+
 .panels,
-.log,
-.menu,
 pre {
-  position: absolute;
-  top: 200px;
-  bottom: 50px;
-  right: 50px;
-  left: 400px;
-  overflow: scroll;
+  flex-grow: 99999;
+  flex-basis: 300px;
 }
 
-.log,
-.menu {
-  right: auto;
-  left: 50px;
-  width: 300px;
-}
-
-pre:not(.with-side) {
-  left: 50px;
+.panels {
+  overflow: auto;
 }
 
 .explanation,
 pre {
+  margin: 0;
+  overflow-x: auto;
   padding: 50px;
 }
 
+@media screen and (max-width: 768px) {
+  .explanation,
+  pre {
+    padding: 25px;
+  }
+}
+
+.explanation dt,
 pre {
-  font-size: 65%;
+  font-size: 80%;
+  font-family: Ubunutu Mono, monospace;
 }
 
 .explanation {
-  margin: 64px 0 0;
-}
-
-.explanation dt {
-  font-family: monospace;
+  flex-grow: 1;
 }
 
 .explanation dt:after {
@@ -235,5 +252,22 @@ pre {
 }
 
 .explanation dd {
-  margin: 0 0 25px;
+  margin: 0 0 0 10px;
+}
+
+.explanation dd + dt {
+  margin: 25px 0 0;
+}
+
+.aside {
+  flex-grow: 1;
+  flex-basis: 300px;
+}
+
+.aside > *:first-child {
+  margin-top: 0;
+}
+
+.aside > *:last-child {
+  margin-bottom: 0;
 }
