@@ -60,6 +60,14 @@ export default class PanelSnap {
     this.scrollEventContainer.addEventListener('scroll', this.onScroll.bind(this), passiveIsSupported && { passive: true });
   }
 
+  enable() {
+    this.isEnabled = true;
+  }
+
+  disable() {
+    this.isEnabled = false;
+  }
+
   on(name, handler) {
     const currentHandlers = this.events[name] || [];
     this.events[name] = [...currentHandlers, handler];
@@ -139,11 +147,11 @@ export default class PanelSnap {
   }
 
   snapToPanel(panel, toBottom = false) {
+    this.activatePanel(panel);
+
     if (!this.isEnabled) {
       return;
     }
-
-    this.activatePanel(panel);
 
     if (this.animation) {
       this.animation.stop();
