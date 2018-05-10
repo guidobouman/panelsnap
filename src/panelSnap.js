@@ -14,7 +14,6 @@ let INSTANCE_COUNTER = 0;
 const defaultOptions = {
   container: document.body,
   panelSelector: '> section',
-  offset: 0,
   directionThreshold: 50,
   delay: 0,
   slideSpeed: 200,
