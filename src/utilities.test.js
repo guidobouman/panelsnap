@@ -169,21 +169,22 @@ describe('getTargetScrollTop', () => {
 });
 
 describe('getElementsInContainerViewport', () => {
-  function getElements(scrollTop, amountOfElements, elementHeight) {
+  function getElements(scrollOffset, amountOfElements, elementSize, horizontal = false) {
     return Array.from(Array(amountOfElements), (_, i) => {
       const target = document.createElement('div');
+      const elementOffset = (i * elementSize) - scrollOffset;
       target.getBoundingClientRect = () => ({
-        top: (i * elementHeight) - scrollTop,
-        bottom: ((i + 1) * elementHeight) - scrollTop,
-        left: 0,
-        right: SCREEN_WIDTH,
+        top: horizontal ? 0 : elementOffset,
+        bottom: horizontal ? SCREEN_HEIGHT : elementOffset + elementSize,
+        left: horizontal ? elementOffset : 0,
+        right: horizontal ? elementOffset + elementSize : SCREEN_WIDTH,
       });
 
       return target;
     });
   }
 
-  test('finds elements in body viewport', () => {
+  test('finds vertical elements in body viewport', () => {
     const test1 = getElementsInContainerViewport(document.body, getElements(0, 5, 300));
     expect(test1).toHaveLength(2);
 
@@ -194,12 +195,34 @@ describe('getElementsInContainerViewport', () => {
     expect(test3).toHaveLength(1);
   });
 
-  test('finds elements in non-body viewport', () => {
+  test('finds horizontal elements in body viewport', () => {
+    const test1 = getElementsInContainerViewport(document.body, getElements(0, 5, 400, true));
+    expect(test1).toHaveLength(2);
+
+    const test2 = getElementsInContainerViewport(document.body, getElements(200, 5, 400, true));
+    expect(test2).toHaveLength(3);
+
+    const test3 = getElementsInContainerViewport(document.body, getElements(800, 3, 400, true));
+    expect(test3).toHaveLength(1);
+  });
+
+  test('finds vertical elements in non-body viewport', () => {
     const container = getElements(0, 1, 400)[0];
 
     const test1 = getElementsInContainerViewport(container, getElements(0, 5, 300));
     expect(test1).toHaveLength(2);
+
     const test2 = getElementsInContainerViewport(container, getElements(0, 5, 400));
+    expect(test2).toHaveLength(1);
+  });
+
+  test('finds horizontal elements in non-body viewport', () => {
+    const container = getElements(0, 1, 400, true)[0];
+
+    const test1 = getElementsInContainerViewport(container, getElements(0, 5, 300, true));
+    expect(test1).toHaveLength(2);
+
+    const test2 = getElementsInContainerViewport(container, getElements(0, 5, 400, true));
     expect(test2).toHaveLength(1);
   });
 });
