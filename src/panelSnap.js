@@ -47,8 +47,7 @@ export default class PanelSnap {
     this.isInteracting = false;
     this.scrollTimeout = null;
     this.animation = null;
-    this.currentScrollOffset = this.scrollContainer.scrollTop;
-    this.targetScrollOffset = this.currentScrollOffset;
+    this.currentScrollTop = this.scrollContainer.scrollTop;
 
     this.scrollEventContainer.addEventListener('keydown', this.onInteractStart.bind(this), passiveIsSupported && { passive: true });
     this.scrollEventContainer.addEventListener('keyup', this.onInteractStop.bind(this), passiveIsSupported && { passive: true });
@@ -104,7 +103,7 @@ export default class PanelSnap {
       return;
     }
 
-    if (this.currentScrollOffset === this.scrollContainer.scrollTop) {
+    if (this.currentScrollTop === this.scrollContainer.scrollTop) {
       return;
     }
 
@@ -114,8 +113,8 @@ export default class PanelSnap {
   }
 
   findSnapTarget() {
-    const delta = this.scrollContainer.scrollTop - this.currentScrollOffset;
-    this.currentScrollOffset = this.scrollContainer.scrollTop;
+    const deltaY = this.scrollContainer.scrollTop - this.currentScrollTop;
+    this.currentScrollTop = this.scrollContainer.scrollTop;
 
     const panelsInViewport = getElementsInContainerViewport(this.container, this.panelList);
     if (panelsInViewport.length === 0) {
@@ -123,13 +122,13 @@ export default class PanelSnap {
     }
 
     if (panelsInViewport.length > 1) {
-      if (Math.abs(delta) < this.options.directionThreshold && this.activePanel) {
-        this.snapToPanel(this.activePanel, delta > 0);
+      if (Math.abs(deltaY) < this.options.directionThreshold && this.activePanel) {
+        this.snapToPanel(this.activePanel, deltaY > 0);
         return;
       }
 
-      const targetIndex = delta > 0 ? 1 : panelsInViewport.length - 2;
-      this.snapToPanel(panelsInViewport[targetIndex], delta < 0);
+      const targetIndex = deltaY > 0 ? 1 : panelsInViewport.length - 2;
+      this.snapToPanel(panelsInViewport[targetIndex], deltaY < 0);
       return;
     }
 
@@ -142,7 +141,7 @@ export default class PanelSnap {
     // TODO: Only one partial panel in viewport, add support for space between panels?
     // eslint-disable-next-line no-console
     console.error('PanelSnap does not support space between panels, snapping back.');
-    this.snapToPanel(visiblePanel, delta > 0);
+    this.snapToPanel(visiblePanel, deltaY > 0);
   }
 
   snapToPanel(panel, toBottom = false) {
@@ -184,7 +183,7 @@ export default class PanelSnap {
   }
 
   clearAnimation() {
-    this.currentScrollOffset = this.scrollContainer.scrollTop;
+    this.currentScrollTop = this.scrollContainer.scrollTop;
     this.animation = null;
   }
 
