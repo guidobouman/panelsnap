@@ -17,7 +17,7 @@ const defaultOptions = {
   panelSelector: '> section',
   directionThreshold: 50,
   delay: 0,
-  slideSpeed: 200,
+  duration: 300,
   easing: t => t,
 };
 
@@ -176,12 +176,14 @@ export default class PanelSnap {
 
     this.targetScrollOffset = getTargetScrollOffset(this.container, panel, toBottom, toRight);
 
-    const start = 0;
-    const end = TWEEN_MAX_VALUE;
-    const duration = 300;
+    this.animation = new Tweezer({
+      start: 0,
+      end: TWEEN_MAX_VALUE,
+      duration: this.options.duration,
+    });
 
-    this.animation = new Tweezer({ start, end, duration });
     this.animation.on('tick', this.animationTick.bind(this));
+
     this.animation.on('done', () => {
       this.emit('snapStop', panel);
       this.clearAnimation();
