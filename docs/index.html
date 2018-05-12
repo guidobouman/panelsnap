@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="utf-8">
-    <title>jQuery.panelSnap Plugin</title>
+    <title>PanelSnap</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
 
@@ -26,7 +26,7 @@
           Each following panel will explain a specific feature of the panelSnap plugin.
         </p>
         <p>
-          <a href="https://github.com/guidobouman/jquery-panelsnap">https://github.com/guidobouman/jquery-panelsnap</a>
+          <a href="https://github.com/guidobouman/panelsnap">https://github.com/guidobouman/panelsnap</a>
         </p>
       </div>
       <div class="bottom">
@@ -157,30 +157,6 @@
         <section>
           <h1>Third</h1>
         </section>
-      </div>
-    </section>
-
-    <section class="manual_demo">
-      <h1>
-        Manual snapping
-      </h1>
-      <div class="group">
-        <pre class="with-side">$('#mylink').on('click', function() {
-  $('.container').panelSnap('snapTo', 'next');
-});
-
-$('#mylink').on('click', function() {
-  var $target = $('.container > .panel_two');
-  $('.container').panelSnap('snapToPanel', $target);
-});</pre>
-        <div class="aside">
-          <p>
-            The `snapTo` method allows for navigating through panels with the following commands: `next`, `prev`, `first` & `last`.
-          </p>
-          <p>
-            The direct `snapToPanel` method snaps to a given target panel. It accepts a jQuery element that's an actual panel.
-          </p>
-        </div>
       </div>
     </section>
 
