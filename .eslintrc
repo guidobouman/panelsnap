@@ -1,8 +1,15 @@
 {
-  "extends": "airbnb-base/legacy",
+  "extends": "airbnb-base",
+  "plugins": ["jest"],
+  "env": {
+    "browser": true,
+    "jest/globals": true
+  },
   "rules": {
     "func-names": 0,
-    "vars-on-top": 0,
-    "no-param-reassign": 0
+    "no-param-reassign": 0,
+    "no-mixed-operators": [2, {
+      "allowSamePrecedence": true
+    }]
   }
 }

@@ -1,23 +1,20 @@
 {
-  "name": "jquery-panelsnap",
+  "name": "panelsnap",
   "version": "0.0.0-development",
-  "description": "jQuery plugin that provides snapping functionality to a set of panels within your interface.",
-  "main": "jquery.panelSnap.js",
-  "scripts": {
-    "lint": "eslint .",
-    "test": "ava",
-    "semantic-release": "semantic-release"
-  },
+  "description": "A JavaScript plugin that provides snapping functionality to a set of panels within your interface.",
+  "main": "lib/panelSnap.cjs.js",
+  "browser": "lib/panelSnap.umd.js",
+  "module": "lib/panelSnap.esm.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/guidobouman/jquery-panelsnap"
+    "url": "https://github.com/guidobouman/panelsnap"
   },
   "author": "Guido Bouman",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/guidobouman/jquery-panelsnap/issues"
+    "url": "https://github.com/guidobouman/panelsnap/issues"
   },
-  "homepage": "https://github.com/guidobouman/jquery-panelsnap",
+  "homepage": "https://github.com/guidobouman/panelsnap",
   "keywords": [
     "snap",
     "snapping",
@@ -28,15 +25,39 @@
     "scroll",
     "scrolling"
   ],
-  "devDependencies": {
-    "ava": "^0.22.0",
-    "cz-conventional-changelog": "^2.1.0",
-    "eslint": "^4.8.0",
-    "eslint-config-airbnb-base": "^12.0.2",
-    "eslint-plugin-import": "^2.7.0",
-    "semantic-release": "^12.2.2"
+  "dependencies": {
+    "tweezer.js": "^1.4.0"
   },
-  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.46",
+    "@babel/preset-env": "^7.0.0-beta.46",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^22.4.3",
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.1.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jest": "^21.15.1",
+    "jest": "^22.4.3",
+    "rollup": "^0.57.1",
+    "rollup-plugin-babel": "^4.0.0-beta.4",
+    "rollup-plugin-license": "^0.6.0",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-uglify": "^3.0.0",
+    "semantic-release": "^15.1.7"
+  },
+  "scripts": {
+    "dev": "rollup -c -w",
+    "build": "rollup -c",
+    "lint": "eslint .",
+    "test": "jest --coverage",
+    "semantic-release": "semantic-release",
+    "commit": "git-cz"
+  },
+  "browserslist": [
+    "> 0.25%"
+  ],
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
