@@ -41,9 +41,11 @@
       <pre>&lt;!doctype html&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;script src="/path/to/panelSnap.js"&gt;&lt;/script&gt;
+    &lt;script src="/path/to/panelSnap.js" defer&gt;&lt;/script&gt;
     &lt;script&gt;
-        new PanelSnap();
+        document.addEventListener("DOMContentLoaded", function() {
+          new PanelSnap();
+        });
     &lt;/script&gt;
   &lt;/head&gt;
   &lt;body&gt;
