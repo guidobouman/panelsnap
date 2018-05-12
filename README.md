@@ -1,5 +1,7 @@
 # PanelSnap
 [![Build Status](https://travis-ci.org/guidobouman/panelsnap.svg?branch=develop)](https://travis-ci.org/guidobouman/panelsnap)
+[![npm](https://img.shields.io/npm/v/panelsnap.svg)](https://www.npmjs.com/package/panelsnap)
+
 
 A JavaScript plugin that provides snapping functionality to a set of panels within your interface.
 
