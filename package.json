@@ -2,9 +2,9 @@
   "name": "jquery-panelsnap",
   "version": "0.0.0-development",
   "description": "jQuery plugin that provides snapping functionality to a set of panels within your interface.",
-  "main": "lib/jquery.panelSnap.cjs.js",
-  "browser": "lib/jquery.panelSnap.umd.js",
-  "module": "lib/jquery.panelSnap.esm.js",
+  "main": "lib/panelSnap.cjs.js",
+  "browser": "lib/panelSnap.umd.js",
+  "module": "lib/panelSnap.esm.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/guidobouman/jquery-panelsnap"

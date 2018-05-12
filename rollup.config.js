@@ -5,7 +5,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import pkg from './package.json';
 
 const banner = `/**
- * panelSnap.js v${pkg.version}
+ * PanelSnap.js v${pkg.version}
  * Copyright (c) 2013-present, Guido Bouman
  *
  * This source code is licensed under the MIT license found in the
@@ -24,20 +24,10 @@ const plugins = [
 
 export default [
   {
-    input: 'src/jquery.panelSnap.js',
+    input: 'src/panelSnap.js',
     output: [
       { file: pkg.main, format: 'cjs' },
       { file: pkg.module, format: 'es' },
-      { file: pkg.browser, format: 'umd' },
-      { file: 'docs/jquery.panelSnap.js', format: 'umd' },
-    ],
-    plugins,
-  },
-  {
-    input: 'src/panelSnap.js',
-    output: [
-      { file: 'lib/panelSnap.cjs.js', format: 'cjs' },
-      { file: 'lib/panelSnap.esm.js', format: 'es' },
     ],
     external: ['tweezer.js'],
     plugins,
@@ -45,7 +35,7 @@ export default [
   {
     input: 'src/panelSnap.js',
     output: [
-      { file: 'lib/panelSnap.umd.js', format: 'umd', name: 'PanelSnap' },
+      { file: pkg.browser, format: 'umd', name: 'PanelSnap' },
       { file: 'docs/panelSnap.js', format: 'umd', name: 'PanelSnap' },
     ],
     plugins: [...plugins, resolve()],
