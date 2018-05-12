@@ -10,6 +10,7 @@ import {
 } from './utilities';
 
 let INSTANCE_COUNTER = 0;
+const TWEEN_MAX_VALUE = 10000;
 
 const defaultOptions = {
   container: document.body,
@@ -47,7 +48,14 @@ export default class PanelSnap {
     this.isInteracting = false;
     this.scrollTimeout = null;
     this.animation = null;
-    this.currentScrollTop = this.scrollContainer.scrollTop;
+    this.currentScrollOffset = {
+      top: this.scrollContainer.scrollTop,
+      left: this.scrollContainer.scrollLeft,
+    };
+    this.targetScrollOffset = {
+      top: 0,
+      left: 0,
+    };
 
     this.scrollEventContainer.addEventListener('keydown', this.onInteractStart.bind(this), passiveIsSupported && { passive: true });
     this.scrollEventContainer.addEventListener('keyup', this.onInteractStop.bind(this), passiveIsSupported && { passive: true });
@@ -103,7 +111,10 @@ export default class PanelSnap {
       return;
     }
 
-    if (this.currentScrollTop === this.scrollContainer.scrollTop) {
+    if (
+      this.currentScrollOffset.top === this.scrollContainer.scrollTop
+      && this.currentScrollOffset.left === this.scrollContainer.scrollLeft
+    ) {
       return;
     }
 
@@ -113,8 +124,12 @@ export default class PanelSnap {
   }
 
   findSnapTarget() {
-    const deltaY = this.scrollContainer.scrollTop - this.currentScrollTop;
-    this.currentScrollTop = this.scrollContainer.scrollTop;
+    const deltaY = this.scrollContainer.scrollTop - this.currentScrollOffset.top;
+    const deltaX = this.scrollContainer.scrollLeft - this.currentScrollOffset.left;
+    this.currentScrollOffset = {
+      top: this.scrollContainer.scrollTop,
+      left: this.scrollContainer.scrollLeft,
+    };
 
     const panelsInViewport = getElementsInContainerViewport(this.container, this.panelList);
     if (panelsInViewport.length === 0) {
@@ -122,13 +137,17 @@ export default class PanelSnap {
     }
 
     if (panelsInViewport.length > 1) {
-      if (Math.abs(deltaY) < this.options.directionThreshold && this.activePanel) {
-        this.snapToPanel(this.activePanel, deltaY > 0);
+      if (
+        Math.abs(deltaY) < this.options.directionThreshold
+        && Math.abs(deltaX) < this.options.directionThreshold
+        && this.activePanel
+      ) {
+        this.snapToPanel(this.activePanel, deltaY > 0, deltaX > 0);
         return;
       }
 
-      const targetIndex = deltaY > 0 ? 1 : panelsInViewport.length - 2;
-      this.snapToPanel(panelsInViewport[targetIndex], deltaY < 0);
+      const targetIndex = deltaY > 0 || deltaX > 0 ? 1 : panelsInViewport.length - 2;
+      this.snapToPanel(panelsInViewport[targetIndex], deltaY < 0, deltaX < 0);
       return;
     }
 
@@ -141,10 +160,10 @@ export default class PanelSnap {
     // TODO: Only one partial panel in viewport, add support for space between panels?
     // eslint-disable-next-line no-console
     console.error('PanelSnap does not support space between panels, snapping back.');
-    this.snapToPanel(visiblePanel, deltaY > 0);
+    this.snapToPanel(visiblePanel, deltaY > 0, deltaX > 0);
   }
 
-  snapToPanel(panel, toBottom = false) {
+  snapToPanel(panel, toBottom = false, toRight = false) {
     this.activatePanel(panel);
 
     if (!this.isEnabled) {
@@ -155,16 +174,14 @@ export default class PanelSnap {
       this.animation.stop();
     }
 
-    const targetScrollOffset = getTargetScrollOffset(this.container, panel, toBottom);
-    const start = this.scrollContainer.scrollTop;
-    const end = targetScrollOffset.top;
+    this.targetScrollOffset = getTargetScrollOffset(this.container, panel, toBottom, toRight);
+
+    const start = 0;
+    const end = TWEEN_MAX_VALUE;
     const duration = 300;
 
     this.animation = new Tweezer({ start, end, duration });
-
-    this.animation.on('tick', (value) => {
-      this.scrollContainer.scrollTop = value;
-    });
+    this.animation.on('tick', this.animationTick.bind(this));
     this.animation.on('done', () => {
       this.emit('snapStop', panel);
       this.clearAnimation();
@@ -172,6 +189,16 @@ export default class PanelSnap {
 
     this.emit('snapStart', panel);
     this.animation.begin();
+  }
+
+  animationTick(value) {
+    const scrollTopDelta = this.targetScrollOffset.top - this.currentScrollOffset.top;
+    const scrollTop = this.currentScrollOffset.top + (scrollTopDelta * value / TWEEN_MAX_VALUE);
+    this.scrollContainer.scrollTop = scrollTop;
+
+    const scrollLeftDelta = this.targetScrollOffset.left - this.currentScrollOffset.left;
+    const scrollLeft = this.currentScrollOffset.left + (scrollLeftDelta * value / TWEEN_MAX_VALUE);
+    this.scrollContainer.scrollLeft = scrollLeft;
   }
 
   stopAnimation() {
@@ -184,7 +211,14 @@ export default class PanelSnap {
   }
 
   clearAnimation() {
-    this.currentScrollTop = this.scrollContainer.scrollTop;
+    this.currentScrollOffset = {
+      top: this.scrollContainer.scrollTop,
+      left: this.scrollContainer.scrollLeft,
+    };
+    this.targetScrollOffset = {
+      top: 0,
+      left: 0,
+    };
     this.animation = null;
   }
 

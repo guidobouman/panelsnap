@@ -63,6 +63,18 @@ section section:nth-child(2n) {
   height: 150%;
 }
 
+.panels.horizontal {
+  display: flex;
+}
+
+.panels.horizontal section {
+  min-width: 100%;
+}
+
+.panels.horizontal section:nth-of-type(2) {
+  min-width: 150%;
+}
+
 section .explanation,
 section pre {
   background: #16a085;
