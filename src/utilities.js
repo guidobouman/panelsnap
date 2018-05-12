@@ -30,12 +30,19 @@ function getContainerRect(container) {
   } : container.getBoundingClientRect();
 }
 
-export function getTargetScrollTop(container, element, toBottom = false) {
+export function getTargetScrollOffset(container, element, toBottom = false, toRight = false) {
   const containerRect = getContainerRect(container);
   const elementRect = element.getBoundingClientRect();
-  const scrollOffset = elementRect.top - containerRect.top;
-  const offsetCorrection = toBottom ? elementRect.height - containerRect.height : 0;
-  return scrollOffset + offsetCorrection + getScrollingElement(container).scrollTop;
+  const scrollTop = elementRect.top - containerRect.top;
+  const scrollLeft = elementRect.left - containerRect.left;
+  const topCorrection = toBottom ? elementRect.height - containerRect.height : 0;
+  const leftCorrection = toRight ? elementRect.width - containerRect.width : 0;
+  const scrollingElement = getScrollingElement(container);
+
+  return {
+    top: scrollTop + topCorrection + scrollingElement.scrollTop,
+    left: scrollLeft + leftCorrection + scrollingElement.scrollLeft,
+  };
 }
 
 export function getElementsInContainerViewport(container, elementList) {

@@ -3,7 +3,7 @@ import Tweezer from 'tweezer.js';
 import {
   getScrollingElement,
   getScrollEventContainer,
-  getTargetScrollTop,
+  getTargetScrollOffset,
   getElementsInContainerViewport,
   elementFillsContainer,
   passiveIsSupported,
@@ -155,8 +155,9 @@ export default class PanelSnap {
       this.animation.stop();
     }
 
+    const targetScrollOffset = getTargetScrollOffset(this.container, panel, toBottom);
     const start = this.scrollContainer.scrollTop;
-    const end = getTargetScrollTop(this.container, panel, toBottom);
+    const end = targetScrollOffset.top;
     const duration = 300;
 
     this.animation = new Tweezer({ start, end, duration });
