@@ -56,6 +56,7 @@ export default class PanelSnap {
     this.scrollEventContainer.addEventListener('touchstart', this.onInteractStart.bind(this), passiveIsSupported && { passive: true });
     this.scrollEventContainer.addEventListener('touchend', this.onInteractStop.bind(this), passiveIsSupported && { passive: true });
     this.scrollEventContainer.addEventListener('scroll', this.onScroll.bind(this), passiveIsSupported && { passive: true });
+    this.scrollEventContainer.addEventListener('wheel', this.onInteract.bind(this), passiveIsSupported && { passive: true });
   }
 
   enable() {
@@ -92,21 +93,14 @@ export default class PanelSnap {
   }
 
   onInteract() {
-    clearTimeout(this.scrollTimeout);
     this.stopAnimation();
+    this.onScroll();
   }
 
   onScroll() {
     clearTimeout(this.scrollTimeout);
 
     if (this.isInteracting || this.animation) {
-      return;
-    }
-
-    if (
-      this.currentScrollOffset.top === this.scrollContainer.scrollTop
-      && this.currentScrollOffset.left === this.scrollContainer.scrollLeft
-    ) {
       return;
     }
 
