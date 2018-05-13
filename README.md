@@ -2,14 +2,35 @@
 [![Build Status](https://travis-ci.org/guidobouman/panelsnap.svg?branch=develop)](https://travis-ci.org/guidobouman/panelsnap)
 [![npm](https://img.shields.io/npm/v/panelsnap.svg)](https://www.npmjs.com/package/panelsnap)
 
-
 A JavaScript plugin that provides snapping functionality to a set of panels within your interface.
 
-# Join the discussion
-The future of this project is being discussed at [this GitHub issue](https://github.com/guidobouman/panelsnap/issues/116). Join the discusssion if you have a feature request or any other opinion you want people to know.
+# Installation
+```bash
+npm install panelsnap
+```
+
+```js
+import PanelSnap from 'panelsnap';
+
+const instance = new PanelSnap();
+```
+
+```html
+<body>
+  <section>
+    ...
+  </section>
+  <section>
+    ...
+  </section>
+  <section>
+    ...
+  </section>
+</body>
+```
 
 # Documentation
-Check out the documentation at [http://guidobouman.github.io/panelsnap](http://guidobouman.github.io/panelsnap) or the docs folder for a working demo that explains most of the features present in the plugin.
+Check out the documentation at [http://guidobouman.github.io/panelsnap](http://guidobouman.github.io/panelsnap) or the `docs` folder for a working demo.
 
 # Credits
 - [jellea](https://github.com/jellea) for early feedback and brainpickings.
