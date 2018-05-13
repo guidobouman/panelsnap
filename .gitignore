@@ -2,4 +2,3 @@ node_modules/
 .DS_Store
 coverage/
 lib/
-docs/*panelSnap.js
