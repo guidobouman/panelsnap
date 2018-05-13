@@ -88,7 +88,7 @@ export default class PanelSnap {
 
   onInteractStop() {
     this.isInteracting = false;
-    this.onScroll();
+    this.findSnapTarget();
   }
 
   onInteract() {
