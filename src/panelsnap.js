@@ -47,15 +47,7 @@ export default class PanelSnap {
     this.isEnabled = true;
     this.isInteracting = false;
     this.scrollTimeout = null;
-    this.animation = null;
-    this.currentScrollOffset = {
-      top: this.scrollContainer.scrollTop,
-      left: this.scrollContainer.scrollLeft,
-    };
-    this.targetScrollOffset = {
-      top: 0,
-      left: 0,
-    };
+    this.resetAnimation();
 
     this.scrollEventContainer.addEventListener('keydown', this.onInteractStart.bind(this), passiveIsSupported && { passive: true });
     this.scrollEventContainer.addEventListener('keyup', this.onInteractStop.bind(this), passiveIsSupported && { passive: true });
@@ -64,6 +56,7 @@ export default class PanelSnap {
     this.scrollEventContainer.addEventListener('touchstart', this.onInteractStart.bind(this), passiveIsSupported && { passive: true });
     this.scrollEventContainer.addEventListener('touchend', this.onInteractStop.bind(this), passiveIsSupported && { passive: true });
     this.scrollEventContainer.addEventListener('scroll', this.onScroll.bind(this), passiveIsSupported && { passive: true });
+    this.scrollEventContainer.addEventListener('wheel', this.onInteract.bind(this), passiveIsSupported && { passive: true });
   }
 
   enable() {
@@ -96,25 +89,18 @@ export default class PanelSnap {
 
   onInteractStop() {
     this.isInteracting = false;
-    this.onScroll();
+    this.findSnapTarget();
   }
 
   onInteract() {
-    clearTimeout(this.scrollTimeout);
     this.stopAnimation();
+    this.onScroll();
   }
 
   onScroll() {
     clearTimeout(this.scrollTimeout);
 
     if (this.isInteracting || this.animation) {
-      return;
-    }
-
-    if (
-      this.currentScrollOffset.top === this.scrollContainer.scrollTop
-      && this.currentScrollOffset.left === this.scrollContainer.scrollLeft
-    ) {
       return;
     }
 
@@ -186,7 +172,7 @@ export default class PanelSnap {
 
     this.animation.on('done', () => {
       this.emit('snapStop', panel);
-      this.clearAnimation();
+      this.resetAnimation();
     });
 
     this.emit('snapStart', panel);
@@ -209,10 +195,10 @@ export default class PanelSnap {
     }
 
     this.animation.stop();
-    this.clearAnimation();
+    this.resetAnimation();
   }
 
-  clearAnimation() {
+  resetAnimation() {
     this.currentScrollOffset = {
       top: this.scrollContainer.scrollTop,
       left: this.scrollContainer.scrollLeft,
