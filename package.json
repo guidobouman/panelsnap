@@ -2,9 +2,9 @@
   "name": "panelsnap",
   "version": "0.0.0-development",
   "description": "A JavaScript plugin that provides snapping functionality to a set of panels within your interface.",
-  "main": "lib/panelSnap.cjs.js",
-  "browser": "lib/panelSnap.umd.js",
-  "module": "lib/panelSnap.esm.js",
+  "main": "lib/panelsnap.cjs.js",
+  "browser": "lib/panelsnap.umd.js",
+  "module": "lib/panelsnap.esm.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/guidobouman/panelsnap"

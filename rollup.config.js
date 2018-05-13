@@ -24,7 +24,7 @@ const plugins = [
 
 export default [
   {
-    input: 'src/panelSnap.js',
+    input: 'src/panelsnap.js',
     output: [
       { file: pkg.main, format: 'cjs' },
       { file: pkg.module, format: 'es' },
@@ -33,10 +33,10 @@ export default [
     plugins,
   },
   {
-    input: 'src/panelSnap.js',
+    input: 'src/panelsnap.js',
     output: [
       { file: pkg.browser, format: 'umd', name: 'PanelSnap' },
-      { file: 'docs/panelSnap.js', format: 'umd', name: 'PanelSnap' },
+      { file: 'docs/panelsnap.js', format: 'umd', name: 'PanelSnap' },
     ],
     plugins: [...plugins, resolve()],
   },

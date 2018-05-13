@@ -1,12 +1,12 @@
-import PanelSnap from './panelSnap';
+import PanelSnap from './panelsnap';
 
 describe('Constructor', () => {
-  test('can init panelSnap', () => {
+  test('can init PanelSnap', () => {
     const instance = new PanelSnap();
     expect(instance).toBeInstanceOf(PanelSnap);
   });
 
-  test('prevents duplicate init of panelSnap on the same element', () => {
+  test('prevents duplicate init of PanelSnap on the same element', () => {
     // On default container: body
     expect(() => [
       new PanelSnap(),
