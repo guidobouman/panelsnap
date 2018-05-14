@@ -10,7 +10,11 @@
     <link href="./style.css" rel="stylesheet">
 
     <script src="./panelsnap.js" defer></script>
-    <script src="./scripts.js" defer></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        new PanelSnap();
+      });
+    </script>
   </head>
   <body>
     <section class="introduction">
@@ -95,48 +99,6 @@
       </dl>
     </section>
 
-    <section class="default_demo">
-      <h1>
-        Demo
-      </h1>
-      <div class="group">
-        <div class="panels">
-          <section>
-            <h1>First</h1>
-          </section>
-          <section>
-            <h1>Second</h1>
-          </section>
-          <section>
-            <h1>Third</h1>
-          </section>
-        </div>
-        <div class="aside">
-          <p>
-            PanelSnap can be initialised on any scrolling element. When a panel is larger than it's container, PanelSnap will snap to
-            the top of a panel when scrolling down, and snap to it's bottom when scrolling up.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="horizontal_demo">
-      <h1>
-        Horizontal demo
-      </h1>
-      <div class="panels horizontal">
-        <section>
-          <h1>First</h1>
-        </section>
-        <section>
-          <h1>Second</h1>
-        </section>
-        <section>
-          <h1>Third</h1>
-        </section>
-      </div>
-    </section>
-
     <section class="api">
       <h1>
         API
@@ -159,5 +121,36 @@
           Trigger a snap to a panel. Where panel is one of the panels within the container.
         </dd>
       </dl>
+    </section>
+
+    <section class="default_demo">
+      <h1>
+        Demos
+      </h1>
+      <p>
+        Common usecases are explained through a set of demos.
+      </p>
+      <ul>
+        <li>
+          <a href="./demos/basic">Basic setup</a>
+        </li>
+        <li>
+          <a href="./demos/horizontal">Horizontal scrolling</a>
+
+        </li>
+        <li>
+          <a href="./demos/menu">Interactive menu</a>
+        </li>
+        <li>
+          <a href="./demos/jquery/">jQuery setup</a>
+        </li>
+        <li>
+          <a href="./demos/vue">Vue.js reactivity</a>
+        </li>
+      </ul>
+      <p>
+        These demos can also be found on
+        <a href="https://github.com/guidobouman/panelsnap/tree/develop/docs/demos">GitHub</a>.
+      </p>
   </body>
 </html>
