@@ -104,8 +104,6 @@ export default class PanelSnap {
       return;
     }
 
-    this.stopAnimation();
-
     this.scrollTimeout = setTimeout(this.findSnapTarget.bind(this), 50 + this.options.delay);
   }
 
