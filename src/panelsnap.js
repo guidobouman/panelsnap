@@ -57,6 +57,8 @@ export default class PanelSnap {
     this.scrollEventContainer.addEventListener('touchend', this.onInteractStop.bind(this), passiveIsSupported && { passive: true });
     this.scrollEventContainer.addEventListener('scroll', this.onScroll.bind(this), passiveIsSupported && { passive: true });
     this.scrollEventContainer.addEventListener('wheel', this.onInteract.bind(this), passiveIsSupported && { passive: true });
+
+    this.findSnapTarget();
   }
 
   enable() {
@@ -70,6 +72,10 @@ export default class PanelSnap {
   on(name, handler) {
     const currentHandlers = this.events[name] || [];
     this.events[name] = [...currentHandlers, handler];
+
+    if (name === 'activatePanel') {
+      handler.call(this, this.activePanel);
+    }
   }
 
   off(name, handler) {
@@ -103,8 +109,6 @@ export default class PanelSnap {
     if (this.isInteracting || this.animation) {
       return;
     }
-
-    this.stopAnimation();
 
     this.scrollTimeout = setTimeout(this.findSnapTarget.bind(this), 50 + this.options.delay);
   }

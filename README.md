@@ -30,7 +30,7 @@ const instance = new PanelSnap();
 ```
 
 # Documentation
-Check out the documentation at [http://guidobouman.github.io/panelsnap](http://guidobouman.github.io/panelsnap) or the `docs` folder for a working demo.
+Check out the documentation at [https://panelsnap.com](https://panelsnap.com) or the `docs` folder for a working demo.
 
 # Credits
 - [jellea](https://github.com/jellea) for early feedback and brainpickings.
