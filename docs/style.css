@@ -8,11 +8,6 @@
   outline: 3px solid #000000;
 }
 
-html,
-body {
-  overflow-x: hidden;
-}
-
 body {
   margin: 0;
   color: #000000;
