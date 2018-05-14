@@ -50,17 +50,17 @@ section:nth-child(2n) {
   background: #16a085;
 }
 
-section section {
+.panels section {
   background: #f1c40f;
   min-height: 100%;
 }
 
-section section:nth-child(2n) {
-  background: #f39c12;
+.panels section:nth-child(2) {
+  min-height: 150%;
 }
 
-.panels.large section {
-  height: 150%;
+.panels section:nth-child(2n) {
+  background: #f39c12;
 }
 
 .panels.horizontal {
@@ -68,10 +68,11 @@ section section:nth-child(2n) {
 }
 
 .panels.horizontal section {
+  min-height: 0;
   min-width: 100%;
 }
 
-.panels.horizontal section:nth-of-type(2) {
+.panels.horizontal section:nth-child(2) {
   min-width: 150%;
 }
 
