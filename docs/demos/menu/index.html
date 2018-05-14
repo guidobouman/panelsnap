@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <title>PanelSnap - menu demo</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300" rel="stylesheet">
+    <link href="../../style.css" rel="stylesheet">
+
+    <script src="../../panelsnap.js" defer></script>
+    <script>
+      var menu, menuItems, panelSnapInstance;
+
+      document.addEventListener("DOMContentLoaded", function () {
+        menu = document.querySelector('.menu');
+        menuItems = menu.querySelectorAll('button');
+
+        panelSnapInstance = new PanelSnap();
+        panelSnapInstance.on('activatePanel', activateMenuItem);
+
+        menuItems.forEach(function (menuItem) {
+          menuItem.addEventListener('click', onButtonClick);
+        })
+      });
+
+      function activateMenuItem(panel) {
+        menuItems.forEach(function (menuItem) {
+          menuItem.classList.remove('active');
+        });
+
+        var panelName = panel.getAttribute('data-panel')
+        var menuItem = menu.querySelector('button[data-panel="' + panelName + '"]');
+        menuItem.classList.add('active');
+      }
+
+      function onButtonClick(e) {
+        var panelName = e.target.getAttribute('data-panel')
+        var panel = document.querySelector('section[data-panel="' + panelName + '"]');
+        panelSnapInstance.snapToPanel(panel);
+      }
+    </script>
+
+    <style>
+      section:nth-child(2) {
+        min-height: calc(100vh + 200px);
+      }
+
+      .menu {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 10px;
+        text-align: center;
+        z-index: 1;
+        display: flex;
+        list-style: none;
+        justify-content: center;
+      }
+
+      .menu li+li button {
+        margin-left: 10px;
+      }
+
+      button {
+        background: white;
+        font: inherit;
+        border: none;
+        padding: 4px 10px;
+        cursor: pointer;
+      }
+
+      button.active {
+        background: black;
+        color: white;
+      }
+
+    </style>
+  </head>
+  <body>
+    <section data-panel="first">
+      <h1>First</h1>
+    </section>
+    <section data-panel="second">
+      <h1>Second</h1>
+    </section>
+    <section data-panel="third">
+      <h1>Third</h1>
+    </section>
+
+    <ul class="menu">
+      <li>
+        <button data-panel="first">First</button>
+      </li>
+      <li>
+        <button data-panel="second">Second</button>
+      </li>
+      <li>
+        <button data-panel="third">Third</button>
+      </li>
+    </ul>
+  </body>
+</html>
