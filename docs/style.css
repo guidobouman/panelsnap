@@ -56,7 +56,7 @@ section:nth-child(2n) {
 }
 
 .panels section:nth-child(2) {
-  min-height: 150%;
+  min-height: calc(100% + 200px);
 }
 
 .panels section:nth-child(2n) {
@@ -73,7 +73,7 @@ section:nth-child(2n) {
 }
 
 .panels.horizontal section:nth-child(2) {
-  min-width: 150%;
+  min-width: calc(100% + 200px);
 }
 
 section .explanation,
