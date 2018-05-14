@@ -5,7 +5,7 @@
 }
 
 *:focus {
-  outline: 3px solid #ffffff;
+  outline: 3px solid #000000;
 }
 
 html,
@@ -15,12 +15,12 @@ body {
 
 body {
   margin: 0;
-  color: #ffffff;
+  color: #000000;
   font-family: 'Lato';
   font-weight: 300;
   font-size: 24px;
   min-height: 100vh;
-  background: #f1c40f;
+  background: #ffffff;
 }
 
 @media screen and (max-width: 768px) {
@@ -37,7 +37,7 @@ section {
   padding: 50px;
   width: 100%;
   min-height: 100vh;
-  background: #1abc9c;
+  background: #ffffff;
 }
 
 @media screen and (max-width: 768px) {
@@ -47,11 +47,11 @@ section {
 }
 
 section:nth-child(2n) {
-  background: #16a085;
+  background: #edf7f5;
 }
 
 .panels section {
-  background: #f1c40f;
+  background: #d6e8e5;
   min-height: 100%;
 }
 
@@ -60,7 +60,7 @@ section:nth-child(2n) {
 }
 
 .panels section:nth-child(2n) {
-  background: #f39c12;
+  background: #c2d6d2;
 }
 
 .panels.horizontal {
@@ -78,44 +78,17 @@ section:nth-child(2n) {
 
 section .explanation,
 section pre {
-  background: #16a085;
+  background: #edf7f5;
 }
 
 section:nth-child(2n) .explanation,
 section:nth-child(2n) pre {
-  background: #1abc9c;
+  background: #ffffff;
 }
 
 section.introduction {
   align-items: center;
   justify-content: center;
-
-  background: none;
-}
-
-section.introduction:after {
-  display: block;
-  position: absolute;
-  top: -200%;
-  left: -150%;
-  height: 500%;
-  width: 200%;
-
-  background: #f39c12;
-  content: '';
-
-  z-index: -1;
-
-  -moz-transform-origin: 100% 50%;
-  -o-transform-origin: 100% 50%;
-  -webkit-transform-origin: 100% 50%;
-  transform-origin: 100% 50%;
-
-  -moz-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-
 }
 
 section.introduction .center {
