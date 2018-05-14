@@ -72,6 +72,10 @@ export default class PanelSnap {
   on(name, handler) {
     const currentHandlers = this.events[name] || [];
     this.events[name] = [...currentHandlers, handler];
+
+    if (name === 'activatePanel') {
+      handler.call(this, this.activePanel);
+    }
   }
 
   off(name, handler) {
