@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <title>PanelSnap - Vue demo</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300" rel="stylesheet">
+    <link href="../../style.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js" defer></script>
+    <script src="../../panelsnap.js" defer></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        new Vue({
+          el: '#app',
+          data: function () {
+            return {
+              activePanel: null,
+            }
+          },
+          mounted: function () {
+            this.panelSnapInstance = new PanelSnap({
+              panelSelector: '> #app > section'
+            });
+
+            this.panelSnapInstance.on('activatePanel', this.activatePanel);
+          },
+          methods: {
+            activatePanel: function (panel) {
+              this.activePanel = panel;
+            }
+          },
+          computed: {
+            activePanelName: function () {
+              if (!this.activePanel) {
+                return '';
+              }
+
+              return this.activePanel.querySelector('h1').innerText;
+            }
+          }
+        });
+      });
+    </script>
+
+    <style>
+      section:nth-child(2) {
+        min-height: calc(100vh + 200px);
+      }
+
+      .status {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 10px;
+        text-align: center;
+      }
+
+      [v-cloak] {
+        visibility: hidden;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <section>
+        <h1>First</h1>
+      </section>
+      <section>
+        <h1>Second</h1>
+      </section>
+      <section>
+        <h1>Third</h1>
+      </section>
+
+      <div class="status" v-cloak>
+        Active panel: {{activePanelName}}
+      </div>
+    </div>
+  </body>
+</html>
