@@ -139,5 +139,27 @@
       </div>
     </section>
 
+    <section class="api">
+      <h1>
+        API
+      </h1>
+      <dl class="explanation">
+        <dt>on([string] eventName, [function] callbackFunction(panel))</dt>
+        <dd>
+          Subscribe to a specific event with your own function. Where eventName is one of `activatePanel`, `snapStart`, `snapStop`
+          and callbackFunction is a function that gets called with the panel that is the subject of the event.
+        </dd>
+
+        <dt>off([string] eventName, [function] callbackFunction(panel))</dt>
+        <dd>
+          Unsubscribe one of your subscriptions. Where eventName is one of `activatePanel`, `snapStart`, `snapStop` and callbackFunction
+          is the function that was used to subscribe to the event.
+        </dd>
+
+        <dt>snapToPanel([DOM Element] panel)</dt>
+        <dd>
+          Trigger a snap to a panel. Where panel is one of the panels within the container.
+        </dd>
+      </dl>
   </body>
 </html>
