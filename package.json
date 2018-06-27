@@ -5,6 +5,7 @@
   "main": "lib/panelsnap.cjs.js",
   "browser": "lib/panelsnap.umd.js",
   "module": "lib/panelsnap.esm.js",
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/guidobouman/panelsnap"
@@ -14,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/guidobouman/panelsnap/issues"
   },
-  "homepage": "https://github.com/guidobouman/panelsnap",
+  "homepage": "https://panelsnap.com/",
   "keywords": [
     "snap",
     "snapping",
@@ -53,6 +54,7 @@
     "lint": "eslint .",
     "test": "jest --coverage",
     "semantic-release": "semantic-release",
+    "prepack": "npm run build",
     "commit": "git-cz"
   },
   "browserslist": [
