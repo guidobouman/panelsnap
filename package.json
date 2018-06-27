@@ -53,6 +53,7 @@
     "lint": "eslint .",
     "test": "jest --coverage",
     "semantic-release": "semantic-release",
+    "prepack": "npm run build",
     "commit": "git-cz"
   },
   "browserslist": [
