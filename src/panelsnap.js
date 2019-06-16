@@ -149,7 +149,8 @@ export default class PanelSnap {
 
     // TODO: Only one partial panel in viewport, add support for space between panels?
     // eslint-disable-next-line no-console
-    console.error('PanelSnap does not support space between panels, snapping back.');
+    // rvaradan: does not account for Safari's "overscroll" so it spams the console unnecessarily
+    //console.error('PanelSnap does not support space between panels, snapping back.');
     this.snapToPanel(visiblePanel, deltaY > 0, deltaX > 0);
   }
 
