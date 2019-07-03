@@ -20,14 +20,19 @@ export function getScrollEventContainer(container) {
 }
 
 function getContainerRect(container) {
-  return container === document.body ? {
-    top: 0,
-    left: 0,
-    bottom: window.innerHeight,
-    right: window.innerWidth,
-    height: window.innerHeight,
-    width: window.innerWidth,
-  } : container.getBoundingClientRect();
+  if (container === document.body) {
+    const scrollContainer = getScrollingElement(container);
+    return {
+      top: 0,
+      left: 0,
+      bottom: scrollContainer.clientHeight,
+      right: scrollContainer.clientWidth,
+      height: scrollContainer.clientHeight,
+      width: scrollContainer.clientWidth,
+    };
+  }
+
+  return container.getBoundingClientRect();
 }
 
 export function getTargetScrollOffset(container, element, toBottom = false, toRight = false) {
