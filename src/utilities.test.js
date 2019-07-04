@@ -9,8 +9,8 @@ import {
 const SCREEN_WIDTH = 800;
 const SCREEN_HEIGHT = 600;
 
-window.innerWidth = SCREEN_WIDTH;
-window.innerHeight = SCREEN_HEIGHT;
+Object.defineProperty(document.documentElement, 'clientWidth', { value: SCREEN_WIDTH });
+Object.defineProperty(document.documentElement, 'clientHeight', { value: SCREEN_HEIGHT });
 
 describe('getScrolllingElement', () => {
   test('returns same element when container is not body', () => {
