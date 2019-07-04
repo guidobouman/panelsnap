@@ -21,14 +21,14 @@ export function getScrollEventContainer(container) {
 
 function getContainerRect(container) {
   if (container === document.body) {
-    const scrollContainer = getScrollingElement(container);
+    const htmlElement = document.documentElement;
     return {
       top: 0,
       left: 0,
-      bottom: scrollContainer.clientHeight,
-      right: scrollContainer.clientWidth,
-      height: scrollContainer.clientHeight,
-      width: scrollContainer.clientWidth,
+      bottom: htmlElement.clientHeight,
+      right: htmlElement.clientWidth,
+      height: htmlElement.clientHeight,
+      width: htmlElement.clientWidth,
     };
   }
 
