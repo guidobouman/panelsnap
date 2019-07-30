@@ -57,10 +57,10 @@ export function getElementsInContainerViewport(container, elementList) {
     const elementRect = element.getBoundingClientRect();
 
     return (
-      elementRect.top < containerRect.bottom &&
-      elementRect.right > containerRect.left &&
-      elementRect.bottom > containerRect.top &&
-      elementRect.left < containerRect.right
+      elementRect.top < containerRect.bottom
+      && elementRect.right > containerRect.left
+      && elementRect.bottom > containerRect.top
+      && elementRect.left < containerRect.right
     );
   });
 }
@@ -70,10 +70,10 @@ export function elementFillsContainer(container, element) {
   const elementRect = element.getBoundingClientRect();
 
   return (
-    elementRect.top <= containerRect.top &&
-    elementRect.bottom >= containerRect.bottom &&
-    elementRect.left <= containerRect.left &&
-    elementRect.right >= containerRect.right
+    elementRect.top <= containerRect.top
+    && elementRect.bottom >= containerRect.bottom
+    && elementRect.left <= containerRect.left
+    && elementRect.right >= containerRect.right
   );
 }
 
