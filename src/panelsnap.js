@@ -49,16 +49,46 @@ export default class PanelSnap {
     this.scrollTimeout = null;
     this.resetAnimation();
 
-    this.scrollEventContainer.addEventListener('keydown', this.onInteractStart.bind(this), passiveIsSupported && { passive: true });
-    this.scrollEventContainer.addEventListener('keyup', this.onInteractStop.bind(this), passiveIsSupported && { passive: true });
-    this.scrollEventContainer.addEventListener('mousedown', this.onInteractStart.bind(this), passiveIsSupported && { passive: true });
-    this.scrollEventContainer.addEventListener('mouseup', this.onInteractStop.bind(this), passiveIsSupported && { passive: true });
-    this.scrollEventContainer.addEventListener('touchstart', this.onInteractStart.bind(this), passiveIsSupported && { passive: true });
-    this.scrollEventContainer.addEventListener('touchend', this.onInteractStop.bind(this), passiveIsSupported && { passive: true });
-    this.scrollEventContainer.addEventListener('scroll', this.onScroll.bind(this), passiveIsSupported && { passive: true });
-    this.scrollEventContainer.addEventListener('wheel', this.onInteract.bind(this), passiveIsSupported && { passive: true });
+    this.onInteractStart = this.onInteractStart.bind(this);
+    this.onInteractStop = this.onInteractStop.bind(this);
+    this.onInteractStart = this.onInteractStart.bind(this);
+    this.onInteractStop = this.onInteractStop.bind(this);
+    this.onInteractStart = this.onInteractStart.bind(this);
+    this.onInteractStop = this.onInteractStop.bind(this);
+    this.onScroll = this.onScroll.bind(this);
+    this.onInteract = this.onInteract.bind(this);
+
+    this.scrollEventContainer.addEventListener('keydown', this.onInteractStart, passiveIsSupported && { passive: true });
+    this.scrollEventContainer.addEventListener('keyup', this.onInteractStop, passiveIsSupported && { passive: true });
+    this.scrollEventContainer.addEventListener('mousedown', this.onInteractStart, passiveIsSupported && { passive: true });
+    this.scrollEventContainer.addEventListener('mouseup', this.onInteractStop, passiveIsSupported && { passive: true });
+    this.scrollEventContainer.addEventListener('touchstart', this.onInteractStart, passiveIsSupported && { passive: true });
+    this.scrollEventContainer.addEventListener('touchend', this.onInteractStop, passiveIsSupported && { passive: true });
+    this.scrollEventContainer.addEventListener('scroll', this.onScroll, passiveIsSupported && { passive: true });
+    this.scrollEventContainer.addEventListener('wheel', this.onInteract, passiveIsSupported && { passive: true });
 
     this.findSnapTarget();
+  }
+
+  destroy() {
+    // Stop current animations
+    this.stopAnimation();
+
+    // Prevent future activity
+    this.disable();
+
+    // Remove event lisiteners
+    this.scrollEventContainer.removeEventListener('keydown', this.onInteractStart, passiveIsSupported && { passive: true });
+    this.scrollEventContainer.removeEventListener('keyup', this.onInteractStop, passiveIsSupported && { passive: true });
+    this.scrollEventContainer.removeEventListener('mousedown', this.onInteractStart, passiveIsSupported && { passive: true });
+    this.scrollEventContainer.removeEventListener('mouseup', this.onInteractStop, passiveIsSupported && { passive: true });
+    this.scrollEventContainer.removeEventListener('touchstart', this.onInteractStart, passiveIsSupported && { passive: true });
+    this.scrollEventContainer.removeEventListener('touchend', this.onInteractStop, passiveIsSupported && { passive: true });
+    this.scrollEventContainer.removeEventListener('scroll', this.onScroll, passiveIsSupported && { passive: true });
+    this.scrollEventContainer.removeEventListener('wheel', this.onInteract, passiveIsSupported && { passive: true });
+
+    // Remove instance association
+    delete this.options.container.dataset.panelsnapId;
   }
 
   enable() {
