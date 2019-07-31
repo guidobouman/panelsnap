@@ -34,6 +34,7 @@
     "@babel/preset-env": "^7.0.0-beta.46",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^22.4.3",
+    "codacy-coverage": "^3.4.0",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.1.0",
     "eslint": "^4.19.1",
@@ -53,6 +54,7 @@
     "build": "rollup -c",
     "lint": "eslint .",
     "test": "jest --coverage",
+    "report-coverage": "cat ./coverage/lcov.info | codacy-coverage",
     "semantic-release": "semantic-release",
     "prepack": "npm run build",
     "commit": "git-cz"

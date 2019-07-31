@@ -7,7 +7,7 @@ notifications:
 jobs:
   include:
     - script: npm run lint
-    - script: npm run test
+    - script: npm run test && npm run report-coverage
     - stage: semantic release
       script: npm run semantic-release
 stages:
