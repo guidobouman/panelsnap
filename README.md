@@ -33,9 +33,9 @@ const instance = new PanelSnap();
 Check out the documentation at [https://panelsnap.com](https://panelsnap.com) or the `docs` folder for a working demo.
 
 ## Credits
-  - [jellea](https://github.com/jellea) for early feedback and brainpickings.
-  - [aalexandrov](https://github.com/aalexandrov) for small improvements & bugfixes.
-  - [akreitals](https://github.com/akreitals) for fixing keyboard navigation when disabled.
-  - [brumm](https://github.com/brumm) far a panel count bug.
-  - [dpaquette](https://github.com/dpaquette) for the offset option.
-  - [wudi96](https://github.com/wudi96) for button navigation.
+- [jellea](https://github.com/jellea) for early feedback and brainpickings.
+- [aalexandrov](https://github.com/aalexandrov) for small improvements & bugfixes.
+- [akreitals](https://github.com/akreitals) for fixing keyboard navigation when disabled.
+- [brumm](https://github.com/brumm) far a panel count bug.
+- [dpaquette](https://github.com/dpaquette) for the offset option.
+- [wudi96](https://github.com/wudi96) for button navigation.
