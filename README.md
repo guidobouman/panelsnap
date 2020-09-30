@@ -1,4 +1,4 @@
-<h1 align="center">PanelSnap<h1>
+<h1 align="center">PanelSnap</h1>
 
 <p align="center">
   <a href="https://www.codacy.com/app/guidobouman/panelsnap"><img src="https://api.codacy.com/project/badge/Grade/c90e8be4cc2e4931b0f280273f54cb30" alt="Codacy Status"></a>
