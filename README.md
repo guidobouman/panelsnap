@@ -2,7 +2,8 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c90e8be4cc2e4931b0f280273f54cb30)](https://www.codacy.com/app/guidobouman/panelsnap)
 [![Build Status](https://travis-ci.org/guidobouman/panelsnap.svg?branch=develop)](https://travis-ci.org/guidobouman/panelsnap)
-[![npm](https://img.shields.io/npm/v/panelsnap.svg)](https://www.npmjs.com/package/panelsnap)
+[![npm](https://img.shields.io/npm/v/panelsnap)](https://www.npmjs.com/package/panelsnap)
+[![size](https://img.shields.io/bundlephobia/min/panelsnap)](https://www.npmjs.com/package/panelsnap)
 
 
 A JavaScript plugin that provides snapping functionality to a set of panels within your interface.
