@@ -1,12 +1,18 @@
-# PanelSnap
+<h1 align="center">PanelSnap<h1>
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c90e8be4cc2e4931b0f280273f54cb30)](https://www.codacy.com/app/guidobouman/panelsnap)
-[![Build Status](https://travis-ci.org/guidobouman/panelsnap.svg?branch=develop)](https://travis-ci.org/guidobouman/panelsnap)
-[![npm](https://img.shields.io/npm/v/panelsnap)](https://www.npmjs.com/package/panelsnap)
-[![size](https://img.shields.io/bundlephobia/min/panelsnap)](https://bundlephobia.com/result?p=panelsnap)
+<p align="center">
+  <a href="https://www.codacy.com/app/guidobouman/panelsnap"><img src="https://api.codacy.com/project/badge/Grade/c90e8be4cc2e4931b0f280273f54cb30" alt="Codacy Status"></a>
+  <a href="https://travis-ci.org/guidobouman/panelsnap"><img src="https://travis-ci.org/guidobouman/panelsnap.svg?branch=develop" alt="Build Status"></a>
+  <a href="https://www.npmjs.com/package/panelsnap"><img src="https://img.shields.io/npm/v/panelsnap.svg?sanitize=true" alt="Version"></a>
+  <a href="https://www.npmjs.com/package/panelsnap"><img src="https://img.shields.io/npm/l/panelsnap.svg?sanitize=true" alt="License"></a>
+  <a href="https://bundlephobia.com/result?p=panelsnap"><img src="https://img.shields.io/bundlephobia/min/panelsnap.svg?sanitize=true" alt="Bundled Size"></a>
+</p>
 
+<p align="center">
+  A JavaScript library that provides snapping functionality to a set of panels within your interface. It works with Vue, React, jQuery and vanilla JavaScript projects.
+</p>
 
-A JavaScript plugin that provides snapping functionality to a set of panels within your interface.
+---
 
 ## Installation
 
