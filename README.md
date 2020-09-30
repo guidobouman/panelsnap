@@ -9,10 +9,14 @@
 </p>
 
 <p align="center">
-  A JavaScript library that provides snapping functionality to a set of panels within your interface. It works with Vue, React, jQuery and vanilla JavaScript projects.
+  A JavaScript library that provides snapping functionality to a set of panels within your interface.
 </p>
 
 ---
+
+## Introduction
+
+PanelSnap is a framework agnostic JavaScript library. This means that it works in every JavaScript project, wheter you use Vue, React, jQuery or plain vanilla JavaScript. It can snap both horizontally & vertically, connect with menu's and fire events based on user behaviour.
 
 ## Installation
 
@@ -42,7 +46,9 @@ const instance = new PanelSnap();
 
 ## Documentation
 
-Check out the documentation at [https://panelsnap.com](https://panelsnap.com) or the `docs` folder for a working demo.
+In its simplest form, PanelSnap does not need any configuration. For more advanced scenarios, PanelSnap can be aopted to about every usecase through its settings object.
+
+Check out the documentation at [https://panelsnap.com](https://panelsnap.com) or the `docs` folder for all the different possibilities.
 
 ## Credits
 
