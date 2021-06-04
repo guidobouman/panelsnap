@@ -1,7 +1,7 @@
-import babel from 'rollup-plugin-babel';
+import { babel } from '@rollup/plugin-babel';
 import license from 'rollup-plugin-license';
-import uglify from 'rollup-plugin-uglify';
-import resolve from 'rollup-plugin-node-resolve';
+import { terser } from 'rollup-plugin-terser';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 import pkg from './package.json';
 
 const banner = `/**
@@ -16,7 +16,7 @@ const plugins = [
   babel({
     exclude: ['node_modules/**'],
   }),
-  uglify(),
+  terser(),
   license({
     banner,
   }),
@@ -38,6 +38,6 @@ export default [
       { file: pkg.browser, format: 'umd', name: 'PanelSnap' },
       { file: 'docs/panelsnap.js', format: 'umd', name: 'PanelSnap' },
     ],
-    plugins: [...plugins, resolve()],
+    plugins: [...plugins, nodeResolve()],
   },
 ];
