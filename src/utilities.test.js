@@ -405,7 +405,7 @@ describe('elementFillsContainer', () => {
 });
 
 describe('isPassiveSupported', () => {
-  test('returns false in JSDOM', () => {
-    expect(passiveIsSupported).toBe(false);
+  test('returns true in JSDOM', () => {
+    expect(passiveIsSupported).toBe(true);
   });
 });
