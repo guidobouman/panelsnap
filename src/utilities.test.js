@@ -291,7 +291,6 @@ describe('getTargetScrollOffset', () => {
       toRight: true,
     });
 
-
     testBodyElements({
       scrollOffset: { top: 0, left: 0 },
       targetDimensions: {
@@ -378,7 +377,6 @@ describe('getElementsInContainerViewport', () => {
     expect(test2).toHaveLength(1);
   });
 });
-
 
 describe('elementFillsContainer', () => {
   function getElement(top, bottom, left = 0, right = SCREEN_WIDTH) {

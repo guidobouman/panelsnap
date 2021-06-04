@@ -18,7 +18,7 @@ const defaultOptions = {
   directionThreshold: 50,
   delay: 0,
   duration: 300,
-  easing: t => t,
+  easing: (t) => t,
 };
 
 export default class PanelSnap {
@@ -110,12 +110,12 @@ export default class PanelSnap {
 
   off(name, handler) {
     const currentHandlers = this.events[name] || [];
-    this.events[name] = currentHandlers.filter(h => h !== handler);
+    this.events[name] = currentHandlers.filter((h) => h !== handler);
   }
 
   emit(name, value) {
     const currentHandlers = this.events[name] || [];
-    currentHandlers.forEach(h => h.call(this, value));
+    currentHandlers.forEach((h) => h.call(this, value));
   }
 
   onInteractStart() {
