@@ -35,7 +35,7 @@
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-node-resolve": "^13.0.0",
     "babel-jest": "^27.0.2",
-    "codacy-coverage": "^3.4.0",
+    "codacy-coverage": "^3.2.0",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.27.0",
