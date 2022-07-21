@@ -19,6 +19,7 @@ const defaultOptions = {
   delay: 0,
   duration: 300,
   easing: (t) => t,
+  timeout: 50,
 };
 
 export default class PanelSnap {
@@ -140,7 +141,7 @@ export default class PanelSnap {
       return;
     }
 
-    this.scrollTimeout = setTimeout(this.findSnapTarget.bind(this), 50 + this.options.delay);
+    this.scrollTimeout = setTimeout(this.findSnapTarget.bind(this), this.options.timeout + this.options.delay);
   }
 
   findSnapTarget() {
