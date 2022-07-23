@@ -35,6 +35,8 @@ jobs:
       run: npm run test
 
     - name: Report coverage
+      env:
+        CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
       run: npm run report-coverage
 
     - name: Release
