@@ -46,7 +46,7 @@
     "rollup": "^2.50.6",
     "rollup-plugin-license": "^2.4.0",
     "rollup-plugin-terser": "^7.0.2",
-    "semantic-release": "^17.4.3"
+    "semantic-release": "^19.0.3"
   },
   "scripts": {
     "dev": "rollup -c -w",
