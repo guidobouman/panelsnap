@@ -35,10 +35,9 @@ jobs:
       run: npm run test
 
     - name: Report coverage
-      env:
-        CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
       uses: codacy/codacy-coverage-reporter-action@v1.3.0
       with:
+        project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
         coverage-reports: coverage/lcov.info
 
     - name: Release
