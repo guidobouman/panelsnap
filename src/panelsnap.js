@@ -33,6 +33,12 @@ export default class PanelSnap {
       throw new Error('PanelSnap is already initialised on this container, aborting.');
     }
 
+    // we need to make sure that if the timeout is less than 15, directionThreshold should be 0
+    // otherwise we will get animation bugs
+    if (this.options.timeout < 15) {
+      this.options.directionThreshold = 0;
+    }
+
     this.container = this.options.container;
     this.scrollContainer = getScrollingElement(this.container);
     this.scrollEventContainer = getScrollEventContainer(this.container);
