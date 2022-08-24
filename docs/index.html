@@ -75,6 +75,7 @@
     delay: 0,
     duration: 300,
     easing: function(t) { return t },
+    timeout: 50,
   };
 
   new PanelSnap(options);
@@ -96,6 +97,8 @@
         <dd>(integer) The amount of miliseconds in which the plugin snaps to the desired panel.</dd>
         <dt>easing</dt>
         <dd>(function) An easing function specificing the snapping motion.</dd>
+        <dt>timeout</dt>
+        <dd>(integer) The amount of milliseconds where no scroll event should occur before the plugin decides to snap to a panel.</dd>
       </dl>
     </section>
 
