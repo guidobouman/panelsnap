@@ -19,6 +19,7 @@ const defaultOptions = {
   delay: 0,
   duration: 300,
   easing: (t) => t,
+  timeout: 50,
 };
 
 export default class PanelSnap {
@@ -30,6 +31,12 @@ export default class PanelSnap {
 
     if (this.options.container.dataset.panelsnapId) {
       throw new Error('PanelSnap is already initialised on this container, aborting.');
+    }
+
+    // we need to make sure that if the timeout is less than 15, directionThreshold should be 0
+    // otherwise we will get animation bugs
+    if (this.options.timeout < 15) {
+      this.options.directionThreshold = 0;
     }
 
     this.container = this.options.container;
@@ -140,7 +147,8 @@ export default class PanelSnap {
       return;
     }
 
-    this.scrollTimeout = setTimeout(this.findSnapTarget.bind(this), 50 + this.options.delay);
+    const totalTimeout = this.options.timeout + this.options.delay;
+    this.scrollTimeout = setTimeout(this.findSnapTarget.bind(this), totalTimeout);
   }
 
   findSnapTarget() {

@@ -75,6 +75,7 @@
     delay: 0,
     duration: 300,
     easing: function(t) { return t },
+    timeout: 50,
   };
 
   new PanelSnap(options);
@@ -91,11 +92,13 @@
         <dt>directionThreshold</dt>
         <dd>(interger) The amount of pixels required to scroll before the plugin detects a direction and snaps to the next panel.</dd>
         <dt>delay</dt>
-        <dd>(integer) The amount of miliseconds the plugin pauzes before snapping to a panel.</dd>
+        <dd>(integer) The amount of milliseconds the plugin pauzes before snapping to a panel.</dd>
         <dt>duration</dt>
-        <dd>(integer) The amount of miliseconds in which the plugin snaps to the desired panel.</dd>
+        <dd>(integer) The amount of milliseconds in which the plugin snaps to the desired panel.</dd>
         <dt>easing</dt>
         <dd>(function) An easing function specificing the snapping motion.</dd>
+        <dt>timeout</dt>
+        <dd>(integer) The amount of milliseconds where no scroll event should occur before the plugin decides to snap to a panel.</dd>
       </dl>
     </section>
 
