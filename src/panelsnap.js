@@ -19,7 +19,7 @@ const defaultOptions = {
   delay: 0,
   duration: 300,
   easing: (t) => t,
-  timeout: 50
+  timeout: 50,
 };
 
 export default class PanelSnap {
