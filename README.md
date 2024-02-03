@@ -46,7 +46,7 @@ const instance = new PanelSnap();
 
 ## Documentation
 
-In its simplest form, PanelSnap does not need any configuration. For more advanced scenarios, PanelSnap can be aopted to about every usecase through its settings object.
+In its simplest form, PanelSnap does not need any configuration. For more advanced scenarios, PanelSnap can be adopted to about every usecase through its settings object.
 
 Check out the documentation at [https://panelsnap.com](https://panelsnap.com) or the `docs` folder for all the different possibilities.
 
